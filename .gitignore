@@ -11,6 +11,9 @@ rules.local
 .agents/local/
 *.log
 
+# Legacy Framer reference files (local only)
+vecchia grafica/
+
 # OS / Editor Files
 .DS_Store
 Thumbs.db

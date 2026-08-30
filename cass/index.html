@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASS — Contextual-aware Selection System | Machine Learning di Marco Pietri</title>
+  
+  <meta name="description" content="CASS (Contextual-aware Selection System): architettura di Machine Learning che emula il Sistema 2 di Kahneman per selezionare dinamicamente l'algoritmo decisionale ottimale.">
+  <meta name="author" content="Marco Pietri">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://marcopietri.com/cass/">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CASS — Contextual-aware Selection System">
+  <meta property="og:description" content="Come selezionare l'algoritmo giusto al momento giusto: architettura di intelligenza artificiale trasparente, adattiva e affidabile.">
+  <meta property="og:url" content="https://marcopietri.com/cass/">
+  <meta property="og:site_name" content="Marco Pietri">
+  <meta property="og:locale" content="it_IT">
+  
+  <!-- Typography & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- Schema.org Scholarly / Software Application JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://marcopietri.com/cass/#software",
+    "name": "CASS — Contextual-aware Selection System",
+    "url": "https://marcopietri.com/cass/",
+    "applicationCategory": "Machine Learning Decision Support System",
+    "author": {
+      "@type": "Person",
+      "@id": "https://marcopietri.com/#person",
+      "name": "Marco Pietri"
+    },
+    "description": "Sistema ibrido di machine learning per la selezione contestuale e spiegabile di algoritmi decisionali basato sul paradigma di Kahneman.",
+    "operatingSystem": "Cross-platform"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand-mark" aria-label="Torna alla Home">
+        <span class="gem">✦</span> Marco Pietri
+      </a>
+      <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
+        ☰ Menu
+      </button>
+      <nav aria-label="Navigazione Principale">
+        <ul class="nav-menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">Su di me</a></li>
+          <li><a href="/#projects">Progetti</a></li>
+          <li><a href="/eklisso/">Eklisso</a></li>
+          <li><a href="/cass/" class="active">CASS</a></li>
+          <li><a href="/spectra/">Spectra</a></li>
+          <li><a href="/certificazioni/">Certificazioni</a></li>
+          <li><a href="/#contact">Contatti</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero / Whitepaper Header -->
+    <section class="hero-section" aria-label="Introduzione CASS">
+      <div class="status-badge">
+        <div class="status-pulse"></div>
+        <span>Machine Learning &bull; Tesi di Ricerca R&amp;D</span>
+      </div>
+
+      <h1 class="hero-title">CASS</h1>
+      
+      <p class="hero-motto">
+        Contextual-aware Selection System — Come selezionare l'algoritmo giusto al momento giusto?
+      </p>
+
+      <article class="hero-lead">
+        <strong>Cos'è CASS:</strong> CASS è un'architettura intelligente ideata da Marco Pietri volta a superare i limiti dei tradizionali sistemi decisionali automatici (DMS). Ispirandosi alla teoria del <em>Sistema 1 e Sistema 2</em> di Daniel Kahneman, CASS introduce un livello di meta-ragionamento che valuta l'incertezza, seleziona criticamente il modello ML migliore per il contesto specifico e motiva la scelta in modo trasparente.
+      </article>
+
+      <div class="btn-group">
+        <a href="#pipeline" class="btn btn-primary">
+          <span>La Pipeline in 6 Fasi</span>
+          <span>&rarr;</span>
+        </a>
+        <a href="#results" class="btn btn-secondary">
+          <span>Case Study SCANIA APS</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- The Problem in Current DMS -->
+    <section id="problem" aria-label="I Limiti dei DMS Tradizionali">
+      <div class="section-header">
+        <span class="section-tag">Analisi del Problema</span>
+        <h2 class="section-title">Dove sta il problema nei Decision-Making Systems?</h2>
+        <p class="section-desc">
+          I DMS automatici sono ampiamente usati in ambito industriale, finanziario e medico, ma la maggior parte dei modelli convenzionali presenta tre criticità strutturali:
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="card-badge" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171; background: rgba(239, 68, 68, 0.1);">Criticità 1</span>
+          <h3 class="card-title">Opachi</h3>
+          <p class="card-body">
+            Prendono decisioni senza spiegare il perché. L'utente riceve un output senza gli strumenti conoscitivi per valutarne la bontà o il percorso logico sottostante.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171; background: rgba(239, 68, 68, 0.1);">Criticità 2</span>
+          <h3 class="card-title">Rigidi</h3>
+          <p class="card-body">
+            Una volta addestrati su un dataset fisso, non gestiscono bene la variazione delle condizioni operative. Una minima variazione può innescare decisioni errate senza preavviso.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171; background: rgba(239, 68, 68, 0.1);">Criticità 3</span>
+          <h3 class="card-title">Poco Affidabili</h3>
+          <p class="card-body">
+            Non quantificano il proprio grado di confidenza. Ogni risposta viene emessa con lo stesso peso formale, persino nei casi limite in cui il modello è intrinsecamente incerto.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- The Kahneman Framework -->
+    <section id="concept" aria-label="Il Paradigma di Ragionamento">
+      <div class="section-header">
+        <span class="section-tag">Fondamento Teorico</span>
+        <h2 class="section-title">E se insegnassimo alle macchine a ragionare lentamente?</h2>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3 class="card-title" style="color: var(--moss-light);">Il Pensiero Umano (Kahneman)</h3>
+          <p class="card-body">
+            Secondo la teoria dei processi duali, la mente umana opera su due canali:
+            <br><br>
+            <strong>&bull; Sistema 1:</strong> Veloce, intuitivo, automatico. Ci guida nelle decisioni repentine ma è soggetto a bias.
+            <br>
+            <strong>&bull; Sistema 2:</strong> Lento, riflessivo, analitico. Interviene quando serve valutare criticamente alternative e dati complessi.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title" style="color: var(--emerald-glow);">L'Intuizione Artificiale &amp; CASS</h3>
+          <p class="card-body">
+            Oggi molti algoritmi agiscono solo come un <em>Sistema 1</em>: rispondono immediatamente anche quando non sono sicuri. 
+            <br><br>
+            <strong>CASS introduce un Sistema 2 artificiale:</strong> valuta il livello di confidenza, analizza il contesto operativo, seleziona il modello più idoneo e garantisce trasparenza prima di eseguire la predizione.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- The 6-Step Cognitive Pipeline -->
+    <section id="pipeline" aria-label="La Pipeline a 6 Fasi di CASS">
+      <div class="section-header">
+        <span class="section-tag">Architettura Algoritmica</span>
+        <h2 class="section-title">Le 6 Fasi del Ciclo Cognitivo di CASS</h2>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <span class="card-badge">Fase 1</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">1. Definizione del Problema</h3>
+          <p class="card-body">
+            L'algoritmo analizza il contesto e definisce con chiarezza gli obiettivi. Proprio come un essere umano che si chiede: <em>"Cosa devo risolvere e perché?"</em>
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge">Fase 2</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">2. Raccolta e Sintesi Dati</h3>
+          <p class="card-body">
+            CASS raccoglie dati da fonti interne o flussi di telemetria, filtra il rumore e si concentra sulle feature determinanti, consolidando la base informativa.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge">Fase 3</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">3. Generazione e Valutazione Alternative</h3>
+          <p class="card-body">
+            Il meta-sistema esplora diverse strategie risolutive, confrontando modelli concorrenti in funzione del trade-off tra velocità, costo computazionale e accuratezza.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge">Fase 4</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">4. Scelta e Pianificazione</h3>
+          <p class="card-body">
+            Seleziona la soluzione migliore secondo criteri oggettivi prefissati (minimizzazione falsi positivi, affidabilità probabilistica), motivando la scelta.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge">Fase 5</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">5. Implementazione Operativa</h3>
+          <p class="card-body">
+            Applica la soluzione prescelta traducendola in azione: esegue l'inferenza, stima il rischio ed emette un output misurabile con relativa metrica di confidenza.
+          </p>
+        </article>
+
+        <article class="card">
+          <span class="card-badge">Fase 6</span>
+          <h3 class="card-title" style="font-size: 1.25rem;">6. Monitoraggio e Adattamento</h3>
+          <p class="card-body">
+            Valuta i risultati ottenuti rispetto al feedback del mondo reale, corregge la calibrazione e impara continuamente nel tempo.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Case Study & Results -->
+    <section id="results" aria-label="Risultati e Case Study Industriale">
+      <div class="section-header">
+        <span class="section-tag">Validazione Sperimentale</span>
+        <h2 class="section-title">Case Study Industriale: SCANIA APS Dataset</h2>
+        <p class="section-desc">
+          Testato su dataset industriali complessi per la manutenzione predittiva dell'Air Pressure System (APS) dei veicoli pesanti Scania.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <h3 class="card-title" style="color: var(--emerald-glow);">Previsioni Trasparenti</h3>
+          <p class="card-body">
+            Ogni diagnosi di anomalia viene accompagnata dai fattori chiave che l'hanno determinata, permettendo ai tecnici di comprendere la causa del guasto prima dell'ispezione.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title" style="color: var(--emerald-glow);">Accuratezza Calibrata</h3>
+          <p class="card-body">
+            Riduzione sensibile dei costi associati ai falsi allarmi e ai mancati interventi grazie alla calibrazione dinamica delle soglie di decisione.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title" style="color: var(--emerald-glow);">Adattabilità Dinamica</h3>
+          <p class="card-body">
+            Capacità di commutare la pipeline di inferenza in tempo reale senza richiedere un riaddestramento monolitico dell'intera infrastruttura.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ CASS -->
+    <section id="faq" aria-label="FAQ su CASS">
+      <div class="section-header">
+        <span class="section-tag">Approfondimenti Tecnici</span>
+        <h2 class="section-title">Domande Frequenti su CASS</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>Dove può essere utilizzato CASS?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            CASS è ideale in contesti mission-critical in cui sbagliare una predizione ha costi elevati o rischi per la sicurezza: manutenzione predittiva industriale (IoT), credit scoring e rilevamento frodi fintech, diagnostica di supporto e sistemi di allocazione risorse in tempo reale.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>CASS sostituisce i modelli di Machine Learning esistenti?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            No, CASS opera come un layer di orchestrazione e meta-decisione intelligente (Meta-Learning). Integra e coordina modelli eterogenei (XGBoost, Reti Neurali, Random Forest, modelli statistici) selezionando il più adatto in base al vettore delle feature in ingresso.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section aria-label="Testa CASS">
+      <div class="cta-banner">
+        <h2>Ti sei incuriosito del progetto CASS?</h2>
+        <p>
+          Se desideri approfondire l'architettura tecnica, consultare il whitepaper completo o testare CASS in un tuo progetto industriale, scrivimi.
+        </p>
+        <div class="btn-group" style="justify-content: center;">
+          <a href="mailto:mpietri82@gmail.com?subject=Richiesta%20Info%20CASS" class="btn btn-primary">
+            <span>Parliamone via Email</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <p>&copy; 2026 Marco Pietri &bull; CASS Research</p>
+        <p style="margin-top: 0.35rem;">
+          Autore: <a href="https://marcopietri.com/#person" style="color: var(--emerald-glow); text-decoration: none;">Marco Pietri</a> &bull; Machine Learning R&amp;D
+        </p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/eklisso/">Eklisso</a></li>
+        <li><a href="/spectra/">Spectra</a></li>
+        <li><a href="/certificazioni/">Certificazioni</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>
