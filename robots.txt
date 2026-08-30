@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Canonical Sitemaps & Entity Home
+Sitemap: https://marcopietri.com/sitemap.xml

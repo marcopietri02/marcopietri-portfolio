@@ -1,0 +1,18 @@
+# Secrets & Local Configurations
+.env
+.env.*
+!.env.example
+*.local
+rules.local
+*.secret
+
+# Antigravity / Agent custom state & logs
+.gemini/
+.agents/local/
+*.log
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
