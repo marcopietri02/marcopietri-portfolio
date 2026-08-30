@@ -132,24 +132,34 @@
     </nav>
 
     <!-- Hero / Credentials Header -->
-    <section class="hero-section" style="padding-top: 1rem;" aria-label="Formazione e Certificazioni">
-      <h1 class="hero-title">Certificazioni &amp; Formazione</h1>
+    <section class="hero-section" style="padding-top: 1rem; padding-bottom: 2rem;" aria-label="Formazione e Certificazioni">
+      <h1 class="hero-title">Certificazioni</h1>
       
-      <p class="hero-motto">
-        Credo nella formazione solida, nella verifica continua e nella trasparenza.
+      <!-- Visual Card Hero Graphic -->
+      <div class="cert-hero-image-wrap">
+        <img 
+          src="/assets/images/certificazioni/cert-hero-card.png" 
+          alt="Tesserino Certificazione UAS A1/A3 Pilota Droni ENAC EASA" 
+          class="cert-hero-img"
+          loading="eager"
+        >
+      </div>
+
+      <p class="hero-motto" style="text-align: center; margin-top: 1.5rem;">
+        Credo nella formazione solida e nella trasparenza.
       </p>
 
       <article class="hero-lead">
         Do valore alle certificazioni quando portano strumenti reali. Ogni attestato e percorso di studio che ho scelto di completare nasce da una curiosità concreta e da un bisogno pratico: approfondire l'ingegneria dei sistemi, testare sul campo e applicare architetture sicure ed efficienti.
       </article>
 
-      <div class="btn-group">
+      <div class="btn-group" style="justify-content: center;">
         <a href="#academic" class="btn btn-primary">
           <span>Esplora Qualifiche</span>
           <span>&rarr;</span>
         </a>
-        <a href="https://www.canva.com/design/DAGIhyIfTFw/BEs4ls-iIb-GZkg9Jppi7g/view" target="_blank" rel="noopener" class="btn btn-gold">
-          <span>Visualizza CV Completo (PDF)</span> &nearr;
+        <a href="https://drive.google.com/file/d/1fuXuN6e4lGd1CrBtd-lQeoXlnenA6BhV/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-gold">
+          <span>Visualizza CV Ufficiale (PDF)</span> &nearr;
         </a>
       </div>
     </section>
@@ -162,13 +172,49 @@
       </div>
 
       <div class="grid-2">
-        <!-- Degree UniFI -->
+        <!-- UAS Drone License with DJI Image -->
         <article class="card">
+          <img src="/assets/images/certificazioni/drone-dji.png" alt="Drone DJI Professionale" class="card-media-banner">
+          <span class="card-badge">Aeronautica</span>
+          <h3 class="card-title">UAS A1-A3</h3>
+          <p class="card-subtitle">ENAC / EASA Open Category</p>
+          <p class="card-body">
+            Certificazione europea obbligatoria per operare droni in scenari Open A1 e A3. Consente operazioni professionali con droni &lt;250g e &lt;500g, nel rispetto delle normative EASA ed ENAC. Rilasciata dopo formazione e test ufficiale.
+          </p>
+          <div class="card-tags">
+            <span class="tag">ENAC / EASA</span>
+            <span class="tag">Open A1-A3</span>
+            <span class="tag">Volo Certificato</span>
+          </div>
+          <a href="https://www.enac.gov.it/sicurezza-aerea/droni/piloti-uas/" target="_blank" rel="noopener" class="card-link-action">
+            <span>Scopri di più</span> &nearr;
+          </a>
+        </article>
+
+        <!-- Cybersecurity BIP with Shield Image (Link removed as requested) -->
+        <article class="card">
+          <img src="/assets/images/certificazioni/cybersecurity-bip.png" alt="BIP CyberSec Talent Week" class="card-media-banner">
+          <span class="card-badge badge-emerald">Cybersecurity</span>
+          <h3 class="card-title">Cybersecurity Talent Week &ndash; BIP x VGen</h3>
+          <p class="card-subtitle">BIP CyberSec &bull; Selezione &amp; Formazione</p>
+          <p class="card-body">
+            Percorso formativo avanzato in sicurezza informatica organizzato da BIP CyberSec e VGen. Include prove pratiche su <strong>strategie difensive e offensive</strong>, simulazioni di attacco e programmazione per la sicurezza. Completato dopo test tecnici e analisi strategica.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Offensive/Defensive</span>
+            <span class="tag">BIP CyberSec</span>
+            <span class="tag">Threat Intelligence</span>
+          </div>
+        </article>
+
+        <!-- Degree UniFI with Illustration -->
+        <article class="card">
+          <img src="/assets/images/certificazioni/laurea-informatica.png" alt="Università degli Studi di Firenze" class="card-media-banner">
           <span class="card-badge badge-emerald">Percorso Accademico</span>
           <h3 class="card-title">Laurea in Informatica</h3>
           <p class="card-subtitle">Università degli Studi di Firenze</p>
           <p class="card-body">
-            Percorso triennale focalizzato su algoritmi, strutture dati, sicurezza informatica, machine learning e ingegneria del software. Un mix di teoria solida e applicazioni pratiche per costruire sistemi intelligenti, sicuri e ad alte prestazioni.
+            Percorso triennale presso l’Università degli Studi di Firenze, focalizzato su algoritmi, sicurezza informatica, machine learning e progettazione software. Un mix di teoria solida e applicazioni pratiche per costruire sistemi intelligenti, sicuri e ad alte prestazioni.
           </p>
           <div class="card-tags">
             <span class="tag">Algoritmi</span>
@@ -176,12 +222,13 @@
             <span class="tag">UniFI</span>
           </div>
           <a href="https://www.informatica.unifi.it/" target="_blank" rel="noopener" class="card-link-action">
-            <span>Visita Corso di Laurea UniFI</span> &nearr;
+            <span>Scopri di più</span> &nearr;
           </a>
         </article>
 
         <!-- Google Gemini for Education -->
         <article class="card">
+          <img src="/assets/images/certificazioni/google-gemini.png" alt="Google Gemini for Education" class="card-media-banner">
           <span class="card-badge">Intelligenza Artificiale</span>
           <h3 class="card-title">Gemini for Education</h3>
           <p class="card-subtitle">Google for Education</p>
@@ -194,43 +241,7 @@
             <span class="tag">Accredible Verified</span>
           </div>
           <a href="https://edu.google.accredible.com/26e963d5-4fcd-49dc-ada3-17ec650db098" target="_blank" rel="noopener" class="card-link-action">
-            <span>Verifica Certificazione Google</span> &nearr;
-          </a>
-        </article>
-
-        <!-- Cybersecurity BIP -->
-        <article class="card">
-          <span class="card-badge badge-emerald">Cybersecurity</span>
-          <h3 class="card-title">Cybersecurity Talent Week</h3>
-          <p class="card-subtitle">BIP CyberSec x VGen</p>
-          <p class="card-body">
-            Percorso selettivo avanzato in sicurezza informatica organizzato da BIP CyberSec e VGen. Include prove pratiche su strategie difensive e offensive, simulazioni di attacco e programmazione per la sicurezza sistemica.
-          </p>
-          <div class="card-tags">
-            <span class="tag">Offensive/Defensive</span>
-            <span class="tag">BIP CyberSec</span>
-            <span class="tag">Threat Intelligence</span>
-          </div>
-          <a href="https://www.vgen.it/it/bip-cybersec-talent-week-2022/" target="_blank" rel="noopener" class="card-link-action">
-            <span>Dettagli Talent Week BIP</span> &nearr;
-          </a>
-        </article>
-
-        <!-- UAS Drone License -->
-        <article class="card">
-          <span class="card-badge">Aeronautica</span>
-          <h3 class="card-title">Pilota Droni UAS A1-A3</h3>
-          <p class="card-subtitle">ENAC / EASA Open Category</p>
-          <p class="card-body">
-            Certificazione europea obbligatoria per operare droni professionali negli scenari Open A1 e A3. Consente operazioni conformi alle normative EASA ed ENAC con velivoli ad alte prestazioni.
-          </p>
-          <div class="card-tags">
-            <span class="tag">ENAC / EASA</span>
-            <span class="tag">Open A1-A3</span>
-            <span class="tag">Volo Certificato</span>
-          </div>
-          <a href="https://www.enac.gov.it/sicurezza-aerea/droni/piloti-uas/" target="_blank" rel="noopener" class="card-link-action">
-            <span>Normativa Piloti ENAC</span> &nearr;
+            <span>Visita la certificazione</span> &nearr;
           </a>
         </article>
       </div>
@@ -239,41 +250,44 @@
     <!-- Additional Continuous Learning / Learnn Modules -->
     <section id="continuous" aria-label="Corsi e Specializzazioni Continue">
       <div class="section-header">
-        <span class="section-tag">Apprendimento Continuo</span>
+        <span class="section-tag">Learnn &bull; Apprendimento Continuo</span>
         <h2 class="section-title">Specializzazioni &amp; Masterclass</h2>
         <p class="section-desc">
-          Approfondimenti su intelligenza artificiale generativa, comunicazione e dinamiche di team:
+          Approfondimenti specialistici su intelligenza artificiale generativa, comunicazione e dinamiche di team:
         </p>
       </div>
 
       <div class="grid-3">
         <!-- Learnn AI -->
         <article class="card">
+          <img src="/assets/images/certificazioni/learnn-chatgpt.png" alt="Simone Dassereto - ChatGPT e AI" class="card-media-banner" style="object-fit: contain; background: #050508;">
           <span class="card-badge">AI Strategy</span>
-          <h3 class="card-title" style="font-size: 1.2rem;">ChatGPT, LLM &amp; Applied AI</h3>
-          <p class="card-subtitle">Docente: Simone Dassereto (Learnn)</p>
+          <h3 class="card-title" style="font-size: 1.2rem;">ChatGPT e AI</h3>
+          <p class="card-subtitle">Simone Dassereto &bull; Learnn</p>
           <p class="card-body">
             Utilizzo dell'intelligenza artificiale generativa per prompt engineering, strategie digitali, efficientamento di funnel e automazione dei dati.
           </p>
         </article>
 
-        <!-- Learnn Public Speaking -->
+        <!-- Psychological Wellbeing -->
         <article class="card">
-          <span class="card-badge">Comunicazione</span>
-          <h3 class="card-title" style="font-size: 1.2rem;">Digital Public Speaking 2.0</h3>
-          <p class="card-subtitle">Docente: Mario Moroni (Learnn)</p>
+          <img src="/assets/images/certificazioni/learnn-benessere.png" alt="Francescon e Russo - Benessere Lavorativo" class="card-media-banner" style="object-fit: contain; background: #050508;">
+          <span class="card-badge">Team &amp; Culture</span>
+          <h3 class="card-title" style="font-size: 1.2rem;">Benessere psicologico sul lavoro</h3>
+          <p class="card-subtitle">Francescon &amp; Russo &bull; Learnn</p>
           <p class="card-body">
-            Tecniche per comunicare con chiarezza, autorevolezza ed efficacia in contesti digitali, presentazioni tecniche, webinar e coordinamento da remoto.
+            Metodologie per la gestione sostenibile dei carichi di lavoro, prevenzione del burnout e ottimizzazione delle relazioni interpersonali in team tecnologici.
           </p>
         </article>
 
-        <!-- Psychological Wellbeing -->
+        <!-- Learnn Public Speaking -->
         <article class="card">
-          <span class="card-badge">Team &amp; Culture</span>
-          <h3 class="card-title" style="font-size: 1.2rem;">Benessere sul Luogo di Lavoro</h3>
-          <p class="card-subtitle">Docenti: Francescon &amp; Russo (Learnn)</p>
+          <img src="/assets/images/certificazioni/learnn-speaking.jpg" alt="Mario Moroni - Digital Public Speaking" class="card-media-banner" style="object-fit: contain; background: #050508;">
+          <span class="card-badge">Comunicazione</span>
+          <h3 class="card-title" style="font-size: 1.2rem;">Digital Public Speaking 2.0</h3>
+          <p class="card-subtitle">Mario Moroni &bull; Learnn</p>
           <p class="card-body">
-            Metodologie per la gestione sostenibile dei carichi di lavoro, prevenzione del burnout e ottimizzazione delle relazioni interpersonali in team tecnologici.
+            Tecniche per comunicare con chiarezza, autorevolezza ed efficacia in contesti digitali, presentazioni tecniche, webinar e coordinamento da remoto.
           </p>
         </article>
       </div>
@@ -289,7 +303,7 @@
             <span style="color: var(--emerald-glow);">&rarr;</span>
           </div>
         </a>
-        <a href="https://www.canva.com/design/DAGIhyIfTFw/BEs4ls-iIb-GZkg9Jppi7g/view" target="_blank" rel="noopener" class="cross-nav-card">
+        <a href="https://drive.google.com/file/d/1fuXuN6e4lGd1CrBtd-lQeoXlnenA6BhV/view?usp=sharing" target="_blank" rel="noopener" class="cross-nav-card">
           <span class="cross-nav-label">Documento Ufficiale</span>
           <div class="cross-nav-title">
             <span>Scarica il CV in PDF</span>
@@ -334,6 +348,9 @@
         </a>
         <a href="https://instagram.com/_marco.pietri_" target="_blank" rel="noopener me" class="social-link">
           <span>Instagram</span> &nearr;
+        </a>
+        <a href="https://drive.google.com/file/d/1fuXuN6e4lGd1CrBtd-lQeoXlnenA6BhV/view?usp=sharing" target="_blank" rel="noopener" class="social-link">
+          <span>CV PDF</span> &nearr;
         </a>
       </div>
     </div>

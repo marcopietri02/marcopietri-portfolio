@@ -240,7 +240,7 @@ header.site-header {
 }
 
 /* ==========================================================================
-   Hero Section with Clean Editorial Portrait Frame
+   Hero Section
    ========================================================================== */
 
 @keyframes heroFadeUp {
@@ -322,7 +322,7 @@ header.site-header {
   margin-bottom: 0.45rem;
 }
 
-/* Editorial Portrait Halo (No rotating sci-fi rings) */
+/* Editorial Portrait Halo */
 .hero-avatar-wrapper {
   display: flex;
   justify-content: center;
@@ -358,7 +358,7 @@ header.site-header {
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center 15%; /* Focused on head & face */
+  object-position: center 15%;
   background-color: #0c0b16;
   display: block;
 }
@@ -496,7 +496,7 @@ section {
   transform: translateY(0);
 }
 
-/* Timeline Components */
+/* Timeline */
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -585,7 +585,7 @@ section {
   margin-top: 0.5rem;
 }
 
-/* Cards (AMOLED Glass with Dual Violet & Emerald Glow) */
+/* Cards */
 .card {
   background: var(--bg-card);
   border: 1px solid rgba(139, 92, 246, 0.18);
@@ -704,10 +704,35 @@ section {
   gap: 0.8rem;
 }
 
-/* ==========================================================================
-   Partners & Collaborations Grid (Replaces Disambiguation Box)
-   ========================================================================== */
+/* Card Visual Covers & Media */
+.card-media-banner {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  background-color: #0c0b16;
+}
 
+.cert-hero-image-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 2.5rem auto 1rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(139, 92, 246, 0.15);
+}
+
+.cert-hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Partners & Collaborations Grid */
 .partners-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -754,10 +779,7 @@ section {
   line-height: 1.6;
 }
 
-/* ==========================================================================
-   Testimonials (Strict Geometric Round Avatar Fix)
-   ========================================================================== */
-
+/* Testimonials (Strict Geometric Round Avatar Fix) */
 .testimonials-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
@@ -810,7 +832,6 @@ section {
   padding-top: 1.15rem;
 }
 
-/* Non-distorting strict 1:1 round avatar */
 .author-avatar {
   width: 46px;
   height: 46px;
@@ -845,10 +866,7 @@ section {
   color: var(--moss-light);
 }
 
-/* ==========================================================================
-   Project Cross-Navigation (Prev / Next Footer Module)
-   ========================================================================== */
-
+/* Project Cross-Navigation */
 .project-cross-nav {
   margin-top: 4rem;
   border-top: 1px solid rgba(139, 92, 246, 0.16);
