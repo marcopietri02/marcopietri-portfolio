@@ -986,9 +986,17 @@ section {
 
 .form-iframe {
   width: 100%;
-  height: 1650px;
+  height: 2600px;
+  min-height: 2600px;
   border: none;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .form-iframe {
+    height: 2850px;
+    min-height: 2850px;
+  }
 }
 .project-cross-nav {
   margin-top: 4rem;
