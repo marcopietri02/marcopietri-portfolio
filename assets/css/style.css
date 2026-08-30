@@ -707,35 +707,13 @@ section {
 /* Card Visual Covers & Media */
 .card-media-banner {
   width: 100%;
-  height: 180px;
+  height: 190px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   margin-bottom: 1.25rem;
   border: 1px solid rgba(139, 92, 246, 0.15);
-  background-color: #0c0b16;
-}
-
-.card-media-banner.media-contain {
-  object-fit: contain;
-  background-color: #050508;
-  padding: 0.85rem;
-}
-
-.cert-hero-image-wrap {
-  width: 100%;
-  max-width: 780px;
-  margin: 2.5rem auto 1rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(139, 92, 246, 0.15);
-}
-
-.cert-hero-img {
-  width: 100%;
-  height: auto;
+  background-color: transparent;
   display: block;
-  object-fit: cover;
 }
 
 /* Partners & Collaborations Grid */
