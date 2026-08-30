@@ -715,6 +715,12 @@ section {
   background-color: #0c0b16;
 }
 
+.card-media-banner.media-contain {
+  object-fit: contain;
+  background-color: #050508;
+  padding: 0.85rem;
+}
+
 .cert-hero-image-wrap {
   width: 100%;
   max-width: 780px;
