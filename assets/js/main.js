@@ -1,6 +1,6 @@
 /**
  * Marco Pietri — Native Vanilla JS Engine
- * Zero external dependencies. Ultra-fast and accessible.
+ * Zero external dependencies. Ultra-fast, accessible, and lightweight.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.textContent = '☰ Menu';
       }
     });
+
+    // Close menu on link click
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.textContent = '☰ Menu';
+      });
+    });
   }
 
   // 2. FAQ Accordion Handling
@@ -33,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       questionBtn.addEventListener('click', () => {
         const isOpen = item.classList.contains('open');
         
-        // Optional: close other items in same group
+        // Close other items in same group
         faqItems.forEach((other) => {
           if (other !== item) {
             other.classList.remove('open');
@@ -48,7 +57,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 3. Copy to Clipboard Utility (for Email / URI)
+  // 3. Scroll-Driven Reveal Animations (Timeline & Cards)
+  const revealElements = document.querySelectorAll('.scroll-reveal, .timeline-item, .partner-card, .testimonial-card');
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach((el) => {
+      revealObserver.observe(el);
+    });
+  } else {
+    // Fallback if IntersectionObserver is not supported
+    revealElements.forEach((el) => el.classList.add('revealed'));
+  }
+
+  // 4. Copy to Clipboard Utility (for Email / URI)
   const copyBtns = document.querySelectorAll('[data-copy-text]');
   copyBtns.forEach((btn) => {
     btn.addEventListener('click', async (e) => {

@@ -24,28 +24,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css">
 
-  <!-- Schema.org Service JSON-LD -->
+  <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://marcopietri.com/spectra/#service",
-    "name": "Spectra Vision — Aerial Drone Operations",
-    "url": "https://marcopietri.com/spectra/",
-    "serviceType": "Aerial Photography, Video Production & Technical Roof Inspections",
-    "provider": {
-      "@type": "Person",
-      "@id": "https://marcopietri.com/#person",
-      "name": "Marco Pietri"
-    },
-    "areaServed": "Toscana, Italia",
-    "description": "Servizio di rilievi aerei con droni professionali DJI per analisi tecniche, ispezioni tetti e pannelli fotovoltaici, documentazione assicurativa e riprese video."
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://marcopietri.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Progetti",
+            "item": "https://marcopietri.com/#projects"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Spectra Vision",
+            "item": "https://marcopietri.com/spectra/"
+          }
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://marcopietri.com/spectra/#service",
+        "name": "Spectra Vision — Aerial Drone Operations",
+        "url": "https://marcopietri.com/spectra/",
+        "serviceType": "Aerial Photography, Video Production & Technical Roof Inspections",
+        "provider": {
+          "@type": "Person",
+          "@id": "https://marcopietri.com/#person",
+          "name": "Marco Pietri"
+        },
+        "areaServed": "Toscana, Italia",
+        "description": "Servizio di rilievi aerei con droni professionali DJI per analisi tecniche, ispezioni tetti e pannelli fotovoltaici, documentazione assicurativa e riprese video."
+      }
+    ]
   }
   </script>
 </head>
 <body>
 
-  <!-- Navigation Header -->
+  <!-- Navigation Header (4-Pillar Nav) -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand-mark" aria-label="Torna alla Home">
@@ -57,11 +84,7 @@
       <nav aria-label="Navigazione Principale">
         <ul class="nav-menu">
           <li><a href="/">Home</a></li>
-          <li><a href="/#about">Su di me</a></li>
-          <li><a href="/#projects">Progetti</a></li>
-          <li><a href="/eklisso/">Eklisso</a></li>
-          <li><a href="/cass/">CASS</a></li>
-          <li><a href="/spectra/" class="active">Spectra</a></li>
+          <li><a href="/#projects" class="active">Progetti</a></li>
           <li><a href="/certificazioni/">Certificazioni</a></li>
           <li><a href="/#contact">Contatti</a></li>
         </ul>
@@ -70,8 +93,17 @@
   </header>
 
   <main class="container">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="Percorso di navigazione">
+      <a href="/">Home</a>
+      <span class="breadcrumb-separator">›</span>
+      <a href="/#projects">Progetti</a>
+      <span class="breadcrumb-separator">›</span>
+      <span class="breadcrumb-current">Spectra Vision</span>
+    </nav>
+
     <!-- Hero / Service Lead -->
-    <section class="hero-section" aria-label="Presentazione Spectra Vision">
+    <section class="hero-section" style="padding-top: 1rem;" aria-label="Presentazione Spectra Vision">
       <h1 class="hero-title">Spectra Vision</h1>
       
       <p class="hero-motto">
@@ -105,7 +137,7 @@
 
       <div class="grid-2">
         <article class="card">
-          <span class="card-badge">Analisi Tecnica</span>
+          <span class="card-badge badge-emerald">Analisi Tecnica</span>
           <h3 class="card-title">Ispezione Tetti &amp; Pannelli Solari</h3>
           <p class="card-body">
             Verifica visiva ad alta risoluzione dello stato di coperture, grondaie, comignoli e impianti fotovoltaici. Permette di individuare rotture, sporco o usura senza necessità di impalcature o rischi di caduta.
@@ -118,7 +150,7 @@
         </article>
 
         <article class="card">
-          <span class="card-badge">Perizie &amp; Legal</span>
+          <span class="card-badge badge-emerald">Perizie &amp; Legal</span>
           <h3 class="card-title">Documentazione Assicurativa &amp; Sinistri</h3>
           <p class="card-body">
             Mappatura fotografica certificata post-intemperie, grandinate o danni strutturali. Fornisce report visivi chiari e georeferenziati a supporto di periti assicurativi e consulenti tecnici.
@@ -182,6 +214,26 @@
       </div>
     </section>
 
+    <!-- Cross-Navigation: Explore Other Projects -->
+    <div class="project-cross-nav">
+      <div class="cross-nav-grid">
+        <a href="/eklisso/" class="cross-nav-card">
+          <span class="cross-nav-label">Esplora Progetto &bull; Community</span>
+          <div class="cross-nav-title">
+            <span>Eklisso Platform</span>
+            <span style="color: var(--violet-glow);">&rarr;</span>
+          </div>
+        </a>
+        <a href="/cass/" class="cross-nav-card">
+          <span class="cross-nav-label">Esplora Ricerca &bull; Machine Learning</span>
+          <div class="cross-nav-title">
+            <span>CASS System</span>
+            <span style="color: var(--emerald-glow);">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
     <!-- Booking / Inquiry CTA -->
     <section aria-label="Richiedi un Sopralluogo">
       <div class="cta-banner">
@@ -199,21 +251,26 @@
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer with Social Bar -->
   <footer class="site-footer">
     <div class="container footer-content">
       <div>
         <p>&copy; 2026 Marco Pietri &bull; Spectra Vision Drone Operations</p>
-        <p style="margin-top: 0.35rem;">
-          Pilota Certificato: <a href="https://marcopietri.com/#person" style="color: var(--emerald-glow); text-decoration: none;">Marco Pietri</a> &bull; ENAC / EASA A1-A3
+        <p style="margin-top: 0.35rem; color: var(--text-dim);">
+          Pilota Certificato: Marco Pietri &bull; ENAC / EASA A1-A3
         </p>
       </div>
-      <ul class="footer-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/eklisso/">Eklisso</a></li>
-        <li><a href="/cass/">CASS</a></li>
-        <li><a href="/certificazioni/">Certificazioni</a></li>
-      </ul>
+      <div class="footer-social-bar">
+        <a href="https://www.linkedin.com/in/marco-pietri-2495b42b9/" target="_blank" rel="noopener me" class="social-link">
+          <span>LinkedIn</span> &nearr;
+        </a>
+        <a href="https://github.com/marcopietri02" target="_blank" rel="noopener me" class="social-link">
+          <span>GitHub</span> &nearr;
+        </a>
+        <a href="https://instagram.com/_marco.pietri_" target="_blank" rel="noopener me" class="social-link">
+          <span>Instagram</span> &nearr;
+        </a>
+      </div>
     </div>
   </footer>
 
