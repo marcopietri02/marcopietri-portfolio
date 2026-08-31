@@ -17,3 +17,4 @@
 2. **Semantic Cleanliness:** Write clean, modular, and accessible HTML/CSS/JS without unnecessary heavy frameworks unless explicitly required by the user.
 3. **SEO & Performance:** Keep markup semantically structured (proper use of H1, H2, meta tags) to ensure high performance and optimal crawler indexing.
 4. **Build Integrity:** Ensure all paths and links remain relative or correctly absolute to prevent broken routing upon deployment.
+5. **Cache-Busting Integrity:** Whenever modifying CSS (`style.css`) or JS (`main.js`), increment the cache-busting query parameter (`?v=X.X`) across all HTML files (`/assets/css/style.css?v=...`, `/assets/js/main.js?v=...`) and ensure `_headers` enforces short stale-while-revalidate caching so users and crawlers receive fresh visual styles immediately.
