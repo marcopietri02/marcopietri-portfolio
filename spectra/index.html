@@ -26,11 +26,11 @@
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#030305">
   
-  <!-- Typography & Stylesheet -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=2.3">
+  <!-- Pannellum 360 Viewer CSS -->
+  <link rel="stylesheet" href="/assets/css/pannellum.css">
+
+  <!-- Shared Stylesheet (AMOLED Edition) -->
+  <link rel="stylesheet" href="/assets/css/style.css?v=2.5">
 
   <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -123,18 +123,185 @@
       </article>
 
       <div class="btn-group">
-        <a href="#services" class="btn btn-primary">
-          <span>Servizi &amp; Applicazioni</span>
+        <a href="#showcase" class="btn btn-primary">
+          <span>Esplora Panorami 360°</span>
           <span>&rarr;</span>
         </a>
-        <a href="#compliance" class="btn btn-secondary">
-          <span>Normative &amp; Sicurezza ENAC</span>
+        <a href="#services" class="btn btn-secondary">
+          <span>Servizi &amp; Applicazioni</span>
         </a>
+      </div>
+    </section>
+
+    <!-- Media & 360 Showcase Section -->
+    <section id="showcase" class="spectra-media-section" aria-label="Media e Panorami 360 Interattivi">
+      <div class="section-header">
+        <span class="section-tag">Showcase &amp; Media Aerei</span>
+        <h2 class="section-title">Esplorazione Immersiva &amp; Produzioni</h2>
+        <p class="section-desc">
+          Scopri le riprese aeree e i rilievi territoriali catturati con droni DJI. Esplora i panorami 360° interattivi e resta aggiornato sui prossimi format in arrivo.
+        </p>
+      </div>
+
+      <!-- Category Cards (Panoramiche 360, Video Short, Fotografie HD) -->
+      <div class="media-category-grid">
+        <!-- Card 1: 360 Panorami (ACTIVE) -->
+        <div class="media-cat-card active-card">
+          <div class="media-cat-header">
+            <span class="media-cat-icon">🌐</span>
+            <span class="cat-badge live">● Disponibile • 5 Scenari</span>
+          </div>
+          <h3 class="media-cat-title">Panorami Aerei 360°</h3>
+          <p class="media-cat-desc">
+            Tour sferici a 360° in altissima definizione: ruota la visuale in tempo reale, fai zoom sui dettagli ed esplora dall'alto con piena libertà.
+          </p>
+          <div class="media-cat-footer">
+            <span class="active-action">
+              <span>Viewer attivo qui sotto</span> &darr;
+            </span>
+          </div>
+        </div>
+
+        <!-- Card 2: Video Short & Reel (COMING SOON) -->
+        <div class="media-cat-card coming-soon-card">
+          <div class="media-cat-header">
+            <span class="media-cat-icon">🎬</span>
+            <span class="cat-badge soon">✦ Coming Soon</span>
+          </div>
+          <h3 class="media-cat-title">Video Short &amp; Reel 4K</h3>
+          <p class="media-cat-desc">
+            Montaggi video dinamici in formato verticale e widescreen per social media, reel cinematografici e presentazioni aziendali.
+          </p>
+          <div class="media-cat-footer">
+            <span class="soon-action">In fase di post-produzione</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Foto & Ortofoto HD (COMING SOON) -->
+        <div class="media-cat-card coming-soon-card">
+          <div class="media-cat-header">
+            <span class="media-cat-icon">📸</span>
+            <span class="cat-badge soon">✦ Coming Soon</span>
+          </div>
+          <h3 class="media-cat-title">Foto &amp; Rilievi HD</h3>
+          <p class="media-cat-desc">
+            Scatti ad alta risoluzione e ortofoto per perizie assicurative, monitoraggio coperture e valorizzazione patrimonio immobiliare.
+          </p>
+          <div class="media-cat-footer">
+            <span class="soon-action">In arrivo prossimamente</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 360 Interactive Viewer Container -->
+      <div class="viewer-360-wrapper">
+        <div class="viewer-topbar">
+          <div class="viewer-scene-info">
+            <div class="viewer-live-dot"></div>
+            <div>
+              <div class="viewer-scene-title" id="current-scene-title">Vista Invernale Aerea</div>
+              <div class="viewer-scene-date" id="current-scene-date">Febbraio 2026 • Rilievo Territoriale</div>
+            </div>
+            <div class="drone-focus-badge" id="drone-focus-indicator" style="display: none;">
+              <span class="focus-pulse">✦</span> <span id="focus-label">Drone Focus</span>
+            </div>
+          </div>
+          <div class="viewer-controls">
+            <button class="viewer-btn" id="toggle-autorotate" type="button" aria-label="Attiva o disattiva tour automatico">
+              <span id="rotate-icon">⏸</span> <span id="rotate-label">Tour Drone</span>
+            </button>
+            <button class="viewer-btn" id="reset-view" type="button" aria-label="Reimposta orientamento iniziale">
+              <span>↺</span> <span>Reset</span>
+            </button>
+            <button class="viewer-btn" id="fullscreen-btn" type="button" aria-label="Visualizza a schermo intero">
+              <span>⤢</span> <span>Schermo Intero</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- WebGL Canvas Container -->
+        <div id="panorama-viewport" class="viewer-viewport">
+          <div class="viewer-instruction-overlay">
+            <span>⟲</span>
+            <span>Trascina con il mouse o muovi lo smartphone per guardare a 360°</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnails Selector Bar -->
+      <div class="pano-carousel-header">
+        <span class="carousel-title">
+          <span>Seleziona Scenario Panoramico</span>
+        </span>
+        <span class="carousel-counter" id="carousel-indicator">1 di 5</span>
+      </div>
+
+      <div class="pano-carousel-strip" id="pano-carousel">
+        <!-- Item 1 -->
+        <button class="pano-thumb-card active-thumb" type="button" data-index="0">
+          <div class="pano-thumb-img-wrapper">
+            <img src="/assets/images/spectra/panorami/pano-1-thumb.jpg" alt="Miniatura Vista Invernale Aerea" class="pano-thumb-img" loading="lazy">
+            <span class="pano-thumb-badge">360° Sferica</span>
+          </div>
+          <div class="pano-thumb-details">
+            <div class="pano-thumb-name">1. Vista Invernale</div>
+            <div class="pano-thumb-meta">Febbraio 2026</div>
+          </div>
+        </button>
+
+        <!-- Item 2 -->
+        <button class="pano-thumb-card" type="button" data-index="1">
+          <div class="pano-thumb-img-wrapper">
+            <img src="/assets/images/spectra/panorami/pano-2-thumb.jpg" alt="Miniatura Tardo Pomeriggio di Maggio" class="pano-thumb-img" loading="lazy">
+            <span class="pano-thumb-badge">360° Sferica</span>
+          </div>
+          <div class="pano-thumb-details">
+            <div class="pano-thumb-name">2. Tardo Pomeriggio</div>
+            <div class="pano-thumb-meta">Maggio 2026</div>
+          </div>
+        </button>
+
+        <!-- Item 3 -->
+        <button class="pano-thumb-card" type="button" data-index="2">
+          <div class="pano-thumb-img-wrapper">
+            <img src="/assets/images/spectra/panorami/pano-3-thumb.jpg" alt="Miniatura Panoramica Solare HD" class="pano-thumb-img" loading="lazy">
+            <span class="pano-thumb-badge">360° Sferica</span>
+          </div>
+          <div class="pano-thumb-details">
+            <div class="pano-thumb-name">3. Panoramica Solare</div>
+            <div class="pano-thumb-meta">Agosto 2026</div>
+          </div>
+        </button>
+
+        <!-- Item 4 -->
+        <button class="pano-thumb-card" type="button" data-index="3">
+          <div class="pano-thumb-img-wrapper">
+            <img src="/assets/images/spectra/panorami/pano-4-thumb.jpg" alt="Miniatura Quota Paesaggistica" class="pano-thumb-img" loading="lazy">
+            <span class="pano-thumb-badge">360° Sferica</span>
+          </div>
+          <div class="pano-thumb-details">
+            <div class="pano-thumb-name">4. Quota Paesaggistica</div>
+            <div class="pano-thumb-meta">Agosto 2026</div>
+          </div>
+        </button>
+
+        <!-- Item 5 -->
+        <button class="pano-thumb-card" type="button" data-index="4">
+          <div class="pano-thumb-img-wrapper">
+            <img src="/assets/images/spectra/panorami/pano-5-thumb.jpg" alt="Miniatura Golden Hour d'Agosto" class="pano-thumb-img" loading="lazy">
+            <span class="pano-thumb-badge">360° Sferica</span>
+          </div>
+          <div class="pano-thumb-details">
+            <div class="pano-thumb-name">5. Golden Hour</div>
+            <div class="pano-thumb-meta">Agosto 2026</div>
+          </div>
+        </button>
       </div>
     </section>
 
     <!-- Services Grid -->
     <section id="services" aria-label="Ambiti Applicativi e Servizi">
+
       <div class="section-header">
         <span class="section-tag">Cosa Offriamo</span>
         <h2 class="section-title">Rilievi Aerei &amp; Ispezioni ad Alta Precisione</h2>
@@ -282,6 +449,277 @@
     </div>
   </footer>
 
-  <script src="/assets/js/main.js?v=2.2"></script>
+  <!-- Pannellum 360 Engine -->
+  <script src="/assets/js/pannellum.js"></script>
+  
+  <!-- Site Scripts -->
+  <script src="/assets/js/main.js?v=2.5"></script>
+
+  <!-- Spectra 360 Interactive Controller -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const viewport = document.getElementById('panorama-viewport');
+      if (!viewport || typeof pannellum === 'undefined') return;
+
+      let isTourActive = true;
+      let userInteracting = false;
+      let panViewer = null;
+      let tourTimer = null;
+      let idleTimer = null;
+      let currentSceneIndex = 0;
+      let focusPointIndex = 0;
+
+      const scenes = [
+        {
+          src: '/assets/images/spectra/panorami/pano-1.jpg',
+          title: 'Vista Invernale Aerea',
+          meta: 'Febbraio 2026 • Rilievo Territoriale',
+          pitch: 0,
+          yaw: 0,
+          focusPoints: [
+            { pitch: -18, yaw: 42, hfov: 62, label: 'Ispezione Coperture & Strutture' },
+            { pitch: -7, yaw: -68, hfov: 66, label: 'Allineamento Orizzonte Collinare' },
+            { pitch: -24, yaw: 135, hfov: 58, label: 'Dettaglio Rilievo Terreno' }
+          ]
+        },
+        {
+          src: '/assets/images/spectra/panorami/pano-2.jpg',
+          title: 'Tardo Pomeriggio di Maggio',
+          meta: 'Maggio 2026 • Luce Naturale Calda',
+          pitch: -5,
+          yaw: 30,
+          focusPoints: [
+            { pitch: -15, yaw: -22, hfov: 60, label: 'Tenuta & Campagna Toscana' },
+            { pitch: -24, yaw: 110, hfov: 64, label: 'Dettaglio Quota Media' },
+            { pitch: -6, yaw: -145, hfov: 68, label: 'Visuale Panoramica Ovest' }
+          ]
+        },
+        {
+          src: '/assets/images/spectra/panorami/pano-3.jpg',
+          title: 'Panoramica Solare HD',
+          meta: 'Agosto 2026 • Ispezione e Dettaglio',
+          pitch: -10,
+          yaw: -45,
+          focusPoints: [
+            { pitch: -25, yaw: -15, hfov: 55, label: 'Ispezione Tetti & Fotovoltaico' },
+            { pitch: -12, yaw: 88, hfov: 62, label: 'Area Urbana & Viabilità' },
+            { pitch: -20, yaw: 170, hfov: 60, label: 'Prospettiva Aerea Obliqua' }
+          ]
+        },
+        {
+          src: '/assets/images/spectra/panorami/pano-4.jpg',
+          title: 'Quota Paesaggistica',
+          meta: 'Agosto 2026 • Vista Aerea Ampia',
+          pitch: 0,
+          yaw: 60,
+          focusPoints: [
+            { pitch: -8, yaw: 142, hfov: 58, label: 'Profilo Montano & Rilievi' },
+            { pitch: -22, yaw: -38, hfov: 64, label: 'Ispezione Immobili dal Drone' },
+            { pitch: -14, yaw: 45, hfov: 62, label: 'Dettaglio Centri Abitati' }
+          ]
+        },
+        {
+          src: '/assets/images/spectra/panorami/pano-5.jpg',
+          title: "Golden Hour d'Agosto",
+          meta: 'Agosto 2026 • Luce Dorata pre-tramonto',
+          pitch: -5,
+          yaw: -120,
+          focusPoints: [
+            { pitch: -5, yaw: -95, hfov: 62, label: 'Luce Tramonto & Controluce' },
+            { pitch: -23, yaw: 36, hfov: 56, label: 'Valle in Ombra & Dettagli' },
+            { pitch: -12, yaw: 160, hfov: 65, label: 'Paesaggio Tardo-Pomeridiano' }
+          ]
+        }
+      ];
+
+      const focusBadge = document.getElementById('drone-focus-indicator');
+      const focusLabel = document.getElementById('focus-label');
+      const rotateBtn = document.getElementById('toggle-autorotate');
+      const rotateIcon = document.getElementById('rotate-icon');
+      const rotateLabel = document.getElementById('rotate-label');
+
+      function stopTourTimers() {
+        if (tourTimer) {
+          clearTimeout(tourTimer);
+          tourTimer = null;
+        }
+        if (focusBadge) {
+          focusBadge.style.display = 'none';
+        }
+      }
+
+      function scheduleDroneMove() {
+        stopTourTimers();
+        if (!isTourActive || userInteracting || !panViewer) return;
+
+        // Wait 7.5 seconds of gentle rotation before triggering cinematic focus
+        tourTimer = setTimeout(() => {
+          if (!isTourActive || userInteracting || !panViewer) return;
+
+          const scene = scenes[currentSceneIndex];
+          if (!scene.focusPoints || scene.focusPoints.length === 0) {
+            scheduleDroneMove();
+            return;
+          }
+
+          const point = scene.focusPoints[focusPointIndex % scene.focusPoints.length];
+          focusPointIndex++;
+
+          // 1. Show dynamic drone focus badge
+          if (focusBadge && focusLabel) {
+            focusLabel.textContent = point.label;
+            focusBadge.style.display = 'inline-flex';
+          }
+
+          // 2. Smoothly glide to target and zoom in (simulating drone camera focus, like Google Earth)
+          panViewer.stopAutoRotate();
+          panViewer.lookAt(point.pitch, point.yaw, point.hfov, 2200, () => {
+            if (!isTourActive || userInteracting || !panViewer) return;
+
+            // 3. Pause for 3.2s on the high-detail zoomed subject
+            tourTimer = setTimeout(() => {
+              if (!isTourActive || userInteracting || !panViewer) return;
+
+              // 4. Smoothly zoom back out to wide view (hfov: 100) and continue rotation
+              panViewer.lookAt(scene.pitch, point.yaw + 28, 100, 2000, () => {
+                if (focusBadge) focusBadge.style.display = 'none';
+                if (isTourActive && !userInteracting && panViewer) {
+                  panViewer.startAutoRotate(-1.5);
+                  scheduleDroneMove();
+                }
+              });
+            }, 3200);
+          });
+        }, 7500);
+      }
+
+      function onUserActivity() {
+        userInteracting = true;
+        stopTourTimers();
+        clearTimeout(idleTimer);
+
+        // Resume cinematic drone tour after 8 seconds of inactivity
+        idleTimer = setTimeout(() => {
+          userInteracting = false;
+          if (isTourActive && panViewer) {
+            panViewer.startAutoRotate(-1.5);
+            scheduleDroneMove();
+          }
+        }, 8000);
+      }
+
+      viewport.addEventListener('pointerdown', onUserActivity);
+      viewport.addEventListener('wheel', onUserActivity, { passive: true });
+      viewport.addEventListener('touchstart', onUserActivity, { passive: true });
+
+      function loadScene(index) {
+        currentSceneIndex = index;
+        focusPointIndex = 0;
+        stopTourTimers();
+
+        const scene = scenes[index];
+        if (!scene) return;
+
+        if (panViewer) {
+          try {
+            panViewer.destroy();
+          } catch(e) {
+            console.error('Error destroying previous viewer instance', e);
+          }
+        }
+
+        panViewer = pannellum.viewer('panorama-viewport', {
+          type: 'equirectangular',
+          panorama: scene.src,
+          autoLoad: true,
+          autoRotate: isTourActive ? -1.5 : 0,
+          autoRotateInactivityDelay: 3500,
+          compass: false,
+          showZoomCtrl: true,
+          showFullscreenCtrl: false,
+          mouseZoom: true,
+          pitch: scene.pitch,
+          yaw: scene.yaw,
+          hfov: 100,
+          minHfov: 45,
+          maxHfov: 120
+        });
+
+        // Update topbar labels
+        const titleEl = document.getElementById('current-scene-title');
+        const dateEl = document.getElementById('current-scene-date');
+        const indicatorEl = document.getElementById('carousel-indicator');
+
+        if (titleEl) titleEl.textContent = scene.title;
+        if (dateEl) dateEl.textContent = scene.meta;
+        if (indicatorEl) indicatorEl.textContent = (index + 1) + ' di ' + scenes.length;
+
+        // Schedule first cinematic drone focus
+        if (isTourActive) {
+          scheduleDroneMove();
+        }
+      }
+
+      // Initial Scene Load
+      loadScene(0);
+
+      // Thumbnail Click Events
+      const thumbCards = document.querySelectorAll('.pano-thumb-card');
+      thumbCards.forEach((card) => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.getAttribute('data-index'), 10);
+          thumbCards.forEach(c => c.classList.remove('active-thumb'));
+          card.classList.add('active-thumb');
+          loadScene(idx);
+        });
+      });
+
+      // Controls: Toggle Cinematic Tour
+      if (rotateBtn) {
+        rotateBtn.addEventListener('click', () => {
+          if (!panViewer) return;
+          if (isTourActive) {
+            isTourActive = false;
+            stopTourTimers();
+            panViewer.stopAutoRotate();
+            if (rotateIcon) rotateIcon.textContent = '▶';
+            if (rotateLabel) rotateLabel.textContent = 'Avvia Tour';
+          } else {
+            isTourActive = true;
+            userInteracting = false;
+            panViewer.startAutoRotate(-1.5);
+            if (rotateIcon) rotateIcon.textContent = '⏸';
+            if (rotateLabel) rotateLabel.textContent = 'Pausa Tour';
+            scheduleDroneMove();
+          }
+        });
+      }
+
+      // Controls: Reset View
+      const resetBtn = document.getElementById('reset-view');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (panViewer) {
+            stopTourTimers();
+            panViewer.setPitch(0);
+            panViewer.setYaw(0);
+            panViewer.setHfov(100);
+            if (isTourActive) scheduleDroneMove();
+          }
+        });
+      }
+
+      // Controls: Toggle Fullscreen
+      const fullBtn = document.getElementById('fullscreen-btn');
+      if (fullBtn) {
+        fullBtn.addEventListener('click', () => {
+          if (panViewer) {
+            panViewer.toggleFullscreen();
+          }
+        });
+      }
+    });
+
+  </script>
 </body>
 </html>
