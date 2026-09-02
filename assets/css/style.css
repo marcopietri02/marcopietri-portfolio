@@ -1242,8 +1242,120 @@ footer.site-footer {
 }
 
 /* ==========================================================================
-   SPECTRA VISION — 360° INTERACTIVE SHOWCASE & MEDIA CATEGORY CARDS
+   SPECTRA VISION — MACRO SERVICES & 360° INTERACTIVE SHOWCASE
    ========================================================================== */
+
+.services-macro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.25rem 0 4rem;
+}
+
+.macro-service-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.85rem 1.6rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-smooth);
+  overflow: hidden;
+}
+
+.macro-service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--emerald-glow), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-smooth);
+}
+
+.macro-service-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.1);
+}
+
+.macro-service-card:hover::before {
+  opacity: 1;
+}
+
+.macro-service-card.highlighted {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--bg-card) 100%);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.08);
+}
+
+.macro-service-card.highlighted::before {
+  opacity: 1;
+}
+
+.macro-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.macro-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.macro-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.01em;
+}
+
+.macro-card-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin-bottom: 1.4rem;
+}
+
+.macro-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--emerald-glow);
+  transition: gap var(--transition-fast);
+}
+
+.macro-service-card:hover .macro-card-cta {
+  gap: 0.75rem;
+}
+
+@media (max-width: 900px) {
+  .services-macro-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+}
 
 .spectra-media-section {
   margin: 3.5rem 0 4rem;
