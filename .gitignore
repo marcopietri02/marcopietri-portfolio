@@ -17,6 +17,9 @@ vecchia grafica/
 # OS / Editor Files
 .DS_Store
 Thumbs.db
-.vscode/
-.idea/
+# Large media files (videos > 100MB blocked by GitHub)
+*.mp4
+*.mov
+*.avi
+scratch/
 

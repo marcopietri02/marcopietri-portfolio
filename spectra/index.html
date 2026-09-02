@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/assets/css/pannellum.css">
 
   <!-- Shared Stylesheet (AMOLED Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=2.8">
+  <link rel="stylesheet" href="/assets/css/style.css?v=2.9">
 
   <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -119,7 +119,7 @@
       </p>
 
       <article class="hero-lead">
-        Spectra Vision è il servizio di riprese e fotografie aeree condotto da Marco Pietri con droni DJI di ultima generazione. Pensato per aziende, privati, perizie e contesti tecnici, combina risoluzione ultra-dettagliata e agilità di manovra, garantendo totale conformità alle normative aeronautiche ENAC ed EASA.
+        Spectra Vision è il servizio di riprese e fotografie aeree condotto da Marco Pietri con droni e tecnologia DJI. Pensato per aziende, privati, perizie e contesti tecnici, combina risoluzione ultra-dettagliata e agilità di manovra, garantendo totale conformità alle normative aeronautiche ENAC ed EASA.
       </article>
 
       <div class="btn-group">
@@ -285,11 +285,13 @@
         </div>
 
         <!-- WebGL Canvas Container -->
-        <div id="panorama-viewport" class="viewer-viewport">
-          <div class="viewer-instruction-overlay">
-            <span>⟲</span>
-            <span>Trascina con il mouse o muovi lo smartphone per guardare a 360°</span>
-          </div>
+        <div id="panorama-viewport" class="viewer-viewport"></div>
+
+        <!-- Helper Instruction Bar (Fully Responsive & Outside Canvas) -->
+        <div class="viewer-helper-bar">
+          <span class="helper-icon">⟲</span>
+          <span class="helper-text desktop-only">Trascina con il mouse o muovi lo smartphone per esplorare a 360°</span>
+          <span class="helper-text mobile-only">Trascina per ruotare a 360° &bull; Pizzica per zoomare</span>
         </div>
       </div>
 
@@ -527,10 +529,10 @@
   </footer>
 
   <!-- Pannellum 360 Engine -->
-  <script src="/assets/js/pannellum.js?v=2.8"></script>
+  <script src="/assets/js/pannellum.js?v=2.9"></script>
   
   <!-- Site Scripts -->
-  <script src="/assets/js/main.js?v=2.8"></script>
+  <script src="/assets/js/main.js?v=2.9"></script>
 
   <!-- Spectra 360 Interactive Controller -->
   <script>
@@ -754,12 +756,25 @@
 
       // Thumbnail Click Events
       const thumbCards = document.querySelectorAll('.pano-thumb-card');
+      const viewerBox = document.querySelector('.viewer-360-wrapper');
+
       thumbCards.forEach((card) => {
         card.addEventListener('click', () => {
           const idx = parseInt(card.getAttribute('data-index'), 10);
           thumbCards.forEach(c => c.classList.remove('active-thumb'));
           card.classList.add('active-thumb');
           switchScene(idx);
+
+          // Center clicked thumbnail horizontally in the strip
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+          // Auto-scroll viewer into view on mobile or whenever it is outside the viewport
+          if (viewerBox) {
+            const rect = viewerBox.getBoundingClientRect();
+            if (rect.top < 60 || rect.bottom > (window.innerHeight + 100) || window.innerWidth <= 900) {
+              viewerBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
         });
       });
 

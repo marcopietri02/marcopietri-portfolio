@@ -1504,6 +1504,7 @@ footer.site-footer {
   overflow: hidden;
   position: relative;
   margin-bottom: 1.5rem;
+  scroll-margin-top: 5rem;
 }
 
 .viewer-topbar {
@@ -1624,26 +1625,42 @@ footer.site-footer {
   }
 }
 
-.viewer-instruction-overlay {
-  position: absolute;
-  bottom: 1.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(5, 5, 8, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  padding: 0.45rem 1rem;
-  border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-main);
-  pointer-events: none;
-  z-index: 10;
+.viewer-helper-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-  white-space: nowrap;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1rem;
+  background: rgba(10, 10, 14, 0.95);
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.viewer-helper-bar .helper-icon {
+  color: var(--emerald-glow);
+  font-size: 0.95rem;
+}
+
+.helper-text.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .helper-text.desktop-only {
+    display: none;
+  }
+  .helper-text.mobile-only {
+    display: inline;
+  }
+  .viewer-helper-bar {
+    font-size: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    line-height: 1.4;
+  }
 }
 
 /* Thumbnail Carousel Strip */
