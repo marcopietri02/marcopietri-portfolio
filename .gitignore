@@ -17,9 +17,10 @@ vecchia grafica/
 # OS / Editor Files
 .DS_Store
 Thumbs.db
-# Large media files (videos > 100MB blocked by GitHub)
-*.mp4
+# Large raw media files (> 100MB blocked by GitHub)
+/elba25_26.mp4
 *.mov
 *.avi
 scratch/
+!assets/videos/**/*.mp4
 

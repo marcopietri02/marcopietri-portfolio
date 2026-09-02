@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/assets/css/pannellum.css">
 
   <!-- Shared Stylesheet (AMOLED Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=2.9">
+  <link rel="stylesheet" href="/assets/css/style.css?v=3.0">
 
   <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -211,7 +211,7 @@
       <!-- Category Cards (Panoramiche 360, Video Short, Fotografie HD) -->
       <div class="media-category-grid">
         <!-- Card 1: 360 Panorami (ACTIVE) -->
-        <div class="media-cat-card active-card">
+        <div class="media-cat-card active-card" id="card-tab-pano" role="button" tabindex="0" aria-label="Mostra Panorami Aerei 360">
           <div class="media-cat-header">
             <span class="media-cat-icon">🌐</span>
             <span class="cat-badge live">● Disponibile • 5 Scenari</span>
@@ -221,24 +221,26 @@
             Tour sferici a 360° in altissima definizione: ruota la visuale in tempo reale, fai zoom sui dettagli ed esplora dall'alto con piena libertà.
           </p>
           <div class="media-cat-footer">
-            <span class="active-action">
+            <span class="active-action" id="action-label-pano">
               <span>Viewer attivo qui sotto</span> &darr;
             </span>
           </div>
         </div>
 
-        <!-- Card 2: Video Short & Reel (COMING SOON) -->
-        <div class="media-cat-card coming-soon-card">
+        <!-- Card 2: Video Short & Reel (ACTIVE) -->
+        <div class="media-cat-card" id="card-tab-video" role="button" tabindex="0" aria-label="Mostra Video Short e Reel 4K">
           <div class="media-cat-header">
             <span class="media-cat-icon">🎬</span>
-            <span class="cat-badge soon">✦ Coming Soon</span>
+            <span class="cat-badge live">● Disponibile • 1 Reel HD</span>
           </div>
           <h3 class="media-cat-title">Video Short &amp; Reel 4K</h3>
           <p class="media-cat-desc">
-            Montaggi video dinamici in formato verticale e widescreen per social media, reel cinematografici e presentazioni aziendali.
+            Montaggi video dinamici e riprese aeree cinematografiche per social media, promozioni territoriali e presentazioni d'impatto.
           </p>
           <div class="media-cat-footer">
-            <span class="soon-action">In fase di post-produzione</span>
+            <span class="inactive-action" id="action-label-video">
+              <span>Clicca per riprodurre</span> &rarr;
+            </span>
           </div>
         </div>
 
@@ -258,111 +260,158 @@
         </div>
       </div>
 
-      <!-- 360 Interactive Viewer Container -->
-      <div class="viewer-360-wrapper">
-        <div class="viewer-topbar">
-          <div class="viewer-scene-info">
-            <div class="viewer-live-dot"></div>
-            <div>
-              <div class="viewer-scene-title" id="current-scene-title">Vista Invernale Aerea</div>
-              <div class="viewer-scene-date" id="current-scene-date">Febbraio 2026 • Rilievo Territoriale</div>
+      <!-- SHOWCASE 01: 360 PANORAMIC TOURS CONTAINER -->
+      <div id="pano-showcase-container">
+        <!-- 360 Interactive Viewer Container -->
+        <div class="viewer-360-wrapper">
+          <div class="viewer-topbar">
+            <div class="viewer-scene-info">
+              <div class="viewer-live-dot"></div>
+              <div>
+                <div class="viewer-scene-title" id="current-scene-title">Vista Invernale Aerea</div>
+                <div class="viewer-scene-date" id="current-scene-date">Febbraio 2026 • Rilievo Territoriale</div>
+              </div>
+              <div class="drone-focus-badge" id="drone-focus-indicator" style="display: none;">
+                <span class="focus-pulse">✦</span> <span id="focus-label">Drone Focus</span>
+              </div>
             </div>
-            <div class="drone-focus-badge" id="drone-focus-indicator" style="display: none;">
-              <span class="focus-pulse">✦</span> <span id="focus-label">Drone Focus</span>
+            <div class="viewer-controls">
+              <button class="viewer-btn" id="toggle-autorotate" type="button" aria-label="Attiva o disattiva tour automatico">
+                <span id="rotate-icon">⏸</span> <span id="rotate-label">Tour Drone</span>
+              </button>
+              <button class="viewer-btn" id="reset-view" type="button" aria-label="Reimposta orientamento iniziale">
+                <span>↺</span> <span>Reset</span>
+              </button>
+              <button class="viewer-btn" id="fullscreen-btn" type="button" aria-label="Visualizza a schermo intero">
+                <span>⤢</span> <span>Schermo Intero</span>
+              </button>
             </div>
           </div>
-          <div class="viewer-controls">
-            <button class="viewer-btn" id="toggle-autorotate" type="button" aria-label="Attiva o disattiva tour automatico">
-              <span id="rotate-icon">⏸</span> <span id="rotate-label">Tour Drone</span>
-            </button>
-            <button class="viewer-btn" id="reset-view" type="button" aria-label="Reimposta orientamento iniziale">
-              <span>↺</span> <span>Reset</span>
-            </button>
-            <button class="viewer-btn" id="fullscreen-btn" type="button" aria-label="Visualizza a schermo intero">
-              <span>⤢</span> <span>Schermo Intero</span>
-            </button>
+
+          <!-- WebGL Canvas Container -->
+          <div id="panorama-viewport" class="viewer-viewport"></div>
+
+          <!-- Helper Instruction Bar (Fully Responsive & Outside Canvas) -->
+          <div class="viewer-helper-bar">
+            <span class="helper-icon">⟲</span>
+            <span class="helper-text desktop-only">Trascina con il mouse o muovi lo smartphone per esplorare a 360°</span>
+            <span class="helper-text mobile-only">Trascina per ruotare a 360° &bull; Pizzica per zoomare</span>
           </div>
         </div>
 
-        <!-- WebGL Canvas Container -->
-        <div id="panorama-viewport" class="viewer-viewport"></div>
+        <!-- Thumbnails Selector Bar -->
+        <div class="pano-carousel-header">
+          <span class="carousel-title">
+            <span>Seleziona Scenario Panoramico</span>
+          </span>
+          <span class="carousel-counter" id="carousel-indicator">1 di 5</span>
+        </div>
 
-        <!-- Helper Instruction Bar (Fully Responsive & Outside Canvas) -->
-        <div class="viewer-helper-bar">
-          <span class="helper-icon">⟲</span>
-          <span class="helper-text desktop-only">Trascina con il mouse o muovi lo smartphone per esplorare a 360°</span>
-          <span class="helper-text mobile-only">Trascina per ruotare a 360° &bull; Pizzica per zoomare</span>
+        <div class="pano-carousel-strip" id="pano-carousel">
+          <!-- Item 1 -->
+          <button class="pano-thumb-card active-thumb" type="button" data-index="0">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-1-thumb.jpg" alt="Miniatura Vista Invernale Aerea" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">360° Sferica</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">1. Vista Invernale</div>
+              <div class="pano-thumb-meta">Febbraio 2026</div>
+            </div>
+          </button>
+
+          <!-- Item 2 -->
+          <button class="pano-thumb-card" type="button" data-index="1">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-2-thumb.jpg" alt="Miniatura Tardo Pomeriggio di Maggio" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">360° Sferica</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">2. Tardo Pomeriggio</div>
+              <div class="pano-thumb-meta">Maggio 2026</div>
+            </div>
+          </button>
+
+          <!-- Item 3 -->
+          <button class="pano-thumb-card" type="button" data-index="2">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-3-thumb.jpg" alt="Miniatura Panoramica Solare HD" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">360° Sferica</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">3. Panoramica Solare</div>
+              <div class="pano-thumb-meta">Agosto 2026</div>
+            </div>
+          </button>
+
+          <!-- Item 4 -->
+          <button class="pano-thumb-card" type="button" data-index="3">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-4-thumb.jpg" alt="Miniatura Quota Paesaggistica" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">360° Sferica</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">4. Quota Paesaggistica</div>
+              <div class="pano-thumb-meta">Agosto 2026</div>
+            </div>
+          </button>
+
+          <!-- Item 5 -->
+          <button class="pano-thumb-card" type="button" data-index="4">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-5-thumb.jpg" alt="Miniatura Golden Hour d'Agosto" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">360° Sferica</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">5. Golden Hour</div>
+              <div class="pano-thumb-meta">Agosto 2026</div>
+            </div>
+          </button>
         </div>
       </div>
 
-      <!-- Thumbnails Selector Bar -->
-      <div class="pano-carousel-header">
-        <span class="carousel-title">
-          <span>Seleziona Scenario Panoramico</span>
-        </span>
-        <span class="carousel-counter" id="carousel-indicator">1 di 5</span>
-      </div>
+      <!-- SHOWCASE 02: VIDEO REEL CONTAINER -->
+      <div id="video-showcase-container" style="display: none;">
+        <div class="video-player-wrapper">
+          <div class="viewer-topbar">
+            <div class="viewer-scene-info">
+              <div class="viewer-live-dot"></div>
+              <div>
+                <div class="viewer-scene-title">Reel Costiero — Isola d'Elba</div>
+                <div class="viewer-scene-date">Agosto 2025 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi</div>
+              </div>
+              <div class="drone-focus-badge">
+                <span class="focus-pulse">✦</span> <span>DJI 4K Source</span>
+              </div>
+            </div>
+            <div class="viewer-controls">
+              <button class="viewer-btn" id="video-fullscreen-btn" type="button" aria-label="Visualizza video a schermo intero">
+                <span>⤢</span> <span>Schermo Intero</span>
+              </button>
+            </div>
+          </div>
 
-      <div class="pano-carousel-strip" id="pano-carousel">
-        <!-- Item 1 -->
-        <button class="pano-thumb-card active-thumb" type="button" data-index="0">
-          <div class="pano-thumb-img-wrapper">
-            <img src="/assets/images/spectra/panorami/pano-1-thumb.jpg" alt="Miniatura Vista Invernale Aerea" class="pano-thumb-img" loading="lazy">
-            <span class="pano-thumb-badge">360° Sferica</span>
+          <!-- Video Viewport -->
+          <div class="video-viewport">
+            <video id="spectra-reel-video" controls playsinline preload="metadata" poster="/assets/images/spectra/elba-poster.jpg" class="spectra-main-video">
+              <source src="/assets/videos/spectra/elba-reel-1080p.mp4" type="video/mp4">
+              Il tuo browser non supporta la riproduzione di video HTML5.
+            </video>
           </div>
-          <div class="pano-thumb-details">
-            <div class="pano-thumb-name">1. Vista Invernale</div>
-            <div class="pano-thumb-meta">Febbraio 2026</div>
-          </div>
-        </button>
 
-        <!-- Item 2 -->
-        <button class="pano-thumb-card" type="button" data-index="1">
-          <div class="pano-thumb-img-wrapper">
-            <img src="/assets/images/spectra/panorami/pano-2-thumb.jpg" alt="Miniatura Tardo Pomeriggio di Maggio" class="pano-thumb-img" loading="lazy">
-            <span class="pano-thumb-badge">360° Sferica</span>
+          <!-- Video Technical Specs Bar -->
+          <div class="video-specs-bar">
+            <div class="video-specs-tags">
+              <span class="video-spec-pill">Sensore DJI Pro</span>
+              <span class="video-spec-pill">Risoluzione 1080p 60fps</span>
+              <span class="video-spec-pill">Color Grading Naturale</span>
+              <span class="video-spec-pill">Gimbal Meccanico 3-Assi</span>
+            </div>
+            <div style="font-size: 0.74rem; color: var(--text-dim);">
+              Durata: 00:30 • Audio Ambientale Incluso
+            </div>
           </div>
-          <div class="pano-thumb-details">
-            <div class="pano-thumb-name">2. Tardo Pomeriggio</div>
-            <div class="pano-thumb-meta">Maggio 2026</div>
-          </div>
-        </button>
-
-        <!-- Item 3 -->
-        <button class="pano-thumb-card" type="button" data-index="2">
-          <div class="pano-thumb-img-wrapper">
-            <img src="/assets/images/spectra/panorami/pano-3-thumb.jpg" alt="Miniatura Panoramica Solare HD" class="pano-thumb-img" loading="lazy">
-            <span class="pano-thumb-badge">360° Sferica</span>
-          </div>
-          <div class="pano-thumb-details">
-            <div class="pano-thumb-name">3. Panoramica Solare</div>
-            <div class="pano-thumb-meta">Agosto 2026</div>
-          </div>
-        </button>
-
-        <!-- Item 4 -->
-        <button class="pano-thumb-card" type="button" data-index="3">
-          <div class="pano-thumb-img-wrapper">
-            <img src="/assets/images/spectra/panorami/pano-4-thumb.jpg" alt="Miniatura Quota Paesaggistica" class="pano-thumb-img" loading="lazy">
-            <span class="pano-thumb-badge">360° Sferica</span>
-          </div>
-          <div class="pano-thumb-details">
-            <div class="pano-thumb-name">4. Quota Paesaggistica</div>
-            <div class="pano-thumb-meta">Agosto 2026</div>
-          </div>
-        </button>
-
-        <!-- Item 5 -->
-        <button class="pano-thumb-card" type="button" data-index="4">
-          <div class="pano-thumb-img-wrapper">
-            <img src="/assets/images/spectra/panorami/pano-5-thumb.jpg" alt="Miniatura Golden Hour d'Agosto" class="pano-thumb-img" loading="lazy">
-            <span class="pano-thumb-badge">360° Sferica</span>
-          </div>
-          <div class="pano-thumb-details">
-            <div class="pano-thumb-name">5. Golden Hour</div>
-            <div class="pano-thumb-meta">Agosto 2026</div>
-          </div>
-        </button>
+        </div>
       </div>
     </section>
 
@@ -529,10 +578,10 @@
   </footer>
 
   <!-- Pannellum 360 Engine -->
-  <script src="/assets/js/pannellum.js?v=2.9"></script>
+  <script src="/assets/js/pannellum.js?v=3.0"></script>
   
   <!-- Site Scripts -->
-  <script src="/assets/js/main.js?v=2.9"></script>
+  <script src="/assets/js/main.js?v=3.0"></script>
 
   <!-- Spectra 360 Interactive Controller -->
   <script>
@@ -813,12 +862,110 @@
         });
       }
 
-      // Controls: Toggle Fullscreen
+      // Controls: Toggle Fullscreen (360 Panorama)
       const fullBtn = document.getElementById('fullscreen-btn');
       if (fullBtn) {
         fullBtn.addEventListener('click', () => {
           if (panViewer) {
             panViewer.toggleFullscreen();
+          }
+        });
+      }
+
+      // Category Tab Switching (Panorami 360 vs Video Reel)
+      const tabPano = document.getElementById('card-tab-pano');
+      const tabVideo = document.getElementById('card-tab-video');
+      const panoContainer = document.getElementById('pano-showcase-container');
+      const videoContainer = document.getElementById('video-showcase-container');
+      const actionLabelPano = document.getElementById('action-label-pano');
+      const actionLabelVideo = document.getElementById('action-label-video');
+      const reelVideo = document.getElementById('spectra-reel-video');
+      const videoFullBtn = document.getElementById('video-fullscreen-btn');
+
+      function showPanoTab() {
+        if (!panoContainer || !videoContainer) return;
+        panoContainer.style.display = 'block';
+        videoContainer.style.display = 'none';
+
+        if (reelVideo) reelVideo.pause();
+
+        if (tabPano) tabPano.classList.add('active-card');
+        if (tabVideo) tabVideo.classList.remove('active-card');
+
+        if (actionLabelPano) {
+          actionLabelPano.className = 'active-action';
+          actionLabelPano.innerHTML = '<span>Viewer attivo qui sotto</span> &darr;';
+        }
+        if (actionLabelVideo) {
+          actionLabelVideo.className = 'inactive-action';
+          actionLabelVideo.innerHTML = '<span>Clicca per riprodurre</span> &rarr;';
+        }
+
+        if (panViewer && isTourActive) {
+          panViewer.startAutoRotate(-1.5);
+          scheduleDroneMove();
+        }
+
+        if (viewerBox) {
+          viewerBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function showVideoTab() {
+        if (!panoContainer || !videoContainer) return;
+        panoContainer.style.display = 'none';
+        videoContainer.style.display = 'block';
+
+        if (panViewer) {
+          stopTourTimers();
+          panViewer.stopAutoRotate();
+        }
+
+        if (tabVideo) tabVideo.classList.add('active-card');
+        if (tabPano) tabPano.classList.remove('active-card');
+
+        if (actionLabelVideo) {
+          actionLabelVideo.className = 'active-action';
+          actionLabelVideo.innerHTML = '<span>Player attivo qui sotto</span> &darr;';
+        }
+        if (actionLabelPano) {
+          actionLabelPano.className = 'inactive-action';
+          actionLabelPano.innerHTML = '<span>Clicca per esplorare 360°</span> &rarr;';
+        }
+
+        const videoBox = document.querySelector('.video-player-wrapper');
+        if (videoBox) {
+          videoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      if (tabPano) {
+        tabPano.addEventListener('click', showPanoTab);
+        tabPano.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showPanoTab();
+          }
+        });
+      }
+
+      if (tabVideo) {
+        tabVideo.addEventListener('click', showVideoTab);
+        tabVideo.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showVideoTab();
+          }
+        });
+      }
+
+      // Video Player Fullscreen
+      if (videoFullBtn && reelVideo) {
+        videoFullBtn.addEventListener('click', () => {
+          if (reelVideo.requestFullscreen) {
+            reelVideo.requestFullscreen();
+          } else if (reelVideo.webkitRequestFullscreen) {
+            reelVideo.webkitRequestFullscreen();
           }
         });
       }
