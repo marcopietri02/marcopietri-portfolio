@@ -1892,3 +1892,344 @@ footer.site-footer {
   }
 }
 
+/* ==========================================================================
+   EKLISSO ENHANCEMENTS — MEDIA KIT, FAST-CTA, HOW-IT-WORKS, PARTNER & TECH
+   ========================================================================== */
+
+/* Fast-Track Action Box (Top CTA anti-scroll) */
+.fast-track-box {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(16, 185, 129, 0.1));
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(139, 92, 246, 0.08);
+}
+
+.fast-track-content {
+  flex: 1;
+}
+
+.fast-track-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--emerald-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.fast-track-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.fast-track-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.fast-track-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 220px;
+}
+
+/* Metric / Media Kit Grid */
+.stat-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-smooth);
+}
+
+.stat-kpi-card:hover {
+  border-color: var(--border-medium);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15);
+}
+
+.stat-kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet-primary), var(--emerald-primary));
+  opacity: 0.6;
+}
+
+.stat-kpi-value {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 30%, var(--moss-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.35rem;
+}
+
+.stat-kpi-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.stat-kpi-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+/* Demographics Panel */
+.demographics-banner {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.demographics-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.demographics-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.demographics-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.demographics-detail {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* 3-Step Process (Come Funziona) */
+.process-step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 1.75rem 0 2rem;
+}
+
+.process-step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.4rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-smooth);
+}
+
+.process-step-card:hover {
+  border-color: var(--emerald-glow);
+  transform: translateY(-4px);
+}
+
+.process-step-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: var(--emerald-glow);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.process-step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.process-step-body {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Monetization / Partner & Locandine Banner */
+.partner-monetize-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 16, 0.95) 50%, rgba(139, 92, 246, 0.08) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  margin: 3rem 0;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-monetize-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.partner-preview-frame {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px dashed rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  position: relative;
+}
+
+.partner-preview-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.partner-preview-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-accent);
+  margin-bottom: 0.35rem;
+}
+
+.partner-preview-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 260px;
+  line-height: 1.45;
+}
+
+/* Architecture / Tech Stack Behind the Scenes */
+.tech-architecture-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 2.5rem 0;
+}
+
+.tech-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.tech-feature-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.tech-feature-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--violet-glow);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tech-feature-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Responsive Overrides */
+@media (max-width: 960px) {
+  .stat-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .demographics-banner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .process-step-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .partner-monetize-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tech-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .fast-track-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .fast-track-actions {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .stat-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
