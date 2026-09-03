@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimelineLaser();
   }, 100);
 
-  // 7. Global Geometric Network Engine (Desktop Cursor Satellites + Mobile Gyroscopic Tilt Physics)
+  // 7. Global Geometric Network Engine (Desktop Proximity Satellites + Scroll Parallax Dynamics)
   const globalCanvas = document.getElementById('global-geometric-canvas');
 
   if (globalCanvas) {
@@ -178,8 +178,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let dpr = 1;
     let bgPoints = [];
     let mouse = { x: -1000, y: -1000, active: false };
-    let gyro = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let animationFrameId = null;
+
+    // Scroll-driven Parallax Momentum
+    let lastScrollY = window.scrollY || window.pageYOffset || 0;
+    let scrollVelocityY = 0;
 
     let interactiveElements = [];
     let closestRect = null;
@@ -226,8 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
         bgPoints.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
-          vy: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
           radius: Math.random() * 1.5 + 1.2,
           basePhase: Math.random() * Math.PI * 2,
         });
@@ -286,27 +289,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let time = 0;
     function draw() {
       ctx.clearRect(0, 0, width, height);
-      time += 0.014;
+      time += 0.012;
 
       const isMobile = window.innerWidth <= 768;
-      const maxDist = isMobile ? 130 : 160;
+      const maxDist = isMobile ? 125 : 160;
 
-      // Smooth Gyroscope interpolation
-      gyro.x += (gyro.targetX - gyro.x) * 0.08;
-      gyro.y += (gyro.targetY - gyro.y) * 0.08;
+      // Dampen scroll momentum velocity smoothly
+      scrollVelocityY *= 0.92;
+      if (Math.abs(scrollVelocityY) < 0.001) scrollVelocityY = 0;
 
       // =========================================================================
-      // 1. Global Viewport Intersecting Background Mesh (with Gyro Drift)
+      // 1. Global Viewport Intersecting Background Mesh (with Scroll Parallax Flow)
       // =========================================================================
       for (let i = 0; i < bgPoints.length; i++) {
         const p = bgPoints[i];
-        p.x += p.vx + Math.sin(time + p.basePhase) * 0.15 + gyro.x * 0.35;
-        p.y += p.vy + Math.cos(time + p.basePhase) * 0.15 + gyro.y * 0.35;
+        p.x += p.vx + Math.sin(time + p.basePhase) * 0.15;
+        // Scroll parallax: scrolling down moves nodes upwards, scrolling up moves nodes downwards
+        p.y += p.vy + Math.cos(time + p.basePhase) * 0.15 - scrollVelocityY * 0.45;
 
-        if (p.x < 0) { p.x = 0; p.vx *= -1; }
-        if (p.x > width) { p.x = width; p.vx *= -1; }
-        if (p.y < 0) { p.y = 0; p.vy *= -1; }
-        if (p.y > height) { p.y = height; p.vy *= -1; }
+        // Infinite Cyclic Toroidal Wrapping
+        if (p.x < -30) p.x = width + 30;
+        if (p.x > width + 30) p.x = -30;
+        if (p.y < -30) p.y = height + 30;
+        if (p.y > height + 30) p.y = -30;
 
         if (!isMobile && mouse.active) {
           const dx = mouse.x - p.x;
@@ -501,18 +506,16 @@ document.addEventListener('DOMContentLoaded', () => {
       closestRect = null;
     });
 
-    // Event Listeners: Gyroscope & Accelerometer (Mobile Tilt Physics)
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', (e) => {
-        if (e.gamma !== null && e.beta !== null) {
-          // Normalize tilt: gamma is roll (-90 to 90), beta is pitch (-180 to 180)
-          gyro.targetX = Math.max(-30, Math.min(30, e.gamma || 0)) * 0.5;
-          gyro.targetY = Math.max(-30, Math.min(30, (e.beta || 45) - 45)) * 0.5;
-        }
-      }, { passive: true });
-    }
-
+    // Event Listeners: Scroll Velocity Parallax Tracker (Mobile & Desktop)
     window.addEventListener('scroll', () => {
+      const curScrollY = window.scrollY || window.pageYOffset || 0;
+      const delta = curScrollY - lastScrollY;
+      lastScrollY = curScrollY;
+
+      // Clamp delta to prevent sudden jump on fast touch flicks
+      const clampedDelta = Math.max(-40, Math.min(40, delta));
+      scrollVelocityY = clampedDelta;
+
       if (!isMobile && mouse.active) {
         checkDesktopProximity();
       }
