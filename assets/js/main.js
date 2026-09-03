@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimelineLaser();
   }, 100);
 
-  // 7. Global Geometric Network & Universal Beacon Engine (Desktop Proximity + Mobile Focal Lock & Gyro)
+  // 7. Global Geometric Network Engine (Desktop Cursor Satellites + Mobile Gyroscopic Tilt Physics)
   const globalCanvas = document.getElementById('global-geometric-canvas');
 
   if (globalCanvas) {
@@ -178,9 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let dpr = 1;
     let bgPoints = [];
     let mouse = { x: -1000, y: -1000, active: false };
-    let touchMode = false;
-    let touchTimer = null;
-    let gyro = { x: 0, y: 0 };
+    let gyro = { x: 0, y: 0, targetX: 0, targetY: 0 };
     let animationFrameId = null;
 
     let interactiveElements = [];
@@ -188,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetProximity = 0; // 0.0 (violet) -> 1.0 (emerald green)
     let currentProximity = 0;
 
-    // 6 Geometric Satellites
+    // 6 Geometric Satellites (Active on Desktop with Mouse)
     const SATELLITE_DEFS = [
       { type: 'triangle', size: 9, orbitR: 28, speed: 0.045, phase: 0 },
       { type: 'diamond', size: 8, orbitR: 36, speed: -0.038, phase: 1.05 },
@@ -222,14 +220,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function initBackground() {
       bgPoints = [];
       const isMobile = window.innerWidth <= 768;
-      const count = isMobile ? 18 : 36;
+      const count = isMobile ? 22 : 36;
 
       for (let i = 0; i < count; i++) {
         bgPoints.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
+          vx: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
+          vy: (Math.random() - 0.5) * (isMobile ? 0.5 : 0.4),
           radius: Math.random() * 1.5 + 1.2,
           basePhase: Math.random() * Math.PI * 2,
         });
@@ -285,64 +283,32 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Focal Acquisition on Mobile (Scroll & Viewport Center Driven)
-    function checkMobileFocalTarget() {
-      if (touchMode && mouse.active) {
-        // If user is actively touching screen, use touch proximity
-        checkDesktopProximity();
-        return;
-      }
-
-      const focalY = height * 0.45;
-      let bestDist = Infinity;
-      let bestRect = null;
-
-      for (let i = 0; i < interactiveElements.length; i++) {
-        const el = interactiveElements[i];
-        const r = el.getBoundingClientRect();
-        if (r.bottom < height * 0.15 || r.top > height * 0.75) continue;
-        if (r.width < 100 || r.height < 40) continue; // Focus on significant cards and buttons
-
-        const elCenterY = (r.top + r.bottom) / 2;
-        const d = Math.abs(elCenterY - focalY);
-
-        if (d < bestDist) {
-          bestDist = d;
-          bestRect = r;
-        }
-      }
-
-      if (bestRect && bestDist < height * 0.35) {
-        closestRect = bestRect;
-        targetProximity = Math.max(0, 1 - (bestDist / (height * 0.35)));
-      } else {
-        closestRect = null;
-        targetProximity = 0;
-      }
-    }
-
     let time = 0;
     function draw() {
       ctx.clearRect(0, 0, width, height);
       time += 0.014;
 
       const isMobile = window.innerWidth <= 768;
-      const maxDist = isMobile ? 120 : 160;
+      const maxDist = isMobile ? 130 : 160;
+
+      // Smooth Gyroscope interpolation
+      gyro.x += (gyro.targetX - gyro.x) * 0.08;
+      gyro.y += (gyro.targetY - gyro.y) * 0.08;
 
       // =========================================================================
       // 1. Global Viewport Intersecting Background Mesh (with Gyro Drift)
       // =========================================================================
       for (let i = 0; i < bgPoints.length; i++) {
         const p = bgPoints[i];
-        p.x += p.vx + Math.sin(time + p.basePhase) * 0.15 + gyro.x * 0.1;
-        p.y += p.vy + Math.cos(time + p.basePhase) * 0.15 + gyro.y * 0.1;
+        p.x += p.vx + Math.sin(time + p.basePhase) * 0.15 + gyro.x * 0.35;
+        p.y += p.vy + Math.cos(time + p.basePhase) * 0.15 + gyro.y * 0.35;
 
         if (p.x < 0) { p.x = 0; p.vx *= -1; }
         if (p.x > width) { p.x = width; p.vx *= -1; }
         if (p.y < 0) { p.y = 0; p.vy *= -1; }
         if (p.y > height) { p.y = height; p.vy *= -1; }
 
-        if (mouse.active) {
+        if (!isMobile && mouse.active) {
           const dx = mouse.x - p.x;
           const dy = mouse.y - p.y;
           const dist = Math.hypot(dx, dy);
@@ -396,31 +362,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // =========================================================================
-      // 2. Cursor Satellites with Dual Mode (Desktop Proximity / Mobile Focal HUD)
+      // 2. Cursor Satellites (Desktop Only - Proximity Magnetic Snap)
       // =========================================================================
-      if (isMobile) {
-        checkMobileFocalTarget();
-      } else {
+      if (!isMobile && mouse.active) {
         checkDesktopProximity();
-      }
+        currentProximity += (targetProximity - currentProximity) * 0.14;
 
-      currentProximity += (targetProximity - currentProximity) * 0.14;
-
-      const shouldRenderSatellites = isMobile ? (closestRect !== null || currentProximity > 0.05) : (mouse.active || currentProximity > 0.05);
-
-      if (shouldRenderSatellites) {
         satellites.forEach((sat, idx) => {
           sat.currentAngle += sat.speed;
 
-          // Free center point: mouse position on desktop, screen center on mobile
-          const baseCenterX = (!isMobile && mouse.active) ? mouse.x : (width * 0.5 + gyro.x * 2);
-          const baseCenterY = (!isMobile && mouse.active) ? mouse.y : (height * 0.45 + gyro.y * 2);
-
-          const freeTargetX = baseCenterX + Math.cos(sat.currentAngle) * sat.orbitR;
-          const freeTargetY = baseCenterY + Math.sin(sat.currentAngle) * sat.orbitR;
+          const freeTargetX = mouse.x + Math.cos(sat.currentAngle) * sat.orbitR;
+          const freeTargetY = mouse.y + Math.sin(sat.currentAngle) * sat.orbitR;
 
           if (closestRect && currentProximity > 0.01) {
-            const pad = isMobile ? 3 : 4;
+            const pad = 4;
             const r = closestRect;
             const corners = [
               { x: r.left - pad, y: r.top - pad },
@@ -451,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentProximity > 0.25 && closestRect) {
           ctx.save();
           const r = closestRect;
-          const pad = isMobile ? 3 : 4;
+          const pad = 4;
           const alpha = (currentProximity - 0.25) / 0.75;
           ctx.strokeStyle = `rgba(52, 211, 153, ${alpha * 0.55})`;
           ctx.lineWidth = 1;
@@ -461,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Tether lines on desktop free space
-        if (!isMobile && currentProximity < 0.8 && mouse.active) {
+        if (currentProximity < 0.8) {
           const tetherAlpha = (1 - currentProximity) * 0.22;
           satellites.forEach((sat) => {
             ctx.beginPath();
@@ -492,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.shadowBlur = 12 * currentProximity;
           }
 
-          const s = isMobile ? sat.size * 0.85 : sat.size;
+          const s = sat.size;
           ctx.beginPath();
 
           if (sat.type === 'triangle') {
@@ -538,7 +493,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       mouse.active = true;
-      touchMode = false;
     });
 
     window.addEventListener('mouseleave', () => {
@@ -547,49 +501,19 @@ document.addEventListener('DOMContentLoaded', () => {
       closestRect = null;
     });
 
-    // Event Listeners: Touch (Mobile Drag Follower)
-    window.addEventListener('touchstart', (e) => {
-      if (e.touches.length > 0) {
-        touchMode = true;
-        mouse.x = e.touches[0].clientX;
-        mouse.y = e.touches[0].clientY;
-        mouse.active = true;
-        if (touchTimer) clearTimeout(touchTimer);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        touchMode = true;
-        mouse.x = e.touches[0].clientX;
-        mouse.y = e.touches[0].clientY;
-        mouse.active = true;
-        if (touchTimer) clearTimeout(touchTimer);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchend', () => {
-      touchTimer = setTimeout(() => {
-        touchMode = false;
-        mouse.active = false;
-      }, 1200);
-    });
-
-    // Event Listeners: Gyroscope (Mobile Tilt Parallax)
+    // Event Listeners: Gyroscope & Accelerometer (Mobile Tilt Physics)
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', (e) => {
         if (e.gamma !== null && e.beta !== null) {
-          // Normalize tilt
-          gyro.x = Math.max(-25, Math.min(25, e.gamma || 0)) * 0.4;
-          gyro.y = Math.max(-25, Math.min(25, (e.beta || 45) - 45)) * 0.4;
+          // Normalize tilt: gamma is roll (-90 to 90), beta is pitch (-180 to 180)
+          gyro.targetX = Math.max(-30, Math.min(30, e.gamma || 0)) * 0.5;
+          gyro.targetY = Math.max(-30, Math.min(30, (e.beta || 45) - 45)) * 0.5;
         }
       }, { passive: true });
     }
 
     window.addEventListener('scroll', () => {
-      if (window.innerWidth <= 768) {
-        checkMobileFocalTarget();
-      } else if (mouse.active) {
+      if (!isMobile && mouse.active) {
         checkDesktopProximity();
       }
     }, { passive: true });
