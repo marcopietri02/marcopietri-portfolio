@@ -513,10 +513,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lastScrollY = curScrollY;
 
       // Clamp delta to prevent sudden jump on fast touch flicks
-      const clampedDelta = Math.max(-40, Math.min(40, delta));
-      scrollVelocityY = clampedDelta;
+      scrollVelocityY = Math.max(-40, Math.min(40, delta));
 
-      if (!isMobile && mouse.active) {
+      const isDesktop = window.innerWidth > 768;
+      if (isDesktop && mouse.active) {
         checkDesktopProximity();
       }
     }, { passive: true });
