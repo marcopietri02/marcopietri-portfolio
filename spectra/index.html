@@ -29,8 +29,8 @@
   <!-- Pannellum 360 Viewer CSS -->
   <link rel="stylesheet" href="/assets/css/pannellum.css">
 
-  <!-- Shared Stylesheet (AMOLED Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=3.3">
+  <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
+  <link rel="stylesheet" href="/assets/css/style.css?v=6.2">
 
   <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -63,15 +63,14 @@
       {
         "@type": "Service",
         "@id": "https://marcopietri.com/spectra/#service",
-        "name": "Spectra Vision — Aerial Drone Operations",
+        "name": "Spectra Vision — Riprese Aeree con Droni",
         "url": "https://marcopietri.com/spectra/",
-        "serviceType": "Aerial Photography, Video Production & Technical Roof Inspections",
         "provider": {
           "@type": "Person",
           "@id": "https://marcopietri.com/#person",
           "name": "Marco Pietri"
         },
-        "areaServed": "Toscana, Italia",
+        "serviceType": "UAS Aerial Photography & Technical Inspection",
         "description": "Servizio di rilievi aerei con droni professionali DJI per analisi tecniche, ispezioni tetti e pannelli fotovoltaici, documentazione assicurativa e riprese video."
       }
     ]
@@ -79,12 +78,14 @@
   </script>
 </head>
 <body>
+  <canvas id="global-geometric-canvas" class="global-geometric-canvas" aria-hidden="true"></canvas>
 
   <!-- Navigation Header (4-Pillar Nav) -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand-mark" aria-label="Torna alla Home">
-        <span class="gem">✦</span> Marco Pietri
+        <span class="brand-dot"></span>
+        <span class="brand-name">Marco Pietri</span>
       </a>
       <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
         ☰ Menu
@@ -167,7 +168,7 @@
           <div>
             <div class="macro-card-top">
               <div class="macro-card-icon">🔍</div>
-              <span class="cat-badge soon">✦ Ambito Tecnico</span>
+              <span class="cat-badge soon">Ambito Tecnico</span>
             </div>
             <h3 class="macro-card-title">Ispezioni Tecniche &amp; Coperture</h3>
             <p class="macro-card-desc">
@@ -184,7 +185,7 @@
           <div>
             <div class="macro-card-top">
               <div class="macro-card-icon">📐</div>
-              <span class="cat-badge soon">✦ Perizie &amp; Mappature</span>
+              <span class="cat-badge soon">Perizie &amp; Mappature</span>
             </div>
             <h3 class="macro-card-title">Rilievi Territoriali &amp; Perizie</h3>
             <p class="macro-card-desc">
@@ -248,7 +249,7 @@
         <div class="media-cat-card coming-soon-card">
           <div class="media-cat-header">
             <span class="media-cat-icon">📸</span>
-            <span class="cat-badge soon">✦ Coming Soon</span>
+            <span class="cat-badge soon">Prossimamente</span>
           </div>
           <h3 class="media-cat-title">Foto &amp; Rilievi HD</h3>
           <p class="media-cat-desc">
@@ -272,7 +273,7 @@
                 <div class="viewer-scene-date" id="current-scene-date">Febbraio 2026 • Rilievo Territoriale</div>
               </div>
               <div class="drone-focus-badge" id="drone-focus-indicator" style="display: none;">
-                <span class="focus-pulse">✦</span> <span id="focus-label">Drone Focus</span>
+                <span class="focus-pulse">●</span> <span id="focus-label">Drone Focus</span>
               </div>
             </div>
             <div class="viewer-controls">
@@ -381,7 +382,7 @@
                 <div class="viewer-scene-date">Agosto 2025 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi</div>
               </div>
               <div class="drone-focus-badge">
-                <span class="focus-pulse">✦</span> <span>DJI 4K Source</span>
+                <span class="focus-pulse">●</span> <span>DJI 4K Source</span>
               </div>
             </div>
             <div class="viewer-controls">
@@ -558,9 +559,9 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <div>
-        <p>&copy; 2026 Marco Pietri &bull; Spectra Vision Drone Operations</p>
+        <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
         <p style="margin-top: 0.35rem; color: var(--text-dim);">
-          Sviluppo Software, Machine Learning &amp; Cybersecurity
+          IT Strategy, AI Automations &amp; Software Architecture
         </p>
       </div>
       <div class="footer-social-bar">

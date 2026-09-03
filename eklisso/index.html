@@ -31,9 +31,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=3.3">
+  <link rel="stylesheet" href="/assets/css/style.css?v=6.2">
 
-  <!-- Schema.org Project & Breadcrumbs JSON-LD -->
+  <!-- Schema.org Application & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -62,30 +62,32 @@
         ]
       },
       {
-        "@type": "Organization",
-        "@id": "https://marcopietri.com/eklisso/#organization",
-        "name": "Eklisso",
+        "@type": "SoftwareApplication",
+        "@id": "https://marcopietri.com/eklisso/#software",
+        "name": "Eklisso — Community Platform",
         "url": "https://marcopietri.com/eklisso/",
-        "logo": "https://marcopietri.com/assets/images/logos/eklisso.png",
-        "founder": {
+        "applicationCategory": "Community & Communication Platform",
+        "author": {
           "@type": "Person",
           "@id": "https://marcopietri.com/#person",
           "name": "Marco Pietri"
         },
-        "description": "Piattaforma community di annunci, alloggi, eventi e supporto locale a Firenze ideata da Marco Pietri con oltre 750k+ visualizzazioni certificate.",
-        "knowsAbout": ["Community Moderation", "GDPR Privacy", "Digital Communications", "Florence Local Hub", "Social Media Insights"]
+        "description": "Piattaforma e punto di riferimento per comunicazioni comunitarie, supporto e bacheca annunci locale.",
+        "operatingSystem": "All modern browsers"
       }
     ]
   }
   </script>
 </head>
 <body>
+  <canvas id="global-geometric-canvas" class="global-geometric-canvas" aria-hidden="true"></canvas>
 
   <!-- Navigation Header (4-Pillar Nav) -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand-mark" aria-label="Torna alla Home">
-        <span class="gem">✦</span> Marco Pietri
+        <span class="brand-dot"></span>
+        <span class="brand-name">Marco Pietri</span>
       </a>
       <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
         ☰ Menu
@@ -159,51 +161,51 @@
 
       <div class="grid-3">
         <!-- Card 1: Google Form Crea Annuncio -->
-        <article class="card">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc7Ypn26JNP3KWBThfOwD3pWVu_F1FXoauTLXxOMOEM4gubw/viewform" target="_blank" rel="noopener noreferrer" class="card card-clickable">
           <div class="partner-card-top">
             <span class="card-badge" style="margin: 0;">Partecipa</span>
-            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--emerald-glow);">Google Form Ufficiale</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-emerald-soft);">Google Form Ufficiale</span>
           </div>
           <h3 class="card-title">Crea Annuncio</h3>
           <p class="card-body">
             Invia la tua richiesta, offerta alloggio o segnalazione alla redazione di Eklisso per la pubblicazione sui canali della community.
           </p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfc7Ypn26JNP3KWBThfOwD3pWVu_F1FXoauTLXxOMOEM4gubw/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: auto; justify-content: center;">
+          <div class="btn btn-primary" style="margin-top: auto; justify-content: center;">
             <span>Apri il Modulo Annunci</span> &nearr;
-          </a>
-        </article>
+          </div>
+        </a>
 
         <!-- Card 2: Assistenza Email -->
-        <article class="card">
+        <a href="mailto:eklissomail@gmail.com?subject=Richiesta%20Assistenza%20Eklisso" class="card card-clickable">
           <div class="partner-card-top">
             <span class="card-badge" style="margin: 0;">Supporto</span>
-            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--violet-glow);">Email Diretta</span>
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-indigo-glow);">Email Diretta</span>
           </div>
           <h3 class="card-title">Parla con l'Assistenza</h3>
           <p class="card-body">
             Hai domande sui formati, sulla moderazione o vuoi richiedere la rimozione tempestiva di un contenuto? Siamo a disposizione.
           </p>
-          <a href="mailto:eklissomail@gmail.com?subject=Richiesta%20Assistenza%20Eklisso" class="btn btn-secondary" style="margin-top: auto; justify-content: center;">
+          <div class="btn btn-secondary" style="margin-top: auto; justify-content: center;">
             <span>eklissomail@gmail.com</span> &nearr;
-          </a>
-        </article>
+          </div>
+        </a>
 
         <!-- Card 3: Instagram Spotted Firenze -->
-        <article class="card">
+        <a href="https://www.instagram.com/eklisso_spotted_firenze/" target="_blank" rel="noopener noreferrer" class="card card-clickable">
           <div class="partner-card-top" style="display: flex; justify-content: space-between; align-items: center;">
             <span class="card-badge badge-emerald" style="margin: 0;">Social Network</span>
             <img src="/assets/images/logos/instagram.svg" alt="Instagram Logo" style="width: 28px; height: 28px; border-radius: 6px;" loading="lazy">
           </div>
           <h3 class="card-title">Instagram Feed</h3>
-          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--moss-light); margin-bottom: 0.6rem;">@eklisso_spotted_firenze</div>
+          <div style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-emerald-soft); margin-bottom: 0.6rem;">@eklisso_spotted_firenze</div>
           <p class="card-body">
             Tutto in tempo reale sul feed: post, alloggi, storie e reel selezionati ogni giorno. La voce della community a portata di tap.
           </p>
-          <a href="https://www.instagram.com/eklisso_spotted_firenze/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: auto; justify-content: center; gap: 0.5rem;">
+          <div class="btn btn-primary" style="margin-top: auto; justify-content: center; gap: 0.5rem;">
             <img src="/assets/images/logos/instagram.svg" alt="" style="width: 18px; height: 18px; border-radius: 4px;" aria-hidden="true">
             <span>Seguici su Instagram</span> &nearr;
-          </a>
-        </article>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -220,25 +222,25 @@
       <!-- 4-KPI Grid -->
       <div class="stat-kpi-grid">
         <div class="stat-kpi-card">
-          <div class="stat-kpi-value">759.964</div>
+          <span class="stat-kpi-value" style="color: #ffffff; font-size: 2.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1.1; margin-bottom: 0.6rem; display: block;">759.964</span>
           <div class="stat-kpi-label">Visualizzazioni Totali</div>
           <div class="stat-kpi-sub">Impressions certificate nel periodo di analisi tra post e storie.</div>
         </div>
 
         <div class="stat-kpi-card">
-          <div class="stat-kpi-value">90,0%</div>
+          <span class="stat-kpi-value" style="color: #ffffff; font-size: 2.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1.1; margin-bottom: 0.6rem; display: block;">90,0%</span>
           <div class="stat-kpi-label">Target Core 18–34 Anni</div>
           <div class="stat-kpi-sub">38,6% studenti universitari e 51,4% giovani professionisti/post-grad.</div>
         </div>
 
         <div class="stat-kpi-card">
-          <div class="stat-kpi-value">5.084</div>
+          <span class="stat-kpi-value" style="color: #ffffff; font-size: 2.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1.1; margin-bottom: 0.6rem; display: block;">5.084</span>
           <div class="stat-kpi-label">Interazioni Funzionali</div>
           <div class="stat-kpi-sub">Segnali di flusso attivi: contatti per alloggi, matching e risposte reali (96% sui post).</div>
         </div>
 
         <div class="stat-kpi-card">
-          <div class="stat-kpi-value">3.935+</div>
+          <span class="stat-kpi-value" style="color: #ffffff; font-size: 2.5rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1.1; margin-bottom: 0.6rem; display: block;">3.935+</span>
           <div class="stat-kpi-label">Follower a Ricambio Attivo</div>
           <div class="stat-kpi-sub">Turn-over biologico continuo: nuova ondata di studenti ad ogni semestre accademico.</div>
         </div>
@@ -404,44 +406,44 @@
         </p>
       </div>
 
-      <div class="grid-2">
+      <div class="team-grid">
         <!-- Marco Pietri -->
-        <article class="card">
-          <div class="testimonial-author" style="border: none; padding: 0; margin-bottom: 1.25rem;">
-            <div class="author-avatar" style="width: 60px; height: 60px; min-width: 60px; min-height: 60px;">
-              <img src="/assets/images/marco-pietri.jpg" alt="Marco Pietri" class="author-avatar-img" style="object-position: center 15%;">
+        <article class="team-card">
+          <div class="team-card-header">
+            <div class="team-avatar">
+              <img src="/assets/images/marco-pietri.jpg" alt="Marco Pietri" class="team-avatar-img" style="object-position: center 15%;">
             </div>
-            <div class="author-info">
-              <h3 class="card-title" style="font-size: 1.35rem; margin: 0;">Marco Pietri</h3>
-              <p class="card-subtitle" style="margin: 0; color: var(--emerald-glow);">Founder &amp; Lead Technical Architect</p>
+            <div class="team-info">
+              <h3 class="team-name">Marco Pietri</h3>
+              <span class="team-role">Founder &amp; Technical Architect</span>
             </div>
           </div>
-          <p class="card-body">
-            Ideatore e sviluppatore dell'infrastruttura tecnologica, dei flussi di automazione, del codice e delle policy di protezione dati di Eklisso.
+          <p class="team-bio">
+            Ideatore e sviluppatore dell'infrastruttura tecnologica, dei flussi di automazione software, del codice e delle policy di protezione dati di Eklisso.
           </p>
-          <a href="https://www.instagram.com/_marco.pietri_/" target="_blank" rel="noopener noreferrer me" class="card-link-action" style="margin-top: auto; display: inline-flex; align-items: center; gap: 0.45rem;">
+          <a href="https://www.instagram.com/_marco.pietri_/" target="_blank" rel="noopener noreferrer me" class="team-social-link">
             <img src="/assets/images/logos/instagram.svg" alt="" style="width: 16px; height: 16px; border-radius: 3px;" aria-hidden="true">
-            <span>Profilo Instagram (@_marco.pietri_)</span> &nearr;
+            <span>Profilo Instagram (@_marco.pietri_) &nearr;</span>
           </a>
         </article>
 
         <!-- Giulia Presenti -->
-        <article class="card">
-          <div class="testimonial-author" style="border: none; padding: 0; margin-bottom: 1.25rem;">
-            <div class="author-avatar" style="width: 60px; height: 60px; min-width: 60px; min-height: 60px;">
-              <img src="/assets/images/testimonials/giulia-presenti.png" alt="Giulia Presenti" class="author-avatar-img">
+        <article class="team-card">
+          <div class="team-card-header">
+            <div class="team-avatar">
+              <img src="/assets/images/testimonials/giulia-presenti.png" alt="Giulia Presenti" class="team-avatar-img">
             </div>
-            <div class="author-info">
-              <h3 class="card-title" style="font-size: 1.35rem; margin: 0;">Giulia Presenti</h3>
-              <p class="card-subtitle" style="margin: 0; color: var(--violet-glow);">Social Media Moderator</p>
+            <div class="team-info">
+              <h3 class="team-name">Giulia Presenti</h3>
+              <span class="team-role">Social Media Moderator</span>
             </div>
           </div>
-          <p class="card-body">
-            Gestione quotidiana della community, moderazione dei contenuti, supporto agli utenti via chat DM e coordinamento editoriale.
+          <p class="team-bio">
+            Gestione quotidiana della community, moderazione dei contenuti inviati, supporto diretto agli utenti via DM e coordinamento editoriale.
           </p>
-          <a href="https://www.instagram.com/giulia.presenti/" target="_blank" rel="noopener noreferrer" class="card-link-action" style="margin-top: auto; display: inline-flex; align-items: center; gap: 0.45rem;">
+          <a href="https://www.instagram.com/giulia.presenti/" target="_blank" rel="noopener noreferrer" class="team-social-link">
             <img src="/assets/images/logos/instagram.svg" alt="" style="width: 16px; height: 16px; border-radius: 3px;" aria-hidden="true">
-            <span>Profilo Instagram (@giulia.presenti)</span> &nearr;
+            <span>Profilo Instagram (@giulia.presenti) &nearr;</span>
           </a>
         </article>
       </div>
@@ -587,9 +589,9 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <div>
-        <p>&copy; 2026 Marco Pietri &bull; Eklisso Community</p>
+        <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
         <p style="margin-top: 0.35rem; color: var(--text-dim);">
-          Sviluppo Software, Machine Learning &amp; Cybersecurity
+          IT Strategy, AI Automations &amp; Software Architecture
         </p>
       </div>
       <div class="footer-social-bar">
@@ -609,6 +611,6 @@
     </div>
   </footer>
 
-  <script src="/assets/js/main.js?v=3.3"></script>
+  <script src="/assets/js/main.js?v=6.2"></script>
 </body>
 </html>

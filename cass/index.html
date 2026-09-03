@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=3.3">
+  <link rel="stylesheet" href="/assets/css/style.css?v=6.2">
 
   <!-- Schema.org Scholarly, Software Application & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -79,12 +79,14 @@
   </script>
 </head>
 <body>
+  <canvas id="global-geometric-canvas" class="global-geometric-canvas" aria-hidden="true"></canvas>
 
   <!-- Navigation Header (4-Pillar Nav) -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="/" class="brand-mark" aria-label="Torna alla Home">
-        <span class="gem">✦</span> Marco Pietri
+        <span class="brand-dot"></span>
+        <span class="brand-name">Marco Pietri</span>
       </a>
       <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
         ☰ Menu
@@ -207,54 +209,96 @@
         <h2 class="section-title">Le 6 Fasi del Ciclo Cognitivo di CASS</h2>
       </div>
 
-      <div class="grid-2">
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 1</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">1. Definizione del Problema</h3>
-          <p class="card-body">
-            L'algoritmo analizza il contesto e definisce con chiarezza gli obiettivi. Proprio come un essere umano che si chiede: <em>"Cosa devo risolvere e perché?"</em>
-          </p>
-        </article>
+      <div class="pipeline-table-wrap">
+        <table class="pipeline-table">
+          <thead>
+            <tr>
+              <th scope="col">Fase</th>
+              <th scope="col">Nome del Processo</th>
+              <th scope="col">Meccanismo &amp; Descrizione Operativa</th>
+              <th scope="col">Focus Architetturale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">01</span>
+              </td>
+              <td class="pipeline-title-col">Definizione del Problema</td>
+              <td class="pipeline-desc-col">
+                L'algoritmo analizza il contesto e definisce con precisione i target di ottimizzazione: cosa risolvere, i vincoli operativi e i requisiti di affidabilità.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Contextual Ingestion</span>
+              </td>
+            </tr>
 
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 2</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">2. Raccolta e Sintesi Dati</h3>
-          <p class="card-body">
-            CASS raccoglie dati da fonti interne o flussi di telemetria, filtra il rumore e si concentra sulle feature determinanti, consolidando la base informativa.
-          </p>
-        </article>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">02</span>
+              </td>
+              <td class="pipeline-title-col">Raccolta e Sintesi Dati</td>
+              <td class="pipeline-desc-col">
+                CASS raccoglie i flussi di telemetria, filtra il rumore dai sensori e seleziona le feature determinanti, consolidando la base informativa ad alta dimensionalità.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Feature Selection</span>
+              </td>
+            </tr>
 
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 3</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">3. Generazione e Valutazione Alternative</h3>
-          <p class="card-body">
-            Il meta-sistema esplora diverse strategie risolutive, confrontando modelli concorrenti in funzione del trade-off tra velocità, costo computazionale e accuratezza.
-          </p>
-        </article>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">03</span>
+              </td>
+              <td class="pipeline-title-col">Generazione &amp; Valutazione</td>
+              <td class="pipeline-desc-col">
+                Il meta-sistema esplora le strategie risolutive, confrontando modelli concorrenti in funzione del trade-off tra latenza, carico computazionale e accuratezza.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Meta-Reasoning</span>
+              </td>
+            </tr>
 
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 4</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">4. Scelta e Pianificazione</h3>
-          <p class="card-body">
-            Seleziona la soluzione migliore secondo criteri oggettivi prefissati (minimizzazione falsi positivi, affidabilità probabilistica), motivando la scelta.
-          </p>
-        </article>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">04</span>
+              </td>
+              <td class="pipeline-title-col">Scelta e Pianificazione</td>
+              <td class="pipeline-desc-col">
+                Seleziona il modello ottimale secondo criteri oggettivi prefissati (minimizzazione costi falsi allarmi, calibrazione probabilistica) motivando formalmente la scelta.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Sistema 2 (Deliberative)</span>
+              </td>
+            </tr>
 
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 5</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">5. Implementazione Operativa</h3>
-          <p class="card-body">
-            Applica la soluzione prescelta traducendola in azione: esegue l'inferenza, stima il rischio ed emette un output misurabile con relativa metrica di confidenza.
-          </p>
-        </article>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">05</span>
+              </td>
+              <td class="pipeline-title-col">Implementazione Operativa</td>
+              <td class="pipeline-desc-col">
+                Esegue l'inferenza sul modello selezionato, stima la soglia di rischio ed emette una predizione interpretabile con relativo indice di confidenza.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Explainable Inference</span>
+              </td>
+            </tr>
 
-        <article class="card">
-          <span class="card-badge badge-emerald">Fase 6</span>
-          <h3 class="card-title" style="font-size: 1.25rem;">6. Monitoraggio e Adattamento</h3>
-          <p class="card-body">
-            Valuta i risultati ottenuti rispetto al feedback del mondo reale, corregge la calibrazione e impara continuamente nel tempo.
-          </p>
-        </article>
+            <tr>
+              <td class="pipeline-phase-col">
+                <span class="pipeline-phase-pill">06</span>
+              </td>
+              <td class="pipeline-title-col">Monitoraggio &amp; Adattamento</td>
+              <td class="pipeline-desc-col">
+                Confronta l'output con il feedback reale dei sistemi industriali, corregge la calibrazione e aggiorna i pesi contestuali nel tempo.
+              </td>
+              <td>
+                <span class="pipeline-focus-tag">Continuous Feedback</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -363,9 +407,9 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <div>
-        <p>&copy; 2026 Marco Pietri &bull; CASS Research</p>
+        <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
         <p style="margin-top: 0.35rem; color: var(--text-dim);">
-          Sviluppo Software, Machine Learning &amp; Cybersecurity
+          IT Strategy, AI Automations &amp; Software Architecture
         </p>
       </div>
       <div class="footer-social-bar">
@@ -378,10 +422,13 @@
         <a href="https://instagram.com/_marco.pietri_" target="_blank" rel="noopener me" class="social-link">
           <span>Instagram</span> &nearr;
         </a>
+        <a href="https://drive.google.com/file/d/1fuXuN6e4lGd1CrBtd-lQeoXlnenA6BhV/view?usp=sharing" target="_blank" rel="noopener" class="social-link">
+          <span>CV PDF</span> &nearr;
+        </a>
       </div>
     </div>
   </footer>
 
-  <script src="/assets/js/main.js?v=3.3"></script>
+  <script src="/assets/js/main.js?v=6.2"></script>
 </body>
 </html>
