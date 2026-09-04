@@ -270,7 +270,7 @@
               <div class="viewer-live-dot"></div>
               <div>
                 <div class="viewer-scene-title" id="current-scene-title">Vista Invernale Aerea</div>
-                <div class="viewer-scene-date" id="current-scene-date">Febbraio 2026 • Rilievo Territoriale</div>
+                <div class="viewer-scene-date" id="current-scene-date">Gennaio 2026 • Rilievo Territoriale</div>
               </div>
               <div class="drone-focus-badge" id="drone-focus-indicator" style="display: none;">
                 <span class="focus-pulse">●</span> <span id="focus-label">Drone Focus</span>
@@ -305,19 +305,19 @@
           <span class="carousel-title">
             <span>Seleziona Scenario Panoramico</span>
           </span>
-          <span class="carousel-counter" id="carousel-indicator">1 di 5</span>
+          <span class="carousel-counter" id="carousel-indicator">1 di 4</span>
         </div>
 
         <div class="pano-carousel-strip" id="pano-carousel">
           <!-- Item 1 -->
           <button class="pano-thumb-card active-thumb" type="button" data-index="0">
             <div class="pano-thumb-img-wrapper">
-              <img src="/assets/images/spectra/panorami/pano-1-thumb.jpg" alt="Miniatura Vista Invernale Aerea" class="pano-thumb-img" loading="lazy">
+              <img src="/assets/images/spectra/panorami/pano-1-thumb.jpg?v=2" alt="Miniatura Vista Invernale Aerea" class="pano-thumb-img" loading="lazy">
               <span class="pano-thumb-badge">360° Sferica</span>
             </div>
             <div class="pano-thumb-details">
               <div class="pano-thumb-name">1. Vista Invernale</div>
-              <div class="pano-thumb-meta">Febbraio 2026</div>
+              <div class="pano-thumb-meta">Gennaio 2026</div>
             </div>
           </button>
 
@@ -348,23 +348,11 @@
           <!-- Item 4 -->
           <button class="pano-thumb-card" type="button" data-index="3">
             <div class="pano-thumb-img-wrapper">
-              <img src="/assets/images/spectra/panorami/pano-4-thumb.jpg" alt="Miniatura Quota Paesaggistica" class="pano-thumb-img" loading="lazy">
+              <img src="/assets/images/spectra/panorami/pano-4-thumb.jpg" alt="Miniatura Golden Hour d'Agosto" class="pano-thumb-img" loading="lazy">
               <span class="pano-thumb-badge">360° Sferica</span>
             </div>
             <div class="pano-thumb-details">
-              <div class="pano-thumb-name">4. Quota Paesaggistica</div>
-              <div class="pano-thumb-meta">Agosto 2026</div>
-            </div>
-          </button>
-
-          <!-- Item 5 -->
-          <button class="pano-thumb-card" type="button" data-index="4">
-            <div class="pano-thumb-img-wrapper">
-              <img src="/assets/images/spectra/panorami/pano-5-thumb.jpg" alt="Miniatura Golden Hour d'Agosto" class="pano-thumb-img" loading="lazy">
-              <span class="pano-thumb-badge">360° Sferica</span>
-            </div>
-            <div class="pano-thumb-details">
-              <div class="pano-thumb-name">5. Golden Hour</div>
+              <div class="pano-thumb-name">4. Golden Hour</div>
               <div class="pano-thumb-meta">Agosto 2026</div>
             </div>
           </button>
@@ -600,9 +588,9 @@
 
       const scenes = [
         {
-          src: '/assets/images/spectra/panorami/pano-1.jpg',
+          src: '/assets/images/spectra/panorami/pano-1.jpg?v=2',
           title: 'Vista Invernale Aerea',
-          meta: 'Febbraio 2026 • Rilievo Territoriale',
+          meta: 'Gennaio 2026 • Rilievo Territoriale',
           pitch: 0,
           yaw: 0,
           focusPoints: [
@@ -637,18 +625,6 @@
         },
         {
           src: '/assets/images/spectra/panorami/pano-4.jpg',
-          title: 'Quota Paesaggistica',
-          meta: 'Agosto 2026 • Vista Aerea Ampia',
-          pitch: 0,
-          yaw: 60,
-          focusPoints: [
-            { pitch: -8, yaw: 142, hfov: 58, label: 'Profilo Montano & Rilievi' },
-            { pitch: -22, yaw: -38, hfov: 64, label: 'Ispezione Immobili dal Drone' },
-            { pitch: -14, yaw: 45, hfov: 62, label: 'Dettaglio Centri Abitati' }
-          ]
-        },
-        {
-          src: '/assets/images/spectra/panorami/pano-5.jpg',
           title: "Golden Hour d'Agosto",
           meta: 'Agosto 2026 • Luce Dorata pre-tramonto',
           pitch: -5,
