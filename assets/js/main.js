@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 3. Scroll-Driven Reveal Animations (Elements & Sections)
-  const revealElements = document.querySelectorAll('.scroll-reveal, .partner-card, .testimonial-card, .competence-item');
+  const revealElements = document.querySelectorAll('.scroll-reveal, .partner-card, .testimonial-card, .competence-item, .stat-kpi-card');
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
@@ -80,6 +80,175 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     revealElements.forEach((el) => el.classList.add('revealed'));
   }
+
+  // 3.1 Dynamic Metrics & Progress Bar Viewport Animation Engine
+  function initDynamicMetrics() {
+    const progressBars = document.querySelectorAll('.telemetry-graph-fill, [data-progress-bar]');
+    const counterElements = document.querySelectorAll('.stat-kpi-value, .telemetry-value, [data-counter]');
+
+    // 1. Initialize Progress Bars at 0 width and remember target
+    progressBars.forEach((bar) => {
+      const inlineWidth = bar.style.width || bar.getAttribute('data-target-width') || '100%';
+      bar.dataset.targetWidth = inlineWidth;
+      bar.style.width = '0%';
+    });
+
+    // Helper: Parse numerical formats for smooth counting
+    function parseNumberTarget(text) {
+      const raw = text.trim();
+      let prefix = '';
+      let suffix = '';
+      let numStr = raw;
+
+      // Extract optional prefix (e.g. + or $)
+      const pMatch = numStr.match(/^[^\d\-\+]+/);
+      if (pMatch) {
+        prefix = pMatch[0];
+        numStr = numStr.slice(prefix.length);
+      }
+
+      // Extract optional suffix (e.g. %, +, k+, k, M, M+)
+      const sMatch = numStr.match(/([^\d\.,]+)$/);
+      if (sMatch) {
+        suffix = sMatch[0];
+        numStr = numStr.slice(0, -suffix.length);
+      }
+
+      // Check if remainder is a pure single numeric value
+      let isThousandDot = false;
+      let isCommaDecimal = false;
+      let isDotDecimal = false;
+      let decimals = 0;
+      let targetNum = 0;
+
+      if (/^\d{1,3}(\.\d{3})+$/.test(numStr)) {
+        isThousandDot = true;
+        targetNum = parseInt(numStr.replace(/\./g, ''), 10);
+      } else if (/^\d+,\d+$/.test(numStr)) {
+        isCommaDecimal = true;
+        decimals = numStr.split(',')[1].length;
+        targetNum = parseFloat(numStr.replace(',', '.'));
+      } else if (/^\d+\.\d+$/.test(numStr)) {
+        isDotDecimal = true;
+        decimals = numStr.split('.')[1].length;
+        targetNum = parseFloat(numStr);
+      } else if (/^\d+$/.test(numStr)) {
+        targetNum = parseInt(numStr, 10);
+      } else {
+        return null; // Not a single numeric counter (e.g. sentences or multi-token strings)
+      }
+
+      return {
+        prefix,
+        suffix,
+        targetNum,
+        format: (val) => {
+          if (isThousandDot) {
+            return prefix + Math.round(val).toLocaleString('it-IT') + suffix;
+          } else if (isCommaDecimal) {
+            return prefix + val.toFixed(decimals).replace('.', ',') + suffix;
+          } else if (isDotDecimal) {
+            return prefix + val.toFixed(decimals) + suffix;
+          } else {
+            return prefix + Math.round(val).toString() + suffix;
+          }
+        }
+      };
+    }
+
+    // Helper: Smooth counter animation with cubic-bezier easing
+    function animateCounter(el) {
+      if (el.dataset.counterAnimated === 'true') return;
+      const originalText = el.textContent.trim();
+      const parsed = parseNumberTarget(originalText);
+      if (!parsed) return;
+
+      el.dataset.counterAnimated = 'true';
+      const duration = 1500;
+      const startTime = performance.now();
+
+      function frame(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        // Ease-out cubic
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const currentVal = parsed.targetNum * ease;
+
+        el.textContent = parsed.format(currentVal);
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          el.textContent = originalText;
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    // Helper: Animate Progress Bar Fill
+    function animateProgressBar(bar) {
+      if (bar.dataset.barAnimated === 'true') return;
+      bar.dataset.barAnimated = 'true';
+      const targetWidth = bar.dataset.targetWidth || '100%';
+      requestAnimationFrame(() => {
+        bar.style.width = targetWidth;
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const metricContainers = document.querySelectorAll(
+        '.deck-card, .deck-telemetry-board, .stat-kpi-card, .stat-kpi-grid'
+      );
+
+      const metricObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const container = entry.target;
+
+            // Trigger progress bars inside
+            const bars = container.querySelectorAll('.telemetry-graph-fill, [data-progress-bar]');
+            bars.forEach((bar) => animateProgressBar(bar));
+
+            // Trigger counters inside
+            const counters = container.querySelectorAll('.stat-kpi-value, .telemetry-value, [data-counter]');
+            counters.forEach((cnt) => animateCounter(cnt));
+
+            // If the element itself is a target
+            if (container.classList.contains('telemetry-graph-fill')) animateProgressBar(container);
+            if (container.classList.contains('stat-kpi-value') || container.classList.contains('telemetry-value')) animateCounter(container);
+
+            observer.unobserve(container);
+          }
+        });
+      }, {
+        root: null,
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      metricContainers.forEach((c) => metricObserver.observe(c));
+
+      // Observe isolated counters or bars
+      counterElements.forEach((el) => {
+        if (!el.closest('.deck-card') && !el.closest('.deck-telemetry-board') && !el.closest('.stat-kpi-card') && !el.closest('.stat-kpi-grid')) {
+          metricObserver.observe(el);
+        }
+      });
+      progressBars.forEach((bar) => {
+        if (!bar.closest('.deck-card') && !bar.closest('.deck-telemetry-board')) {
+          metricObserver.observe(bar);
+        }
+      });
+    } else {
+      // Fallback
+      progressBars.forEach((bar) => {
+        bar.style.width = bar.dataset.targetWidth || '100%';
+      });
+    }
+  }
+
+  initDynamicMetrics();
 
   // 4. Interactive Scrollytelling: Layered Deck Stacking Engine
   const deckCards = document.querySelectorAll('.deck-card');
