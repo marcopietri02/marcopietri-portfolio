@@ -701,4 +701,66 @@ document.addEventListener('DOMContentLoaded', () => {
     updateInteractiveElements();
     animationFrameId = requestAnimationFrame(draw);
   }
+
+  // 12. Global PayPal QR & Donation Modal Handler
+  function initPayPalModal() {
+    let modal = document.querySelector('.paypal-modal-overlay');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.className = 'paypal-modal-overlay';
+      modal.id = 'paypal-modal';
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      modal.setAttribute('aria-label', 'Supporta con PayPal');
+      modal.innerHTML = `
+        <div class="paypal-modal-card">
+          <button class="paypal-modal-close" aria-label="Chiudi modale">✕</button>
+          <div class="paypal-modal-header">
+            <div class="paypal-badge-icon">
+              <img src="/assets/images/logos/paypal.svg" alt="PayPal" style="width: 26px; height: 26px;">
+            </div>
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.3rem; color: #ffffff; margin-bottom: 0.2rem; font-weight: 700;">Supporta il Progetto</h3>
+              <p style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--text-dim);">Donazione libera e sicura via PayPal</p>
+            </div>
+          </div>
+          <div class="paypal-qr-container">
+            <img src="/assets/images/paypal-qr.png" alt="Inquadra il QR Code PayPal per donare" class="paypal-qr-image" loading="lazy">
+            <div class="paypal-qr-hint">Inquadra con la fotocamera o l'app PayPal</div>
+          </div>
+          <div class="paypal-modal-footer">
+            <a href="https://www.paypal.com" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, #0079C1, #00457C); border-color: rgba(56, 189, 248, 0.4);">
+              <img src="/assets/images/logos/paypal.svg" alt="" style="width: 16px; height: 16px;" aria-hidden="true">
+              <span>Continua su PayPal</span> &nearr;
+            </a>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeBtn = modal.querySelector('.paypal-modal-close');
+      const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+      });
+    }
+
+    document.querySelectorAll('[data-open-paypal-modal]').forEach((trigger) => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  }
+
+  initPayPalModal();
 });

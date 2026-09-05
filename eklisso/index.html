@@ -209,6 +209,27 @@
           </div>
         </a>
       </div>
+
+      <!-- Horizontal Support & Donation Card -->
+      <div class="card card-horizontal-donation">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.75rem;">
+            <img src="/assets/images/logos/paypal.svg" alt="PayPal Logo" style="width: 22px; height: 22px;">
+            <span class="card-badge" style="border-color: rgba(0, 121, 193, 0.4); color: #38bdf8; background: rgba(0, 121, 193, 0.12); margin: 0;">Sostieni la Community</span>
+          </div>
+          <h3 class="card-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Supporta lo Sviluppo Indipendente di Eklisso</h3>
+          <p class="card-body" style="font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
+            Eklisso è e rimarrà un servizio gratuito, neutrale e senza abbonamenti per tutta la comunità di Firenze. Se trovi utile la piattaforma e vuoi contribuire ai costi di server, automazioni e mantenimento attivo, puoi supportare il progetto con una donazione libera.
+          </p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: center; justify-content: center; min-width: 220px;">
+          <button class="btn btn-primary" data-open-paypal-modal style="width: 100%; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, #0079C1, #00457C); border-color: rgba(56, 189, 248, 0.4);">
+            <img src="/assets/images/logos/paypal.svg" alt="" style="width: 16px; height: 16px;" aria-hidden="true">
+            <span>Dona con PayPal / QR</span> &nearr;
+          </button>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-align: center;">Inquadra QR o procedi online</span>
+        </div>
+      </div>
     </section>
 
     <!-- 3. Media Kit & Community Metrics (Insights Ufficiali 60gg) -->
@@ -609,10 +630,14 @@
         <a href="https://drive.google.com/file/d/1fuXuN6e4lGd1CrBtd-lQeoXlnenA6BhV/view?usp=sharing" target="_blank" rel="noopener" class="social-link">
           <span>CV PDF</span> &nearr;
         </a>
+        <button class="social-link" data-open-paypal-modal aria-label="Supporta con PayPal" style="background: none; border: none; font-family: inherit; font-size: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+          <img src="/assets/images/logos/paypal.svg" alt="PayPal" style="width: 14px; height: 14px; vertical-align: middle;">
+          <span>PayPal</span> &nearr;
+        </button>
       </div>
     </div>
   </footer>
 
-  <script src="/assets/js/main.js?v=6.6"></script>
+  <script src="/assets/js/main.js?v=6.7"></script>
 </body>
 </html>
