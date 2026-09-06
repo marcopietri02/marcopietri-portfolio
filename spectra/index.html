@@ -250,11 +250,11 @@
         <div class="media-cat-card" id="card-tab-luma" role="button" tabindex="0" aria-label="Mostra Immersione 3D e Gaussian Splatting">
           <div class="media-cat-header">
             <span class="media-cat-icon">🛰️</span>
-            <span class="cat-badge live">● Disponibile • Gaussian Splat 3D</span>
+            <span class="cat-badge live">● Disponibile • 2 Modelli 3D</span>
           </div>
           <h3 class="media-cat-title">Immersione 3D &amp; Neural Splat</h3>
           <p class="media-cat-desc">
-            Ricostruzione volumetrica 3D del Santuario di Trestina tramite fotogrammetria neurale (Luma AI / Gaussian Splatting): orbita ed esplora liberamente lo spazio.
+            Ricostruzioni volumetriche 3D (Santuario di Canoscio e Cassero di Castiglion Fiorentino) tramite Gaussian Splatting neurale Luma AI: orbita ed esplora liberamente.
           </p>
           <div class="media-cat-footer">
             <span class="inactive-action" id="action-label-luma">
@@ -425,8 +425,8 @@
             <div class="viewer-scene-info">
               <div class="viewer-live-dot"></div>
               <div>
-                <div class="viewer-scene-title">Santuario di Canoscio / Trestina — Rilievo Neurale 3D</div>
-                <div class="viewer-scene-date">Cattura Fotogrammetrica con Drone &bull; Neural Radiance / Gaussian Splatting (Luma AI)</div>
+                <div class="viewer-scene-title" id="luma-scene-title">Santuario di Canoscio / Trestina — Rilievo Neurale 3D</div>
+                <div class="viewer-scene-date" id="luma-scene-date">Cattura Fotogrammetrica con Drone &bull; Neural Radiance / Gaussian Splatting (Luma AI)</div>
               </div>
               <div class="drone-focus-badge">
                 <span class="focus-pulse">●</span> <span>3D Interactive Neural Field</span>
@@ -467,6 +467,40 @@
               <span class="mobile-only">👆 Trascina per ruotare in 3D &bull; Due dita per zoom e pan</span>
             </div>
           </div>
+        </div>
+
+        <!-- 3D Models Selector Bar -->
+        <div class="pano-carousel-header">
+          <span class="carousel-title">
+            <span>Seleziona Modello Neurale 3D</span>
+          </span>
+          <span class="carousel-counter" id="luma-carousel-indicator">1 di 2</span>
+        </div>
+
+        <div class="pano-carousel-strip" id="luma-carousel">
+          <!-- Item 1: Santuario di Canoscio -->
+          <button class="pano-thumb-card active-thumb" type="button" data-luma-index="0">
+            <div class="pano-thumb-img-wrapper" style="display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25), #06090e);">
+              <span style="font-size: 1.8rem;">🏛️</span>
+              <span class="pano-thumb-badge" style="background: rgba(16, 185, 129, 0.9);">Gaussian 3D</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">1. Santuario di Canoscio</div>
+              <div class="pano-thumb-meta">Trestina • Rilievo Aereo Neurale</div>
+            </div>
+          </button>
+
+          <!-- Item 2: Cassero di Castiglion Fiorentino -->
+          <button class="pano-thumb-card" type="button" data-luma-index="1">
+            <div class="pano-thumb-img-wrapper" style="display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.25), #06090e);">
+              <span style="font-size: 1.8rem;">🏰</span>
+              <span class="pano-thumb-badge" style="background: rgba(59, 130, 246, 0.9);">Gaussian 3D</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">2. Cassero Medievale</div>
+              <div class="pano-thumb-meta">Castiglion F.no • Fortezza Storica</div>
+            </div>
+          </button>
         </div>
       </div>
     </section>
@@ -1113,6 +1147,56 @@
           }
         });
       }
+
+      // Luma 3D Multiple Models Switcher
+      const lumaScenes = [
+        {
+          title: "Santuario di Canoscio / Trestina — Rilievo Neurale 3D",
+          date: "Cattura Fotogrammetrica con Drone \u2022 Neural Radiance / Gaussian Splatting (Luma AI)",
+          src: "https://lumalabs.ai/embed/af0534f9-9821-4d36-a5af-f6cecee7ea91?mode=sparkles&background=%23030305&color=%23ffffff&showTitle=true&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+        },
+        {
+          title: "Cassero di Castiglion Fiorentino — Rilievo Storico 3D",
+          date: "Scansione Aerea Fotogrammetrica \u2022 Fortezza Medievale (Luma AI)",
+          src: "https://lumalabs.ai/embed/7848c55f-2129-403e-bd2b-73d868577bfb?mode=sparkles&background=%23030305&color=%23ffffff&showTitle=true&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false"
+        }
+      ];
+
+      const lumaSceneTitle = document.getElementById('luma-scene-title');
+      const lumaSceneDate = document.getElementById('luma-scene-date');
+      const lumaCarouselIndicator = document.getElementById('luma-carousel-indicator');
+      const lumaThumbs = document.querySelectorAll('#luma-carousel .pano-thumb-card');
+
+      function switchLumaScene(index) {
+        const scene = lumaScenes[index];
+        if (!scene) return;
+        if (lumaIframe) {
+          lumaIframe.src = scene.src;
+        }
+        if (lumaSceneTitle) {
+          lumaSceneTitle.textContent = scene.title;
+        }
+        if (lumaSceneDate) {
+          lumaSceneDate.textContent = scene.date;
+        }
+        if (lumaCarouselIndicator) {
+          lumaCarouselIndicator.textContent = `${index + 1} di ${lumaScenes.length}`;
+        }
+        lumaThumbs.forEach((thumb, i) => {
+          if (i === index) {
+            thumb.classList.add('active-thumb');
+          } else {
+            thumb.classList.remove('active-thumb');
+          }
+        });
+      }
+
+      lumaThumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const idx = parseInt(thumb.getAttribute('data-luma-index'), 10);
+          switchLumaScene(idx);
+        });
+      });
     });
 
   </script>
