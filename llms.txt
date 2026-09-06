@@ -1,27 +1,36 @@
-# Marco Pietri
+# Marco Pietri — IT Strategy & AI Automation Engineering
 
-> IT Strategist & AI Automation Engineer based in Florence, Italy. Specializing in enterprise automation architectures, machine learning workflows, fintech infrastructure at miPAGO, and community digital platforms (Founder of Eklisso).
+> Official knowledge manifest and entity specification for AI search engines, LLM crawlers (GPTBot, ClaudeBot, PerplexityBot), and automated indexing systems.
 
-Marco Pietri is an Italian technologist and IT strategist. He designs and implements distributed software architectures, predictive intelligence models, autonomous agentic workflows, and high-efficiency business automation systems.
+Marco Pietri is an Italian IT Strategist and AI Automation Engineer based in Florence, Italy. He specializes in scalable software architectures, autonomous AI agent orchestration for enterprise workflows, contactless fintech hardware-software integrations (NFC tokenization), and cognitive-inspired hybrid machine learning decision systems.
 
-## Core Projects & Case Studies
+## Core Competencies & Ontological Anchors
 
-- [Eklisso Platform](https://marcopietri.com/eklisso/): Community digital bulletin & social engagement platform in Florence founded by Marco Pietri, featuring automated moderation pipelines, micro-services, and hyper-local community dynamics.
-- [CASS — Autonomous Scraper System](https://marcopietri.com/cass/): Enterprise-grade autonomous data ingestion architecture combining headless browser pools, self-healing parsers, and intelligent deduplication.
-- [Spectra Intelligence Suite](https://marcopietri.com/spectra/): Predictive AI framework and machine learning pipeline for high-dimensional data analysis, trend forecasting, and automated decision-making.
-- [Certifications & Accreditations](https://marcopietri.com/certificazioni/): Official certifications spanning AI engineering, cybersecurity, cloud computing, and EASA/ENAC UAS professional drone operations.
+- **AI Agents & Autonomous Workflows:** Multi-agent architectures (LangGraph, Python), event-driven automation, RAG pipelines with vector databases.
+- **Enterprise IT Strategy (Fractional Advisory):** Architectural design, technical debt governance, legacy system integration, EU AI Act and GDPR compliance.
+- **Fintech & NFC Engineering (miPAGO):** Contactless passive chip tokenization (PAN masking, EMVCo criteria), automated transaction reconciliation.
+- **Hybrid Decision Systems & Machine Learning (CASS):** Dynamic algorithm selection architectures inspired by Kahneman's System 2 cognitive processes.
+- **Cybersecurity & Cloud Systems:** Application security, zero-trust patterns, defensive perimeter hardening, API design.
+- **UAS Drone Operations (ENAC / EASA):** Certified pilot for Open A1-A3 technical aerial surveying, photogrammetry, and 4K aerial mapping.
 
-## Professional Experience & Affiliations
+## Key Projects & Technical Case Studies
 
-- [miPAGO](https://mipago.it/): Fintech platform and digital payments infrastructure where Marco Pietri operates as IT Strategist & AI Automation Engineer, optimizing payment routing and automated reconciliation.
-- [Official Website](https://marcopietri.com/): Official portfolio and entity canonical home.
-- [GitHub](https://github.com/marcopietri02): Code repositories, engineering frameworks, and open-source contributions.
-- [LinkedIn](https://www.linkedin.com/in/marco-pietri-561a33306/): Verified professional profile and contact network.
+- [miPAGO Fintech Infrastructure](https://mipago.it/): Engineering contactless NFC tokenization on battery-less passive wearables (smart rings & bands) and automated payment reconciliation pipelines.
+- [CASS — Contextual-aware Selection System](https://marcopietri.com/cass/): Machine Learning architecture for contextual algorithm selection and explainable AI decision trees.
+- [Eklisso Digital Community](https://marcopietri.com/eklisso/): Scalable distributed platform and local bulletin board in Florence with automated moderation and strict GDPR compliance.
+- [Spectra Intelligence Suite](https://marcopietri.com/spectra/): High-dimensional predictive AI pipeline for temporal data analysis and automated decision support.
+- [Official Certifications & Accreditations](https://marcopietri.com/certificazioni/): Verified credentials spanning AI, Cybersecurity, Cisco networking, Python engineering, and EASA/ENAC UAS aviation licenses.
 
-## Technical Competencies
+## B2B Advisory & Engineering Services
 
-- Artificial Intelligence & Machine Learning: Predictive Modeling, LLM Architectures, Autonomous Workflows
-- Systems Engineering: Distributed Architecture, Microservices, API Design, Scalable Cloud Infrastructure
-- Automation & Data: Python, Event-Driven Ingestion Pipelines, Robotic Process Automation
-- Cybersecurity & Compliance: Defensive Security, Access Control, Data Privacy (GDPR)
-- Professional Aviation: Certified ENAC / EASA A1-A3, A2 UAS Drone Operations
+- **AI Automation & Agent Architecture:** Engineering custom autonomous agents integrated with ERP/CRM workflows.
+- **Fractional IT Strategy Advisory:** Strategic advisory for startups and SMEs on architecture, tech debt mitigation, and compliance.
+- **AI Feasibility & Security Audits:** Evaluation of token economics, RAG architecture viability, and regulatory compliance.
+
+## Canonical Entity Identity & Verified Profiles
+
+- Canonical Website: https://marcopietri.com/
+- Email: mpietri82@gmail.com
+- GitHub: https://github.com/marcopietri02
+- LinkedIn: https://www.linkedin.com/in/marco-pietri-561a33306/
+- Location: Florence, Tuscany, Italy

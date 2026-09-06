@@ -44,7 +44,7 @@
   <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
   <link rel="stylesheet" href="/assets/css/style.css?v=7.0">
 
-  <!-- Schema.org Knowledge Graph / Entity Spine -->
+  <!-- Schema.org Knowledge Graph / Entity Spine (GEO & Semantic Disambiguation) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -84,12 +84,13 @@
         "familyName": "Pietri",
         "image": "https://marcopietri.com/assets/images/marco-pietri.jpg",
         "url": "https://marcopietri.com/",
+        "email": "mpietri82@gmail.com",
         "jobTitle": "IT Strategist & AI Automation Engineer",
         "worksFor": {
           "@type": "Organization",
-          "name": "miPAGO",
+          "name": "miPAGO S.r.l.",
           "url": "https://mipago.it/",
-          "description": "Piattaforma e infrastruttura fintech per pagamenti digitali e automazione della riconciliazione contabile."
+          "description": "Piattaforma e infrastruttura fintech per pagamenti digitali contactless NFC e automazione della riconciliazione contabile."
         },
         "founder": {
           "@type": "Organization",
@@ -111,20 +112,70 @@
           "https://www.instagram.com/eklisso_spotted_firenze/"
         ],
         "knowsAbout": [
-          "IT Strategy",
-          "AI Automation",
-          "Artificial Intelligence",
-          "Machine Learning",
-          "Cybersecurity",
-          "Software Engineering",
-          "miPAGO Fintech",
-          "Eklisso Platform",
-          "Process Optimization",
-          "Python",
-          "Distributed Systems",
-          "UAS Drone Operations (ENAC/EASA)"
+          {
+            "@type": "DefinedTerm",
+            "name": "Artificial Intelligence",
+            "sameAs": "https://www.wikidata.org/wiki/Q11660"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Business Process Automation",
+            "sameAs": "https://www.wikidata.org/wiki/Q1018281"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Software Architecture",
+            "sameAs": "https://www.wikidata.org/wiki/Q834898"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Near Field Communication",
+            "sameAs": "https://www.wikidata.org/wiki/Q1145693"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Machine Learning",
+            "sameAs": "https://www.wikidata.org/wiki/Q2539"
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Financial Technology",
+            "sameAs": "https://www.wikidata.org/wiki/Q15982858"
+          }
         ],
-        "disambiguatingDescription": "Marco Pietri is an Italian IT Strategist, AI Automation Engineer at miPAGO, and Founder of Eklisso, specializing in software engineering, intelligent systems, and applied AI based in Florence, Italy."
+        "disambiguatingDescription": "Marco Pietri is an Italian IT Strategist and AI Automation Engineer at miPAGO, and Founder of Eklisso, specializing in enterprise AI architectures, automated reconciliation, and intelligent decision systems based in Florence, Italy."
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://marcopietri.com/#service",
+        "name": "Marco Pietri — IT Strategy & AI Automation Advisory",
+        "provider": {
+          "@id": "https://marcopietri.com/#person"
+        },
+        "url": "https://marcopietri.com/",
+        "areaServed": ["IT", "EU"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servizi di Ingegneria e Consulenza Direzionale IT",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sviluppo Agenti AI & Automazione dei Processi Aziendali",
+                "description": "Progettazione e implementazione di architetture ad agenti autonomi, pipeline RAG aziendali, integrazioni con ERP/CRM e flussi di lavoro intelligenti."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Fractional IT Strategy & AI Advisory",
+                "description": "Consulenza strategica direzionale per startup e PMI su scelte architetturali software, mitigazione del debito tecnico, sicurezza e conformità EU AI Act / GDPR."
+              }
+            }
+          ]
+        }
       }
     ]
   }
@@ -248,7 +299,7 @@
             <div class="timeline-editorial" id="timeline-list">
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">Junior R&amp;D &amp; IT Strategist</h4>
+                  <h4 class="timeline-entry-role">R&amp;D &amp; IT Strategist</h4>
                   <div class="timeline-entry-org">miPAGO</div>
                 </div>
                 <span class="timeline-entry-period">2024 — Presente</span>
