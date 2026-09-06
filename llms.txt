@@ -1,0 +1,27 @@
+# Marco Pietri
+
+> IT Strategist & AI Automation Engineer based in Florence, Italy. Specializing in enterprise automation architectures, machine learning workflows, fintech infrastructure at miPAGO, and community digital platforms (Founder of Eklisso).
+
+Marco Pietri is an Italian technologist and IT strategist. He designs and implements distributed software architectures, predictive intelligence models, autonomous agentic workflows, and high-efficiency business automation systems.
+
+## Core Projects & Case Studies
+
+- [Eklisso Platform](https://marcopietri.com/eklisso/): Community digital bulletin & social engagement platform in Florence founded by Marco Pietri, featuring automated moderation pipelines, micro-services, and hyper-local community dynamics.
+- [CASS — Autonomous Scraper System](https://marcopietri.com/cass/): Enterprise-grade autonomous data ingestion architecture combining headless browser pools, self-healing parsers, and intelligent deduplication.
+- [Spectra Intelligence Suite](https://marcopietri.com/spectra/): Predictive AI framework and machine learning pipeline for high-dimensional data analysis, trend forecasting, and automated decision-making.
+- [Certifications & Accreditations](https://marcopietri.com/certificazioni/): Official certifications spanning AI engineering, cybersecurity, cloud computing, and EASA/ENAC UAS professional drone operations.
+
+## Professional Experience & Affiliations
+
+- [miPAGO](https://mipago.it/): Fintech platform and digital payments infrastructure where Marco Pietri operates as IT Strategist & AI Automation Engineer, optimizing payment routing and automated reconciliation.
+- [Official Website](https://marcopietri.com/): Official portfolio and entity canonical home.
+- [GitHub](https://github.com/marcopietri02): Code repositories, engineering frameworks, and open-source contributions.
+- [LinkedIn](https://www.linkedin.com/in/marco-pietri-561a33306/): Verified professional profile and contact network.
+
+## Technical Competencies
+
+- Artificial Intelligence & Machine Learning: Predictive Modeling, LLM Architectures, Autonomous Workflows
+- Systems Engineering: Distributed Architecture, Microservices, API Design, Scalable Cloud Infrastructure
+- Automation & Data: Python, Event-Driven Ingestion Pipelines, Robotic Process Automation
+- Cybersecurity & Compliance: Defensive Security, Access Control, Data Privacy (GDPR)
+- Professional Aviation: Certified ENAC / EASA A1-A3, A2 UAS Drone Operations
