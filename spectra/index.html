@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/assets/css/pannellum.css">
 
   <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=6.9">
+  <link rel="stylesheet" href="/assets/css/style.css?v=7.0">
 
   <!-- Schema.org Service & Breadcrumbs JSON-LD -->
   <script type="application/ld+json">
@@ -246,18 +246,20 @@
           </div>
         </div>
 
-        <!-- Card 3: Foto & Ortofoto HD (COMING SOON) -->
-        <div class="media-cat-card coming-soon-card">
+        <!-- Card 3: Immersione 3D & Gaussian Splatting (ACTIVE) -->
+        <div class="media-cat-card" id="card-tab-luma" role="button" tabindex="0" aria-label="Mostra Immersione 3D e Gaussian Splatting">
           <div class="media-cat-header">
-            <span class="media-cat-icon">📸</span>
-            <span class="cat-badge soon">Prossimamente</span>
+            <span class="media-cat-icon">🛰️</span>
+            <span class="cat-badge live">● Disponibile • Gaussian Splat 3D</span>
           </div>
-          <h3 class="media-cat-title">Foto &amp; Rilievi HD</h3>
+          <h3 class="media-cat-title">Immersione 3D &amp; Neural Splat</h3>
           <p class="media-cat-desc">
-            Scatti ad alta risoluzione e ortofoto per perizie assicurative, monitoraggio coperture e valorizzazione patrimonio immobiliare.
+            Ricostruzione volumetrica 3D del Santuario di Trestina tramite fotogrammetria neurale (Luma AI / Gaussian Splatting): orbita ed esplora liberamente lo spazio.
           </p>
           <div class="media-cat-footer">
-            <span class="soon-action">In arrivo prossimamente</span>
+            <span class="inactive-action" id="action-label-luma">
+              <span>Clicca per navigare in 3D</span> &rarr;
+            </span>
           </div>
         </div>
       </div>
@@ -411,6 +413,58 @@
             </div>
             <div style="font-size: 0.74rem; color: var(--text-dim);">
               Durata: 00:31 &bull; Ripresa Panoramica Aerea
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHOWCASE 03: 3D GAUSSIAN SPLAT / LUMA AI CONTAINER -->
+      <div id="luma-showcase-container" style="display: none;">
+        <div class="luma-viewer-wrapper">
+          <div class="viewer-topbar">
+            <div class="viewer-scene-info">
+              <div class="viewer-live-dot"></div>
+              <div>
+                <div class="viewer-scene-title">Santuario di Canoscio / Trestina — Rilievo Neurale 3D</div>
+                <div class="viewer-scene-date">Cattura Fotogrammetrica con Drone &bull; Neural Radiance / Gaussian Splatting (Luma AI)</div>
+              </div>
+              <div class="drone-focus-badge">
+                <span class="focus-pulse">●</span> <span>3D Interactive Neural Field</span>
+              </div>
+            </div>
+            <div class="viewer-controls">
+              <button class="viewer-btn" id="luma-fullscreen-btn" type="button" aria-label="Visualizza modello 3D a schermo intero">
+                <span>⤢</span> <span>Schermo Intero</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Luma 3D Viewport Frame -->
+          <div class="luma-viewport-container" id="luma-viewport-box">
+            <iframe 
+              id="luma-embed-iframe"
+              src="https://lumalabs.ai/embed/af0534f9-9821-4d36-a5af-f6cecee7ea91?mode=sparkles&background=%23030305&color=%23ffffff&showTitle=true&loadBg=true&logoPosition=bottom-left&infoPosition=bottom-right&cinematicVideo=undefined&showMenu=false" 
+              width="100%" 
+              height="580" 
+              frameborder="0" 
+              title="Luma AI 3D Gaussian Splatting Santuario di Trestina" 
+              style="border: none; display: block; width: 100%; height: 580px; background: #030305;"
+              allow="fullscreen; accelerometer; gyroscope; xr-spatial-tracking"
+              loading="lazy">
+            </iframe>
+          </div>
+
+          <!-- Technical Specs Bar & Navigation Helper -->
+          <div class="video-specs-bar">
+            <div class="video-specs-tags">
+              <span class="video-spec-pill">Gaussian Splatting</span>
+              <span class="video-spec-pill">Luma AI Neural Engine</span>
+              <span class="video-spec-pill">Navigazione 6DOF</span>
+              <span class="video-spec-pill">Fotogrammetria Aerea DJI</span>
+            </div>
+            <div style="font-size: 0.74rem; color: var(--text-dim);">
+              <span class="desktop-only">🖱️ Trascina per orbitare &bull; Tasto destro / Due dita per traslare &bull; Rotella per zoom</span>
+              <span class="mobile-only">👆 Trascina per ruotare in 3D &bull; Due dita per zoom e pan</span>
             </div>
           </div>
         </div>
@@ -885,25 +939,32 @@
         });
       }
 
-      // Category Tab Switching (Panorami 360 vs Video Reel)
+      // Category Tab Switching (Panorami 360 vs Video Reel vs 3D Gaussian Splatting)
       const tabPano = document.getElementById('card-tab-pano');
       const tabVideo = document.getElementById('card-tab-video');
+      const tabLuma = document.getElementById('card-tab-luma');
       const panoContainer = document.getElementById('pano-showcase-container');
       const videoContainer = document.getElementById('video-showcase-container');
+      const lumaContainer = document.getElementById('luma-showcase-container');
       const actionLabelPano = document.getElementById('action-label-pano');
       const actionLabelVideo = document.getElementById('action-label-video');
+      const actionLabelLuma = document.getElementById('action-label-luma');
       const reelVideo = document.getElementById('spectra-reel-video');
       const videoFullBtn = document.getElementById('video-fullscreen-btn');
+      const lumaFullBtn = document.getElementById('luma-fullscreen-btn');
+      const lumaIframe = document.getElementById('luma-embed-iframe');
 
       function showPanoTab() {
-        if (!panoContainer || !videoContainer) return;
+        if (!panoContainer) return;
         panoContainer.style.display = 'block';
-        videoContainer.style.display = 'none';
+        if (videoContainer) videoContainer.style.display = 'none';
+        if (lumaContainer) lumaContainer.style.display = 'none';
 
         if (reelVideo) reelVideo.pause();
 
         if (tabPano) tabPano.classList.add('active-card');
         if (tabVideo) tabVideo.classList.remove('active-card');
+        if (tabLuma) tabLuma.classList.remove('active-card');
 
         if (actionLabelPano) {
           actionLabelPano.className = 'active-action';
@@ -912,6 +973,10 @@
         if (actionLabelVideo) {
           actionLabelVideo.className = 'inactive-action';
           actionLabelVideo.innerHTML = '<span>Clicca per riprodurre</span> &rarr;';
+        }
+        if (actionLabelLuma) {
+          actionLabelLuma.className = 'inactive-action';
+          actionLabelLuma.innerHTML = '<span>Clicca per navigare in 3D</span> &rarr;';
         }
 
         if (panViewer && isTourActive) {
@@ -925,9 +990,10 @@
       }
 
       function showVideoTab() {
-        if (!panoContainer || !videoContainer) return;
-        panoContainer.style.display = 'none';
+        if (!videoContainer) return;
+        if (panoContainer) panoContainer.style.display = 'none';
         videoContainer.style.display = 'block';
+        if (lumaContainer) lumaContainer.style.display = 'none';
 
         if (panViewer) {
           stopTourTimers();
@@ -936,6 +1002,7 @@
 
         if (tabVideo) tabVideo.classList.add('active-card');
         if (tabPano) tabPano.classList.remove('active-card');
+        if (tabLuma) tabLuma.classList.remove('active-card');
 
         if (actionLabelVideo) {
           actionLabelVideo.className = 'active-action';
@@ -945,10 +1012,50 @@
           actionLabelPano.className = 'inactive-action';
           actionLabelPano.innerHTML = '<span>Clicca per esplorare 360°</span> &rarr;';
         }
+        if (actionLabelLuma) {
+          actionLabelLuma.className = 'inactive-action';
+          actionLabelLuma.innerHTML = '<span>Clicca per navigare in 3D</span> &rarr;';
+        }
 
         const videoBox = document.querySelector('.video-player-wrapper');
         if (videoBox) {
           videoBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function showLumaTab() {
+        if (!lumaContainer) return;
+        if (panoContainer) panoContainer.style.display = 'none';
+        if (videoContainer) videoContainer.style.display = 'none';
+        lumaContainer.style.display = 'block';
+
+        if (reelVideo) reelVideo.pause();
+
+        if (panViewer) {
+          stopTourTimers();
+          panViewer.stopAutoRotate();
+        }
+
+        if (tabLuma) tabLuma.classList.add('active-card');
+        if (tabPano) tabPano.classList.remove('active-card');
+        if (tabVideo) tabVideo.classList.remove('active-card');
+
+        if (actionLabelLuma) {
+          actionLabelLuma.className = 'active-action';
+          actionLabelLuma.innerHTML = '<span>Modello 3D attivo qui sotto</span> &darr;';
+        }
+        if (actionLabelPano) {
+          actionLabelPano.className = 'inactive-action';
+          actionLabelPano.innerHTML = '<span>Clicca per esplorare 360°</span> &rarr;';
+        }
+        if (actionLabelVideo) {
+          actionLabelVideo.className = 'inactive-action';
+          actionLabelVideo.innerHTML = '<span>Clicca per riprodurre</span> &rarr;';
+        }
+
+        const lumaBox = document.querySelector('.luma-viewer-wrapper');
+        if (lumaBox) {
+          lumaBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
 
@@ -972,6 +1079,16 @@
         });
       }
 
+      if (tabLuma) {
+        tabLuma.addEventListener('click', showLumaTab);
+        tabLuma.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showLumaTab();
+          }
+        });
+      }
+
       // Video Player Fullscreen
       if (videoFullBtn && reelVideo) {
         videoFullBtn.addEventListener('click', () => {
@@ -979,6 +1096,20 @@
             reelVideo.requestFullscreen();
           } else if (reelVideo.webkitRequestFullscreen) {
             reelVideo.webkitRequestFullscreen();
+          }
+        });
+      }
+
+      // Luma 3D Fullscreen
+      if (lumaFullBtn) {
+        lumaFullBtn.addEventListener('click', () => {
+          const target = lumaIframe || document.getElementById('luma-viewport-box');
+          if (target) {
+            if (target.requestFullscreen) {
+              target.requestFullscreen();
+            } else if (target.webkitRequestFullscreen) {
+              target.webkitRequestFullscreen();
+            }
           }
         });
       }
