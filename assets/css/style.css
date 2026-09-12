@@ -2909,6 +2909,56 @@ footer.site-footer {
   flex-direction: column;
   gap: 0.5rem;
   min-width: 220px;
+}
+
+/* ==========================================================================
+   PayPal Donation Section & Support Card
+   ========================================================================== */
+.card-horizontal-donation {
+  margin-top: 4.5rem;
+  margin-bottom: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(14, 14, 24, 0.95), rgba(8, 8, 14, 0.98));
+  border: 1px solid rgba(0, 121, 193, 0.32);
+  border-radius: var(--radius-lg);
+  padding: 2.75rem 2.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 0 25px rgba(0, 121, 193, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-horizontal-donation::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0079C1, #38bdf8, transparent);
+}
+
+.card-horizontal-donation .card-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-horizontal-donation .card-body {
+  margin-bottom: 0;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.card-horizontal-donation .donation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+}
+
 /* Responsive Overrides */
 @media (max-width: 960px) {
   .stat-kpi-grid {
@@ -2931,6 +2981,18 @@ footer.site-footer {
   .tech-feature-grid {
     grid-template-columns: 1fr;
   }
+  
+  .card-horizontal-donation {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+    padding: 2.25rem 2rem;
+  }
+
+  .card-horizontal-donation .donation-actions {
+    width: 100%;
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2945,156 +3007,12 @@ footer.site-footer {
   }
 
   .card-horizontal-donation {
-    margin-top: 2.5rem !important;
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    margin-top: 3rem !important;
+    padding: 1.85rem 1.5rem !important;
+    gap: 1.75rem !important;
   }
   
   .stat-kpi-grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* ==========================================================================
-   PayPal Donation Modal & Horizontal Card
-   ========================================================================== */
-.card-horizontal-donation {
-  margin-top: 3.5rem;
-  margin-bottom: 2rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2.5rem;
-  align-items: center;
-  background: linear-gradient(135deg, rgba(14, 14, 24, 0.95), rgba(8, 8, 14, 0.98));
-  border: 1px solid rgba(0, 121, 193, 0.28);
-  border-radius: var(--radius-md);
-  padding: 2.5rem 2.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 121, 193, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.card-horizontal-donation::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #0079C1, #38bdf8, transparent);
-}
-
-.paypal-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(3, 3, 5, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
-}
-
-.paypal-modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.paypal-modal-card {
-  background: #0b0b12;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-lg);
-  max-width: 440px;
-  width: 100%;
-  padding: 2.25rem 2rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 121, 193, 0.15);
-  position: relative;
-  transform: scale(0.94) translateY(10px);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.paypal-modal-overlay.active .paypal-modal-card {
-  transform: scale(1) translateY(0);
-}
-
-.paypal-modal-close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-muted);
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: var(--transition-fast);
-}
-
-.paypal-modal-close:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
-  border-color: var(--border-medium);
-}
-
-.paypal-modal-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.paypal-badge-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-sm);
-  background: rgba(0, 121, 193, 0.12);
-  border: 1px solid rgba(0, 121, 193, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.paypal-qr-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.85rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-}
-
-.paypal-qr-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 12px;
-  object-fit: cover;
-  background: #ffffff;
-  padding: 6px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.paypal-qr-hint {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  text-align: center;
-  letter-spacing: 0.02em;
 }
