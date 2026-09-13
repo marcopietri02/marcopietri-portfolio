@@ -1021,6 +1021,11 @@ document.addEventListener('DOMContentLoaded', () => {
           enOpt.classList.toggle('is-active', lang === 'en');
         }
       });
+
+      // 4. Update command palette if initialized
+      if (typeof window.updateCommandPaletteLanguage === 'function') {
+        window.updateCommandPaletteLanguage(lang);
+      }
     };
 
     if (animate && document.startViewTransition) {
@@ -1055,6 +1060,7 @@ document.addEventListener('DOMContentLoaded', () => {
       backdrop.id = 'cmd-palette-backdrop';
       backdrop.className = 'cmd-palette-backdrop';
       backdrop.setAttribute('aria-hidden', 'true');
+      const isEn = currentLang === 'en';
       backdrop.innerHTML = `
         <div class="cmd-palette-modal" role="dialog" aria-modal="true" aria-label="Command Palette">
           <div class="cmd-palette-header">
@@ -1066,23 +1072,24 @@ document.addEventListener('DOMContentLoaded', () => {
               type="text" 
               class="cmd-palette-input" 
               id="cmd-palette-input" 
-              placeholder="Cerca progetti, sezioni o digita un comando (es: 'whoami', 'stack', 'cv')..." 
+              placeholder="${isEn ? "Search projects, sections or type a command (e.g. 'whoami', 'stack', 'cv')..." : "Cerca progetti, sezioni o digita un comando (es: 'whoami', 'stack', 'cv')..."}" 
               autocomplete="off" 
               spellcheck="false"
             />
-            <span class="cmd-mode-badge" id="cmd-mode-badge">NAV &amp; CLI</span>
+            <span class="cmd-mode-badge" id="cmd-mode-badge">${isEn ? 'NAV &amp; SEARCH' : 'NAV &amp; COMANDI'}</span>
           </div>
           <div class="cmd-palette-body" id="cmd-palette-body">
             <!-- Dynamic Items or Terminal View -->
           </div>
           <div class="cmd-palette-footer">
             <div class="cmd-shortcuts-legend">
-              <span><kbd>↑</kbd><kbd>↓</kbd> Naviga</span>
-              <span><kbd>↵</kbd> Seleziona</span>
-              <span><kbd>ESC</kbd> Chiudi</span>
+              ${isEn 
+                ? `<span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span> <span><kbd>↵</kbd> Select</span> <span><kbd>ESC</kbd> Close</span>` 
+                : `<span><kbd>↑</kbd><kbd>↓</kbd> Naviga</span> <span><kbd>↵</kbd> Seleziona</span> <span><kbd>ESC</kbd> Chiudi</span>`
+              }
             </div>
             <div>
-              <span>Marco Pietri CLI v8.1.0</span>
+              <span>v8.1.1</span>
             </div>
           </div>
         </div>
@@ -1540,21 +1547,34 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    function openPalette() {
-      backdrop.classList.add('is-open');
-      backdrop.setAttribute('aria-hidden', 'false');
-      input.value = '';
-      input.placeholder = currentLang === 'en' 
+    const updateCommandPaletteLanguage = (lang) => {
+      if (!input || !backdrop) return;
+      input.placeholder = lang === 'en' 
         ? "Search projects, sections or type a command (e.g. 'whoami', 'stack', 'cv')..." 
         : "Cerca progetti, sezioni o digita un comando (es: 'whoami', 'stack', 'cv')...";
       
+      if (!isTerminalMode && badge) {
+        badge.textContent = lang === 'en' ? 'NAV & SEARCH' : 'NAV & COMANDI';
+      }
+
       const footerLegend = backdrop.querySelector('.cmd-shortcuts-legend');
       if (footerLegend) {
-        footerLegend.innerHTML = currentLang === 'en'
+        footerLegend.innerHTML = lang === 'en'
           ? `<span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span> <span><kbd>↵</kbd> Select</span> <span><kbd>ESC</kbd> Close</span>`
           : `<span><kbd>↑</kbd><kbd>↓</kbd> Naviga</span> <span><kbd>↵</kbd> Seleziona</span> <span><kbd>ESC</kbd> Chiudi</span>`;
       }
 
+      if (backdrop.classList.contains('is-open')) {
+        renderResults(input.value);
+      }
+    };
+    window.updateCommandPaletteLanguage = updateCommandPaletteLanguage;
+
+    function openPalette() {
+      backdrop.classList.add('is-open');
+      backdrop.setAttribute('aria-hidden', 'false');
+      input.value = '';
+      updateCommandPaletteLanguage(currentLang);
       renderResults('');
       setTimeout(() => input.focus(), 50);
       document.body.style.overflow = 'hidden';

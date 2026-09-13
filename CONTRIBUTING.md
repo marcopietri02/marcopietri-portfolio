@@ -2,7 +2,7 @@
 
 Questo documento definisce l'architettura dei versionamenti, gli standard architetturali, le regole di buona programmazione e la convenzione obbligatoria per i messaggi di commit del repository del portfolio di **Marco Pietri**. Il codice è manutenuto ed esteso in modalità collaborativa da **sviluppatori umani** e **agenti AI**.
 
-Versione di riferimento corrente della build sincronizzata: **`v8.1.0`** (Data: `2026-09-13`).
+Versione di riferimento corrente della build sincronizzata: **`v8.1.1`** (Data: `2026-09-13`).
 
 ---
 
@@ -20,8 +20,8 @@ Questi componenti condividono all'unisono lo stesso numero di versione semantico
    - `<link rel="stylesheet" href="/assets/css/style.css?v=X.Y.Z">`
    - `<script src="/assets/js/main.js?v=X.Y.Z"></script>`
 3. **Command Palette / Quick Terminal:**  
-   L'indicatore di build presente nella barra di stato della Command Palette in `assets/js/main.js`:  
-   `<span>Marco Pietri CLI vX.Y.Z</span>`
+   L'indicatore di versione build nel footer della Command Palette in `assets/js/main.js`:  
+   `<span>vX.Y.Z</span>`
 4. **Specifiche per Modelli AI / LLM (`llms.txt`):**  
    L'intestazione per i crawler AI (GPTBot, ClaudeBot, PerplexityBot):  
    `> **Specification Version:** X.Y.Z | **Last Modified:** YYYY-MM-DD`
