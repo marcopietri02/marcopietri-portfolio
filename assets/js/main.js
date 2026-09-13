@@ -358,8 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetProximity = 0; // 0.0 (violet) -> 1.0 (emerald green)
     let currentProximity = 0;
 
-    // 6 Geometric Satellites (Active on Desktop with Mouse)
-    const SATELLITE_DEFS = [
+    // Geometric Satellites Engine (Desktop Mouse Orbit)
+    const BASE_SATELLITE_DEFS = [
       { type: 'triangle', size: 9, orbitR: 28, speed: 0.045, phase: 0 },
       { type: 'diamond', size: 8, orbitR: 36, speed: -0.038, phase: 1.05 },
       { type: 'hexagon', size: 9, orbitR: 42, speed: 0.032, phase: 2.1 },
@@ -368,17 +368,36 @@ document.addEventListener('DOMContentLoaded', () => {
       { type: 'square', size: 8, orbitR: 34, speed: -0.035, phase: 5.25 }
     ];
 
-    let satellites = SATELLITE_DEFS.map((def) => ({
-      ...def,
-      x: width / 2,
-      y: height / 2,
-      targetX: width / 2,
-      targetY: height / 2,
-      currentAngle: def.phase,
-      colorR: 167,
-      colorG: 139,
-      colorB: 250
-    }));
+    // 2 Distinct Golden Vector Figures active in Gold Edition
+    const GOLD_SATELLITE_DEFS = [
+      { type: 'gold-octahedron', size: 11, orbitR: 52, speed: 0.026, phase: 0.85, isGold: true },
+      { type: 'gold-star', size: 10, orbitR: 58, speed: -0.024, phase: 3.75, isGold: true }
+    ];
+
+    let satellites = [];
+
+    function updateSatellitesList() {
+      const defs = isGoldUnlocked 
+        ? [...BASE_SATELLITE_DEFS, ...GOLD_SATELLITE_DEFS]
+        : BASE_SATELLITE_DEFS;
+
+      satellites = defs.map((def, idx) => {
+        const existing = satellites[idx];
+        return {
+          ...def,
+          x: existing ? existing.x : mouse.active ? mouse.x : width / 2,
+          y: existing ? existing.y : mouse.active ? mouse.y : height / 2,
+          targetX: existing ? existing.targetX : width / 2,
+          targetY: existing ? existing.targetY : height / 2,
+          currentAngle: existing ? existing.currentAngle : def.phase,
+          colorR: def.isGold ? 251 : 167,
+          colorG: def.isGold ? 191 : 139,
+          colorB: def.isGold ? 36 : 250
+        };
+      });
+    }
+
+    updateSatellitesList();
 
     // Golden Constellation Points & Vector Polygons (Easter Egg)
     let goldPoints = [];
@@ -410,6 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         isGoldUnlocked = !isGoldUnlocked;
       }
+
+      updateSatellitesList();
 
       if (isGoldUnlocked) {
         initGoldConstellation();
@@ -710,9 +731,15 @@ document.addEventListener('DOMContentLoaded', () => {
           sat.x += (sat.targetX - sat.x) * 0.18;
           sat.y += (sat.targetY - sat.y) * 0.18;
 
-          sat.colorR = Math.round(167 + (52 - 167) * currentProximity);
-          sat.colorG = Math.round(139 + (211 - 139) * currentProximity);
-          sat.colorB = Math.round(250 + (153 - 250) * currentProximity);
+          if (sat.isGold) {
+            sat.colorR = 251;
+            sat.colorG = 191;
+            sat.colorB = 36;
+          } else {
+            sat.colorR = Math.round(167 + (52 - 167) * currentProximity);
+            sat.colorG = Math.round(139 + (211 - 139) * currentProximity);
+            sat.colorB = Math.round(250 + (153 - 250) * currentProximity);
+          }
         });
 
         // Laser Reticle Frame around acquired target
@@ -735,8 +762,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             ctx.moveTo(mouse.x, mouse.y);
             ctx.lineTo(sat.x, sat.y);
-            ctx.strokeStyle = `rgba(${Math.round(sat.colorR)}, ${Math.round(sat.colorG)}, ${Math.round(sat.colorB)}, ${tetherAlpha})`;
-            ctx.lineWidth = 0.5;
+            if (sat.isGold) {
+              ctx.strokeStyle = `rgba(251, 191, 36, ${tetherAlpha * 1.6})`;
+              ctx.lineWidth = 0.75;
+            } else {
+              ctx.strokeStyle = `rgba(${Math.round(sat.colorR)}, ${Math.round(sat.colorG)}, ${Math.round(sat.colorB)}, ${tetherAlpha})`;
+              ctx.lineWidth = 0.5;
+            }
             ctx.stroke();
           });
         }
@@ -751,19 +783,60 @@ document.addEventListener('DOMContentLoaded', () => {
           const gCol = Math.round(sat.colorG);
           const bCol = Math.round(sat.colorB);
 
-          ctx.strokeStyle = `rgb(${rCol}, ${gCol}, ${bCol})`;
-          ctx.fillStyle = `rgba(${rCol}, ${gCol}, ${bCol}, 0.22)`;
-          ctx.lineWidth = 1.3;
+          if (sat.isGold) {
+            ctx.strokeStyle = 'rgba(251, 191, 36, 0.95)';
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.3)';
+            ctx.lineWidth = 1.4;
+            ctx.shadowColor = 'rgba(251, 191, 36, 0.85)';
+            ctx.shadowBlur = 10;
+          } else {
+            ctx.strokeStyle = `rgb(${rCol}, ${gCol}, ${bCol})`;
+            ctx.fillStyle = `rgba(${rCol}, ${gCol}, ${bCol}, 0.22)`;
+            ctx.lineWidth = 1.3;
 
-          if (currentProximity > 0.15) {
-            ctx.shadowColor = `rgba(16, 185, 129, ${currentProximity * 0.9})`;
-            ctx.shadowBlur = 12 * currentProximity;
+            if (currentProximity > 0.15) {
+              ctx.shadowColor = `rgba(16, 185, 129, ${currentProximity * 0.9})`;
+              ctx.shadowBlur = 12 * currentProximity;
+            }
           }
 
           const s = sat.size;
           ctx.beginPath();
 
-          if (sat.type === 'triangle') {
+          if (sat.type === 'gold-octahedron') {
+            // Faceted Golden Octahedron / Diamond
+            ctx.moveTo(0, -s);
+            ctx.lineTo(s * 0.75, 0);
+            ctx.lineTo(0, s);
+            ctx.lineTo(-s * 0.75, 0);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+            // Inner facet lines
+            ctx.beginPath();
+            ctx.moveTo(0, -s);
+            ctx.lineTo(0, s);
+            ctx.moveTo(-s * 0.75, 0);
+            ctx.lineTo(s * 0.75, 0);
+            ctx.strokeStyle = 'rgba(254, 240, 138, 0.7)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          } else if (sat.type === 'gold-star') {
+            // 8-Point Vector Golden Star
+            const inner = s * 0.42;
+            const outer = s;
+            for (let sp = 0; sp < 8; sp++) {
+              const a = (sp / 8) * Math.PI * 2;
+              const rad = sp % 2 === 0 ? outer : inner;
+              const px = Math.cos(a) * rad;
+              const py = Math.sin(a) * rad;
+              if (sp === 0) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          } else if (sat.type === 'triangle') {
             ctx.moveTo(0, -s);
             ctx.lineTo(s * 0.86, s * 0.5);
             ctx.lineTo(-s * 0.86, s * 0.5);
@@ -791,9 +864,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.rect(-s * 0.5, -s * 0.5, s, s);
           }
 
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
+          if (sat.type !== 'gold-octahedron' && sat.type !== 'gold-star') {
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+          }
+
           ctx.restore();
         });
       }

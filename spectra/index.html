@@ -397,11 +397,11 @@
             <div class="viewer-scene-info">
               <div class="viewer-live-dot"></div>
               <div>
-                <div class="viewer-scene-title">Reel Costiero — Isola d'Elba</div>
-                <div class="viewer-scene-date">Agosto 2025 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi</div>
+                <div class="viewer-scene-title" id="video-current-title">Reel Costiero — Isola d'Elba</div>
+                <div class="viewer-scene-date" id="video-current-date">Agosto 2025/2026 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi</div>
               </div>
               <div class="drone-focus-badge">
-                <span class="focus-pulse">●</span> <span>DJI 4K Source</span>
+                <span class="focus-pulse">●</span> <span id="video-source-badge">DJI 4K Source</span>
               </div>
             </div>
             <div class="viewer-controls">
@@ -414,23 +414,57 @@
           <!-- Video Viewport -->
           <div class="video-viewport">
             <video id="spectra-reel-video" controls playsinline muted loop preload="metadata" poster="/assets/images/spectra/elba-poster.jpg?v=2" class="spectra-main-video">
-              <source src="/assets/videos/spectra/elba-reel-1080p.mp4?v=2" type="video/mp4">
+              <source id="spectra-reel-source" src="/assets/videos/spectra/elba-reel-1080p.mp4?v=8.2.1" type="video/mp4">
               Il tuo browser non supporta la riproduzione di video HTML5.
             </video>
           </div>
 
           <!-- Video Technical Specs Bar -->
           <div class="video-specs-bar">
-            <div class="video-specs-tags">
+            <div class="video-specs-tags" id="video-specs-tags">
               <span class="video-spec-pill">Sensore DJI Pro</span>
               <span class="video-spec-pill">Risoluzione 1080p 60fps</span>
               <span class="video-spec-pill">Color Grading Naturale</span>
               <span class="video-spec-pill">Gimbal Meccanico 3-Assi</span>
             </div>
-            <div style="font-size: 0.74rem; color: var(--text-dim);">
-              Durata: 00:31 &bull; Ripresa Panoramica Aerea
+            <div id="video-duration-meta" style="font-size: 0.74rem; color: var(--text-dim);">
+              Durata: 00:31 &bull; Ripresa Panoramica Aerea Costiera
             </div>
           </div>
+        </div>
+
+        <!-- Video Reels Selector Bar -->
+        <div class="pano-carousel-header">
+          <span class="carousel-title">
+            <span>Seleziona QuickShort Reel Video</span>
+          </span>
+          <span class="carousel-counter" id="video-carousel-indicator">1 di 2</span>
+        </div>
+
+        <div class="pano-carousel-strip" id="video-carousel">
+          <!-- Video 1 -->
+          <button class="pano-thumb-card active-thumb video-thumb-card" type="button" data-video-index="0">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/elba-poster.jpg?v=2" alt="Miniatura Reel Isola d'Elba" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">Reel 4K Drone</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">1. Reel Costiero — Isola d'Elba</div>
+              <div class="pano-thumb-meta">Agosto 2025/2026 &bull; Coste &amp; Scogliere</div>
+            </div>
+          </button>
+
+          <!-- Video 2 -->
+          <button class="pano-thumb-card video-thumb-card" type="button" data-video-index="1">
+            <div class="pano-thumb-img-wrapper">
+              <img src="/assets/images/spectra/panorami/pano-5-thumb.jpg?v=2" alt="Miniatura Reel Monte Nerone" class="pano-thumb-img" loading="lazy">
+              <span class="pano-thumb-badge">Reel 4K Drone</span>
+            </div>
+            <div class="pano-thumb-details">
+              <div class="pano-thumb-name">2. Reel Montano — Monte Nerone</div>
+              <div class="pano-thumb-meta">2026 &bull; Vetta Appenninica &amp; Crinali</div>
+            </div>
+          </button>
         </div>
       </div>
 
@@ -1140,7 +1174,68 @@
         });
       }
 
-      // Video Player Fullscreen
+      // Video Player Fullscreen & Multi-Reel Switcher
+      const videoItems = [
+        {
+          src: '/assets/videos/spectra/elba-reel-1080p.mp4?v=8.2.1',
+          poster: '/assets/images/spectra/elba-poster.jpg?v=2',
+          title: "Reel Costiero — Isola d'Elba",
+          date: 'Agosto 2025/2026 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi',
+          badge: 'DJI 4K Source',
+          specs: ['Sensore DJI Pro', 'Risoluzione 1080p 60fps', 'Color Grading Naturale', 'Gimbal Meccanico 3-Assi'],
+          meta: 'Durata: 00:31 • Ripresa Panoramica Aerea Costiera'
+        },
+        {
+          src: '/assets/videos/spectra/montenerone-reel-1080p.mp4?v=8.2.1',
+          poster: '/assets/images/spectra/panorami/pano-5-thumb.jpg?v=2',
+          title: 'Reel Montano — Vetta Monte Nerone',
+          date: '2026 • 4K HDR High-Altitude • DJI Flight Dynamics',
+          badge: 'DJI 4K High-Alt',
+          specs: ['Vetta Appenninica', 'Dinamica Alta Quota', 'Color Profiling D-Log', 'Stabilizzazione 3-Assi'],
+          meta: 'Durata: 00:45 • Ripresa Panoramica Aerea Montana'
+        }
+      ];
+
+      const videoThumbCards = document.querySelectorAll('.video-thumb-card');
+      const videoTitleEl = document.getElementById('video-current-title');
+      const videoDateEl = document.getElementById('video-current-date');
+      const videoBadgeEl = document.getElementById('video-source-badge');
+      const videoSpecsTagsEl = document.getElementById('video-specs-tags');
+      const videoDurationMetaEl = document.getElementById('video-duration-meta');
+      const videoIndicatorEl = document.getElementById('video-carousel-indicator');
+
+      function switchVideo(idx) {
+        const item = videoItems[idx];
+        if (!item || !reelVideo) return;
+
+        videoThumbCards.forEach(c => c.classList.remove('active-thumb'));
+        if (videoThumbCards[idx]) videoThumbCards[idx].classList.add('active-thumb');
+
+        if (videoTitleEl) videoTitleEl.textContent = item.title;
+        if (videoDateEl) videoDateEl.textContent = item.date;
+        if (videoBadgeEl) videoBadgeEl.textContent = item.badge;
+        if (videoIndicatorEl) videoIndicatorEl.textContent = (idx + 1) + ' di ' + videoItems.length;
+        if (videoDurationMetaEl) videoDurationMetaEl.textContent = item.meta;
+
+        if (videoSpecsTagsEl) {
+          videoSpecsTagsEl.innerHTML = item.specs.map(s => `<span class="video-spec-pill">${s}</span>`).join('');
+        }
+
+        reelVideo.pause();
+        reelVideo.poster = item.poster;
+        reelVideo.src = item.src;
+        reelVideo.load();
+        reelVideo.play().catch(() => {});
+      }
+
+      videoThumbCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.getAttribute('data-video-index'), 10);
+          switchVideo(idx);
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      });
+
       if (videoFullBtn && reelVideo) {
         videoFullBtn.addEventListener('click', () => {
           if (reelVideo.requestFullscreen) {
