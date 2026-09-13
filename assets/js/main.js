@@ -374,6 +374,9 @@ document.addEventListener('DOMContentLoaded', () => {
       { type: 'gold-star', size: 10, orbitR: 58, speed: -0.024, phase: 3.75, isGold: true }
     ];
 
+    // Golden Constellation Points & Vector Polygons (Easter Egg)
+    let goldPoints = [];
+    let isGoldUnlocked = false;
     let satellites = [];
 
     function updateSatellitesList() {
@@ -398,10 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateSatellitesList();
-
-    // Golden Constellation Points & Vector Polygons (Easter Egg)
-    let goldPoints = [];
-    let isGoldUnlocked = false;
 
     function initGoldConstellation() {
       goldPoints = [];
