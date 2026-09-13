@@ -42,7 +42,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
   <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=7.2">
+  <link rel="stylesheet" href="/assets/css/style.css?v=8.1.0">
 
   <!-- Schema.org Knowledge Graph / Entity Spine (GEO & Semantic Disambiguation) -->
   <script type="application/ld+json">
@@ -54,6 +54,8 @@
         "@id": "https://marcopietri.com/#website",
         "url": "https://marcopietri.com/",
         "name": "Marco Pietri — Official Website",
+        "version": "8.1.0",
+        "dateModified": "2026-09-13",
         "publisher": {
           "@id": "https://marcopietri.com/#person"
         },
@@ -64,6 +66,8 @@
         "@id": "https://marcopietri.com/#webpage",
         "url": "https://marcopietri.com/",
         "name": "Marco Pietri — IT Strategist & AI Automation Engineer",
+        "version": "8.1.0",
+        "dateModified": "2026-09-13",
         "isPartOf": {
           "@id": "https://marcopietri.com/#website"
         },
@@ -191,15 +195,29 @@
         <span class="brand-dot"></span>
         <span class="brand-name">Marco Pietri</span>
       </a>
+      
+      <div class="header-actions">
+        <button class="cmd-palette-trigger" aria-label="Apri Command Palette (Cmd+K)">
+          <span class="kbd-badge">⌘K</span>
+          <span data-i18n="cmd_k_hint">Cerca o Comandi</span>
+        </button>
+
+        <button class="lang-toggle-btn" aria-label="Cambia Lingua / Switch Language">
+          <span class="lang-opt is-active" data-lang-val="it">IT</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-opt" data-lang-val="en">EN</span>
+        </button>
+      </div>
+
       <button class="mobile-nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">
         ☰ Menu
       </button>
       <nav aria-label="Navigazione Principale">
         <ul class="nav-menu">
-          <li><a href="/" class="active">Home</a></li>
-          <li><a href="#projects">Progetti</a></li>
-          <li><a href="/certificazioni/">Certificazioni</a></li>
-          <li><a href="#contact">Contatti</a></li>
+          <li><a href="/" class="active" data-i18n="nav_home">Home</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">Progetti</a></li>
+          <li><a href="/certificazioni/" data-i18n="nav_certifications">Certificazioni</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contatti</a></li>
         </ul>
       </nav>
     </div>
@@ -210,25 +228,25 @@
     <section class="hero-section" id="hero" aria-label="Introduzione e Visione">
       <div class="hero-grid">
         <div class="hero-content">
-          <span class="hero-eyebrow">IT Strategy · AI Automations · Intelligent Systems</span>
+          <span class="hero-eyebrow" data-i18n="hero_eyebrow">IT Strategy · AI Automations · Intelligent Systems</span>
           <h1 class="hero-title" id="hero-title">Marco Pietri</h1>
-          <p class="hero-subtitle">IT Strategist &amp; AI Automation Engineer</p>
+          <p class="hero-subtitle" data-i18n="hero_subtitle">IT Strategist &amp; AI Automation Engineer</p>
 
-          <p class="hero-lead-text">
+          <p class="hero-lead-text" data-i18n="hero_lead">
             Progetto architetture software, automazioni avanzate e sistemi intelligenti basati su intelligenza artificiale per efficientare processi complessi. Focalizzato su affidabilità computazionale, sicurezza strutturale e impatto strategico misurabile.
           </p>
 
           <div class="btn-group">
             <a href="#projects" class="btn btn-primary">
-              <span>Vedi i Progetti</span>
+              <span data-i18n="hero_btn_projects">Vedi i Progetti</span>
               <span>&rarr;</span>
             </a>
             <a href="/certificazioni/" class="btn btn-secondary">
-              <span>Certificazioni &amp; CV</span>
+              <span data-i18n="hero_btn_cert">Certificazioni &amp; CV</span>
               <span>&rarr;</span>
             </a>
             <a href="#contact" class="btn btn-secondary">
-              <span>Contattami</span>
+              <span data-i18n="hero_btn_contact">Contattami</span>
             </a>
           </div>
         </div>
@@ -250,9 +268,9 @@
     <!-- About & Experience Timeline -->
     <section id="about" aria-label="Chi Sono ed Esperienze">
       <div class="section-header">
-        <span class="section-tag">01 / Percorso &amp; Visione</span>
-        <h2 class="section-title">Metodo &amp; Esperienza</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="sec_01_tag">01 / Percorso &amp; Visione</span>
+        <h2 class="section-title" data-i18n="sec_01_title">Metodo &amp; Esperienza</h2>
+        <p class="section-desc" data-i18n="sec_01_desc">
           Unisco rigore ingegneristico e visione strategica. Coordino lo sviluppo di sistemi intelligenti e automazioni, con un approccio pragmatico: architetture manutenibili, processi scalabili e sicurezza strutturale.
         </p>
       </div>
@@ -260,36 +278,36 @@
       <div class="grid-2">
         <!-- Vision & Core Domains -->
         <div>
-          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: #fff; margin-bottom: 0.75rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: #fff; margin-bottom: 0.75rem;" data-i18n="sec_01_spec_title">
             Aree di Specializzazione
           </h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;">
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.7;" data-i18n="sec_01_spec_desc">
             Traduco la complessità analitica in strumenti software immediati e resilienti. Quando non sono davanti a un terminale a ottimizzare un flusso, mi trovi a pilotare droni in operazioni tecniche autorizzate o a sperimentare su nuovi paradigmi algoritmici.
           </p>
 
           <div class="competence-list">
             <div class="competence-item">
-              <span class="competence-title">Machine Learning &amp; Explainable AI</span>
-              <span class="competence-desc">Sistemi ibridi di selezione contestuale algoritmi (CASS), data analysis e classificazione.</span>
+              <span class="competence-title" data-i18n="comp_1_title">Machine Learning &amp; Explainable AI</span>
+              <span class="competence-desc" data-i18n="comp_1_desc">Sistemi ibridi di selezione contestuale algoritmi (CASS), data analysis e classificazione.</span>
             </div>
             <div class="competence-item">
-              <span class="competence-title">Fintech Architecture &amp; Automations</span>
-              <span class="competence-desc">Riconciliazione contabile, ottimizzazione flussi transazionali e integrazioni software.</span>
+              <span class="competence-title" data-i18n="comp_2_title">Fintech Architecture &amp; Automations</span>
+              <span class="competence-desc" data-i18n="comp_2_desc">Riconciliazione contabile, ottimizzazione flussi transazionali e integrazioni software.</span>
             </div>
             <div class="competence-item">
-              <span class="competence-title">Cybersecurity &amp; Threat Defense</span>
-              <span class="competence-desc">Sicurezza applicativa, conformità GDPR, analisi delle vulnerabilità e protezione dei dati.</span>
+              <span class="competence-title" data-i18n="comp_3_title">Cybersecurity &amp; Threat Defense</span>
+              <span class="competence-desc" data-i18n="comp_3_desc">Sicurezza applicativa, conformità GDPR, analisi delle vulnerabilità e protezione dei dati.</span>
             </div>
             <div class="competence-item">
-              <span class="competence-title">Operazioni UAS &amp; Rilievi Aerei (ENAC / EASA)</span>
-              <span class="competence-desc">Pilota attestato Open A1-A3 per ispezioni tecniche, perizie fotogrammetriche e riprese DJI 4K.</span>
+              <span class="competence-title" data-i18n="comp_4_title">Operazioni UAS &amp; Rilievi Aerei (ENAC / EASA)</span>
+              <span class="competence-desc" data-i18n="comp_4_desc">Pilota attestato Open A1-A3 per ispezioni tecniche, perizie fotogrammetriche e riprese DJI 4K.</span>
             </div>
           </div>
         </div>
 
         <!-- Career Timeline (Editorial Format with Interactive Laser Track) -->
         <div>
-          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: #fff; margin-bottom: 1.25rem;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.4rem; color: #fff; margin-bottom: 1.25rem;" data-i18n="timeline_title">
             Esperienza Professionale
           </h3>
           <div class="timeline-wrap">
@@ -299,47 +317,47 @@
             <div class="timeline-editorial" id="timeline-list">
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">R&amp;D &amp; IT Strategist</h4>
+                  <h4 class="timeline-entry-role" data-i18n="timeline_role_mipago">R&amp;D &amp; IT Strategist</h4>
                   <div class="timeline-entry-org">miPAGO</div>
                 </div>
-                <span class="timeline-entry-period">2024 — Presente</span>
-                <p class="timeline-entry-desc">Strategia tecnologica, R&amp;D fintech, automazione dei processi di riconciliazione contabile e sicurezza.</p>
+                <span class="timeline-entry-period">2024 — <span data-i18n="timeline_exp_present">Presente</span></span>
+                <p class="timeline-entry-desc" data-i18n="timeline_desc_mipago">Strategia tecnologica, R&amp;D fintech, automazione dei processi di riconciliazione contabile e sicurezza.</p>
               </div>
 
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">Docente Esperto</h4>
+                  <h4 class="timeline-entry-role" data-i18n="timeline_role_franchi">Docente Esperto</h4>
                   <div class="timeline-entry-org">Istituto Formazione Franchi</div>
                 </div>
-                <span class="timeline-entry-period">2025 — Presente</span>
-                <p class="timeline-entry-desc">Formazione avanzata su programmazione, architetture digitali e innovazione software.</p>
+                <span class="timeline-entry-period">2025 — <span data-i18n="timeline_exp_present">Presente</span></span>
+                <p class="timeline-entry-desc" data-i18n="timeline_desc_franchi">Formazione avanzata su programmazione, architetture digitali e innovazione software.</p>
               </div>
 
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">AI Researcher &amp; Developer</h4>
+                  <h4 class="timeline-entry-role" data-i18n="timeline_role_cass">AI Researcher &amp; Developer</h4>
                   <div class="timeline-entry-org">CASS (Tesi di Laurea UniFI)</div>
                 </div>
                 <span class="timeline-entry-period">2024 — 2025</span>
-                <p class="timeline-entry-desc">Progettazione dell'architettura decisionale ibrida CASS e validazione su dataset industriali critici.</p>
+                <p class="timeline-entry-desc" data-i18n="timeline_desc_cass">Progettazione dell'architettura decisionale ibrida CASS e validazione su dataset industriali critici.</p>
               </div>
 
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">Founder</h4>
+                  <h4 class="timeline-entry-role" data-i18n="timeline_role_eklisso">Founder</h4>
                   <div class="timeline-entry-org">Eklisso</div>
                 </div>
-                <span class="timeline-entry-period">2023 — Presente</span>
-                <p class="timeline-entry-desc">Piattaforma community di annunci, supporto e connessione locale con moderazione automatica.</p>
+                <span class="timeline-entry-period">2023 — <span data-i18n="timeline_exp_present">Presente</span></span>
+                <p class="timeline-entry-desc" data-i18n="timeline_desc_eklisso">Piattaforma community di annunci, supporto e connessione locale con moderazione automatica.</p>
               </div>
 
               <div class="timeline-entry">
                 <div>
-                  <h4 class="timeline-entry-role">Sales &amp; Tech Support</h4>
+                  <h4 class="timeline-entry-role" data-i18n="timeline_role_mw">Sales &amp; Tech Support</h4>
                   <div class="timeline-entry-org">MediaWorld</div>
                 </div>
                 <span class="timeline-entry-period">2023 — 2024</span>
-                <p class="timeline-entry-desc">Consulenza tecnica, diagnostica hardware/software e supporto specialistico.</p>
+                <p class="timeline-entry-desc" data-i18n="timeline_desc_mw">Consulenza tecnica, diagnostica hardware/software e supporto specialistico.</p>
               </div>
             </div>
           </div>
@@ -350,9 +368,9 @@
     <!-- Featured Projects Showcase (Interactive Layered Deck / Scrollytelling) -->
     <section id="projects" aria-label="Progetti Principali">
       <div class="section-header">
-        <span class="section-tag">02 / Progetti Selezionati</span>
-        <h2 class="section-title">Progetti &amp; Ricerca</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="sec_02_tag">02 / Progetti Selezionati</span>
+        <h2 class="section-title" data-i18n="sec_02_title">Progetti &amp; Ricerca</h2>
+        <p class="section-desc" data-i18n="sec_02_desc">
           Casi studio e sistemi sviluppati per risolvere esigenze concrete: dal machine learning per decisioni industriali alle piattaforme comunitarie, fino alle riprese aeree professionali.
         </p>
       </div>
@@ -367,8 +385,8 @@
                 <span class="deck-category">Machine Learning · Decision Systems</span>
               </div>
               <h3 class="deck-title">CASS</h3>
-              <p class="deck-subtitle">Contextual-aware Selection System (Tesi UniFI)</p>
-              <p class="deck-body">
+              <p class="deck-subtitle" data-i18n="proj_cass_sub">Contextual-aware Selection System (Tesi UniFI)</p>
+              <p class="deck-body" data-i18n="proj_cass_body">
                 Architettura ibrida ispirata ai modelli cognitivi umani (Sistema 1 vs Sistema 2). Seleziona dinamicamente il modello ottimale in tempo reale per garantire affidabilità, trasparenza e spiegabilità algoritmica su processi critici ad alto rischio.
               </p>
               <div class="deck-meta-list">
@@ -379,7 +397,7 @@
               </div>
               <div class="btn-group">
                 <a href="/cass/" class="btn btn-primary">
-                  <span>Esplora Caso Studio &amp; Architettura</span>
+                  <span data-i18n="proj_cass_btn">Esplora Caso Studio &amp; Architettura</span>
                   <span>&rarr;</span>
                 </a>
                 <a href="https://zenodo.org/records/18593717" target="_blank" rel="noopener" class="btn btn-secondary">
@@ -391,20 +409,20 @@
 
             <div class="deck-telemetry-board">
               <div class="telemetry-row">
-                <span class="telemetry-label">Paradigma Cognitivo</span>
-                <span class="telemetry-value accent">Sistema 1 + Sistema 2</span>
+                <span class="telemetry-label" data-i18n="tel_cog_paradigm">Paradigma Cognitivo</span>
+                <span class="telemetry-value accent" data-i18n="tel_val_sistema12">Sistema 1 + Sistema 2</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Dataset Validazione</span>
+                <span class="telemetry-label" data-i18n="tel_val_dataset">Dataset Validazione</span>
                 <span class="telemetry-value">Scania Industrial APS</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Interpretabilità</span>
-                <span class="telemetry-value accent">Nativamente Spiegabile</span>
+                <span class="telemetry-label" data-i18n="tel_interpretability">Interpretabilità</span>
+                <span class="telemetry-value accent" data-i18n="tel_val_spiegabile">Nativamente Spiegabile</span>
               </div>
               <div>
                 <div class="telemetry-row" style="padding-bottom: 0.2rem; border-bottom: none;">
-                  <span class="telemetry-label">Efficienza Computazionale</span>
+                  <span class="telemetry-label" data-i18n="tel_comp_efficiency">Efficienza Computazionale</span>
                   <span class="telemetry-value">99.2%</span>
                 </div>
                 <div class="telemetry-graph-bar">
@@ -424,8 +442,8 @@
                 <span class="deck-category">Platform &amp; Community Architecture</span>
               </div>
               <h3 class="deck-title">Eklisso</h3>
-              <p class="deck-subtitle">La rete locale a portata di click</p>
-              <p class="deck-body">
+              <p class="deck-subtitle" data-i18n="proj_eklisso_sub">La rete locale a portata di click</p>
+              <p class="deck-body" data-i18n="proj_eklisso_body">
                 Piattaforma e bacheca digitale concepita per connettere persone, studenti e realtà territoriali in tempo reale. Combina flussi di automazione social, moderazione automatizzata e massima tutela della privacy conforme al GDPR.
               </p>
               <div class="deck-meta-list">
@@ -435,27 +453,27 @@
                 <span class="deck-meta-item">Florence Hub</span>
               </div>
               <a href="/eklisso/" class="btn btn-primary">
-                <span>Scopri la Piattaforma Eklisso</span>
+                <span data-i18n="proj_eklisso_btn">Scopri la Piattaforma Eklisso</span>
                 <span>&rarr;</span>
               </a>
             </div>
 
             <div class="deck-telemetry-board">
               <div class="telemetry-row">
-                <span class="telemetry-label">Visualizzazioni Totali</span>
+                <span class="telemetry-label" data-i18n="tel_total_views">Visualizzazioni Totali</span>
                 <span class="telemetry-value accent">750k+</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Tutela Privacy</span>
+                <span class="telemetry-label" data-i18n="tel_privacy">Tutela Privacy</span>
                 <span class="telemetry-value">GDPR Compliant</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Moderazione Feed</span>
+                <span class="telemetry-label" data-i18n="tel_feed_mod">Moderazione Feed</span>
                 <span class="telemetry-value accent">Automated Real-Time</span>
               </div>
               <div>
                 <div class="telemetry-row" style="padding-bottom: 0.2rem; border-bottom: none;">
-                  <span class="telemetry-label">Tasso di Risposta Community</span>
+                  <span class="telemetry-label" data-i18n="tel_resp_rate">Tasso di Risposta Community</span>
                   <span class="telemetry-value">98.5%</span>
                 </div>
                 <div class="telemetry-graph-bar">
@@ -475,8 +493,8 @@
                 <span class="deck-category">Operazioni Aeree · Rilievi UAS</span>
               </div>
               <h3 class="deck-title">Spectra Vision</h3>
-              <p class="deck-subtitle">Riprese aeree e ispezioni tecniche con droni DJI</p>
-              <p class="deck-body">
+              <p class="deck-subtitle" data-i18n="proj_spectra_sub">Riprese aeree e ispezioni tecniche con droni DJI</p>
+              <p class="deck-body" data-i18n="proj_spectra_body">
                 Operazioni aeree professionali per ispezioni tecniche di tetti e impianti fotovoltaici, perizie assicurative post-evento meteo, rilievi territoriali e storytelling multimediale in 4K con conformità ENAC/EASA.
               </p>
               <div class="deck-meta-list">
@@ -486,27 +504,27 @@
                 <span class="deck-meta-item">Perizie Tecniche</span>
               </div>
               <a href="/spectra/" class="btn btn-primary">
-                <span>Entra nello Showcase 360°</span>
+                <span data-i18n="proj_spectra_btn">Entra nello Showcase 360°</span>
                 <span>&rarr;</span>
               </a>
             </div>
 
             <div class="deck-telemetry-board">
               <div class="telemetry-row">
-                <span class="telemetry-label">Licenza Aeronautica</span>
+                <span class="telemetry-label" data-i18n="tel_uas_license">Licenza Aeronautica</span>
                 <span class="telemetry-value accent">ENAC / EASA A1-A3</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Risoluzione Sensore</span>
+                <span class="telemetry-label" data-i18n="tel_sensor_res">Risoluzione Sensore</span>
                 <span class="telemetry-value">4K HDR / 60fps</span>
               </div>
               <div class="telemetry-row">
-                <span class="telemetry-label">Viewer 360°</span>
-                <span class="telemetry-value accent">Visuale Aerea Interattiva</span>
+                <span class="telemetry-label" data-i18n="tel_viewer_360">Viewer 360°</span>
+                <span class="telemetry-value accent" data-i18n="tel_viewer_360_val">Visuale Aerea Interattiva</span>
               </div>
               <div>
                 <div class="telemetry-row" style="padding-bottom: 0.2rem; border-bottom: none;">
-                  <span class="telemetry-label">Sicurezza &amp; Conformità Normativa</span>
+                  <span class="telemetry-label" data-i18n="tel_safety_comp">Sicurezza &amp; Conformità Normativa</span>
                   <span class="telemetry-value">100%</span>
                 </div>
                 <div class="telemetry-graph-bar">
@@ -522,9 +540,9 @@
     <!-- Partners & Collaborations -->
     <section id="partners" aria-label="Aziende e Collaborazioni">
       <div class="section-header">
-        <span class="section-tag">03 / Ecosistema &amp; Partner</span>
-        <h2 class="section-title">Aziende &amp; Collaborazioni</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="sec_03_tag">03 / Ecosistema &amp; Partner</span>
+        <h2 class="section-title" data-i18n="sec_03_title">Aziende &amp; Collaborazioni</h2>
+        <p class="section-desc" data-i18n="sec_03_desc">
           Organizzazioni, istituti e realtà con cui collaboro nello sviluppo tecnologico, strategico e di ricerca.
         </p>
       </div>
@@ -535,12 +553,12 @@
             <span class="partner-name">miPAGO</span>
             <img src="/assets/images/logos/mipago.png" alt="miPAGO Logo" class="partner-card-logo">
           </div>
-          <div class="partner-role">Fintech · R&amp;D &amp; IT Strategy</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_mipago_role">Fintech · R&amp;D &amp; IT Strategy</div>
+          <p class="partner-desc" data-i18n="partner_mipago_desc">
             Sviluppo di architetture di pagamento digitale, sicurezza dei flussi transazionali e automazione dei processi di riconciliazione contabile.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Sito ufficiale</span> &nearr;
+            <span data-i18n="partner_mipago_link">Sito ufficiale</span> &nearr;
           </div>
         </a>
 
@@ -549,12 +567,12 @@
             <span class="partner-name">Futura · PNRR</span>
             <img src="/assets/images/logos/futura-pnrr.png" alt="Futura PNRR Logo" class="partner-card-logo">
           </div>
-          <div class="partner-role">PNRR · Scuola 4.0 &amp; Competenze Digitali</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_pnrr_role">PNRR · Scuola 4.0 &amp; Competenze Digitali</div>
+          <p class="partner-desc" data-i18n="partner_pnrr_desc">
             Laboratori innovativi e percorsi didattici per la transizione digitale promossi dal Ministero dell'Istruzione e del Merito.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Portale PNRR</span> &nearr;
+            <span data-i18n="partner_pnrr_link">Portale PNRR</span> &nearr;
           </div>
         </a>
 
@@ -563,12 +581,12 @@
             <span class="partner-name">Ist. Formazione Franchi</span>
             <img src="/assets/images/logos/franchi.png" alt="Istituto Formazione Franchi Logo" class="partner-card-logo">
           </div>
-          <div class="partner-role">Education · Docenza Informatica</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_franchi_role">Education · Docenza Informatica</div>
+          <p class="partner-desc" data-i18n="partner_franchi_desc">
             Attività di docenza specialistica su linguaggi di programmazione, architetture web e metodologie di sviluppo software.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Sito Franchi</span> &nearr;
+            <span data-i18n="partner_franchi_link">Sito Franchi</span> &nearr;
           </div>
         </a>
 
@@ -577,12 +595,12 @@
             <span class="partner-name">Eklisso</span>
             <img src="/assets/images/logos/eklisso.png" alt="Eklisso Logo" class="partner-card-logo" style="border-radius: 50%; width: 40px; height: 40px; object-fit: cover;">
           </div>
-          <div class="partner-role">Venture · Community Platform</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_eklisso_role">Venture · Community Platform</div>
+          <p class="partner-desc" data-i18n="partner_eklisso_desc">
             Iniziativa digitale per il supporto territoriale, moderazione automatizzata e gestione sicura delle comunicazioni locali.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Scheda Progetto</span> &rarr;
+            <span data-i18n="partner_eklisso_link">Scheda Progetto</span> &rarr;
           </div>
         </a>
 
@@ -591,12 +609,12 @@
             <span class="partner-name">MediaWorld</span>
             <img src="/assets/images/logos/mediaworld.png" alt="MediaWorld Logo" class="partner-card-logo">
           </div>
-          <div class="partner-role">Tech Support · Consulenza Sistemi</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_mw_role">Tech Support · Consulenza Sistemi</div>
+          <p class="partner-desc" data-i18n="partner_mw_desc">
             Supporto tecnico sistemistico, consulenza hardware e diagnostica rapida per privati e professionisti.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Sito MediaWorld</span> &nearr;
+            <span data-i18n="partner_mw_link">Sito MediaWorld</span> &nearr;
           </div>
         </a>
 
@@ -604,12 +622,12 @@
           <div class="partner-card-top">
             <span class="partner-name">BIP CyberSec</span>
           </div>
-          <div class="partner-role">Cybersecurity · Talent Week</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_bip_role">Cybersecurity · Talent Week</div>
+          <p class="partner-desc" data-i18n="partner_bip_desc">
             Simulazioni pratiche di threat analysis, strategie difensive perimetrali e sicurezza dei sistemi enterprise.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Sito BIP Group</span> &nearr;
+            <span data-i18n="partner_bip_link">Sito BIP Group</span> &nearr;
           </div>
         </a>
 
@@ -618,12 +636,12 @@
             <span class="partner-name">Università di Firenze</span>
             <img src="/assets/images/logos/unifi.png" alt="Università degli Studi di Firenze Logo" class="partner-card-logo" style="max-height: 38px;">
           </div>
-          <div class="partner-role">Formazione Accademica · Laurea in Informatica</div>
-          <p class="partner-desc">
+          <div class="partner-role" data-i18n="partner_unifi_role">Formazione Accademica · Laurea in Informatica</div>
+          <p class="partner-desc" data-i18n="partner_unifi_desc">
             Percorso triennale in scienze informatiche con focus su algoritmi, machine learning e sistemi distribuiti.
           </p>
           <div class="card-link-action" style="margin-top: auto; padding-top: 1rem;">
-            <span>Portale UniFI</span> &nearr;
+            <span data-i18n="partner_unifi_link">Portale UniFI</span> &nearr;
           </div>
         </a>
       </div>
@@ -632,9 +650,9 @@
     <!-- Testimonials Section (Editorial Quotations) -->
     <section id="testimonials" aria-label="Cosa Dicono di Me">
       <div class="section-header">
-        <span class="section-tag">04 / Referenze &amp; Feedback</span>
-        <h2 class="section-title">Cosa Dicono di Me</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="sec_04_tag">04 / Referenze &amp; Feedback</span>
+        <h2 class="section-title" data-i18n="sec_04_title">Cosa Dicono di Me</h2>
+        <p class="section-desc" data-i18n="sec_04_desc">
           Testimonianze dirette di colleghi e collaboratori sulle modalità di lavoro, precisione e approccio ai problemi.
         </p>
       </div>
@@ -642,7 +660,7 @@
       <div class="testimonials-grid">
         <!-- Testimonial 1 -->
         <article class="testimonial-card">
-          <p class="testimonial-quote">
+          <p class="testimonial-quote" data-i18n="test_1_quote">
             Preciso, metodico, puntuale, paziente, dedito e riflessivo. Queste sono le parole che descrivono meglio Marco nella sfera professionale. Sono molto contenta di poter collaborare con lui all'interno del team miPAGO.
           </p>
           <div class="testimonial-author">
@@ -651,14 +669,14 @@
             </div>
             <div class="author-info">
               <h4>Federica Zingarelli</h4>
-              <p>Copywriter &amp; PR · miPAGO</p>
+              <p data-i18n="test_1_role">Copywriter &amp; PR · miPAGO</p>
             </div>
           </div>
         </article>
 
         <!-- Testimonial 2 -->
         <article class="testimonial-card">
-          <p class="testimonial-quote">
+          <p class="testimonial-quote" data-i18n="test_2_quote">
             Marco è giovane, scattante e orientato all’obiettivo. Una volta ricevuto un input entra subito in azione con precisione e grande senso pratico. Ha una mente analitica che lo porta dritto al punto, senza trascurare i dettagli critici.
           </p>
           <div class="testimonial-author">
@@ -667,14 +685,14 @@
             </div>
             <div class="author-info">
               <h4>Martina Premazzi</h4>
-              <p>Content Strategist · miPAGO</p>
+              <p data-i18n="test_2_role">Content Strategist · miPAGO</p>
             </div>
           </div>
         </article>
 
         <!-- Testimonial 3 -->
         <article class="testimonial-card">
-          <p class="testimonial-quote">
+          <p class="testimonial-quote" data-i18n="test_3_quote">
             Marco è brillante, affidabile e curioso, con un mix di creatività e rigore analitico. Unisce competenze tecniche solide a una visione sempre orientata all’innovazione. È un team player che cura la qualità e i dettagli con grande etica.
           </p>
           <div class="testimonial-author">
@@ -683,14 +701,14 @@
             </div>
             <div class="author-info">
               <h4>Giulia Presenti</h4>
-              <p>Community Moderator · Eklisso</p>
+              <p data-i18n="test_3_role">Community Moderator · Eklisso</p>
             </div>
           </div>
         </article>
 
         <!-- Testimonial 4 -->
         <article class="testimonial-card">
-          <p class="testimonial-quote">
+          <p class="testimonial-quote" data-i18n="test_4_quote">
             Lavorare con Marco significa mettere ordine al caos. Il suo approccio è chirurgico: riflette quanto basta per non sbagliare la direzione e agisce con rapidità. Ottimizza il flusso di lavoro di tutto il team con soluzioni durature.
           </p>
           <div class="testimonial-author">
@@ -699,7 +717,7 @@
             </div>
             <div class="author-info">
               <h4>Federico Caseli</h4>
-              <p>Marketing &amp; Operations · miPAGO</p>
+              <p data-i18n="test_4_role">Marketing &amp; Operations · miPAGO</p>
             </div>
           </div>
         </article>
@@ -709,17 +727,17 @@
     <!-- Contact Section -->
     <section id="contact" aria-label="Contatti e Collaborazioni">
       <div class="cta-banner">
-        <h2>Vuoi discutere un progetto o una consulenza?</h2>
-        <p>
+        <h2 data-i18n="contact_title">Vuoi discutere un progetto o una consulenza?</h2>
+        <p data-i18n="contact_desc">
           Disponibile per collaborazioni software, implementazioni di Machine Learning, ottimizzazione processi e missioni autorizzate con droni.
         </p>
         <div class="btn-group" style="justify-content: center;">
           <a href="mailto:mpietri82@gmail.com" class="btn btn-primary">
-            <span>Scrivi via Email</span>
+            <span data-i18n="contact_btn_email">Scrivi via Email</span>
             <span>&rarr;</span>
           </a>
           <button class="btn btn-secondary" data-copy-text="mpietri82@gmail.com">
-            <span>Copia Email</span>
+            <span data-i18n="contact_btn_copy">Copia Email</span>
           </button>
         </div>
       </div>
@@ -729,10 +747,11 @@
   <!-- Semantic Footer -->
   <footer class="site-footer">
     <div class="container footer-content">
-      <div>
+      <div class="footer-meta-wrap">
         <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
-        <p style="margin-top: 0.35rem; color: var(--text-dim);">
-          IT Strategy, AI Automations &amp; Software Architecture
+        <p class="footer-sub-line">
+          <span data-i18n="footer_sub">IT Strategy, AI Automations &amp; Software Architecture</span>
+          <span class="footer-version-tag" title="Versione Corrente Build"><span class="footer-version-dot"></span>v8.1.0</span>
         </p>
       </div>
       <div class="footer-social-bar">
@@ -761,6 +780,6 @@
   </footer>
 
   <!-- Native JavaScript -->
-  <script src="/assets/js/main.js?v=7.0"></script>
+  <script src="/assets/js/main.js?v=8.1.0"></script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 # Marco Pietri — IT Strategy & AI Automation Engineering
 
-> Official knowledge manifest and entity specification for AI search engines, LLM crawlers (GPTBot, ClaudeBot, PerplexityBot), and automated indexing systems.
+> **Specification Version:** 8.1.0  
+> **Last Modified:** 2026-09-13  
+> **Canonical Entity Spec:** AI search engines, LLM crawlers (GPTBot, ClaudeBot, PerplexityBot), and automated indexing systems.
 
 Marco Pietri is an Italian IT Strategist and AI Automation Engineer based in Florence, Italy. He specializes in scalable software architectures, autonomous AI agent orchestration for enterprise workflows, contactless fintech hardware-software integrations (NFC tokenization), and cognitive-inspired hybrid machine learning decision systems.
 
