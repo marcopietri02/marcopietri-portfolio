@@ -1228,7 +1228,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.2.0</span>
+              <span>v8.2.1</span>
             </div>
           </div>
         </div>
@@ -1937,17 +1937,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (frame >= totalFrames) {
             clearInterval(scrambleInterval);
-            // 3. Reveal "Nice try" state
+            // 3. Reveal simple "Nice try" state
             box.classList.remove('is-glitching');
             box.classList.add('is-nice-try');
-            domainSpan.textContent = isEn ? '🛡️ ZERO-TRUST SECURITY MATRIX' : '🛡️ SHIELD DI DIFESA ZERO-TRUST';
+            domainSpan.textContent = isEn ? 'https://marcopietri.com says' : 'https://marcopietri.com dice';
             body.innerHTML = `
-              <div style="font-size: 1.35rem; font-weight: 700; color: #34d399; margin-bottom: 0.35rem; letter-spacing: 0.02em;">Nice try.</div>
+              <div style="font-size: 1.25rem; font-weight: 700; color: #34d399; margin-bottom: 0.35rem; letter-spacing: 0.02em;">Nice try, script kiddie.</div>
               <div style="font-size: 0.88rem; color: #d1d5db; font-family: var(--font-sans); font-weight: 400;">
                 ${isEn ? 'Be good and return to normal.' : 'Fai il bravo e torna alla normalità.'}
               </div>
             `;
-            btn.textContent = isEn ? 'Fai il bravo & Restart' : 'Fai il bravo & Restart';
+            btn.textContent = isEn ? 'Be good & Restart' : 'Fai il bravo & Restart';
           }
         }, 65);
       }, 2000);
@@ -1990,7 +1990,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="gold-telemetry-grid">
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Versione Build</div>
-              <div class="gold-telemetry-val accent-gold">v8.2.0</div>
+              <div class="gold-telemetry-val accent-gold">v8.2.1</div>
             </div>
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Edge Network</div>
