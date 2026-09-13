@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof forceState === 'boolean') {
         isGoldUnlocked = forceState;
       } else {
-        isGoldUnlocked = !isGoldUnlocked;
+        isGoldUnlocked = true; // Always activate on click
       }
 
       updateSatellitesList();
@@ -2105,10 +2105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showGoldInspectorModal() {
+      const modalEl = document.getElementById('gold-inspector-modal') || modal;
+      if (!modalEl) return;
       const isEn = currentLang === 'en';
-      const badge = modal.querySelector('.gold-inspector-badge');
-      const sub = modal.querySelector('.gold-inspector-subtitle');
-      const note = modal.querySelector('.gold-inspector-note');
+      const badge = modalEl.querySelector('.gold-inspector-badge');
+      const sub = modalEl.querySelector('.gold-inspector-subtitle');
+      const note = modalEl.querySelector('.gold-inspector-note');
       const okBtn = document.getElementById('gold-inspector-ok');
 
       if (badge) badge.textContent = isEn ? '✨ GOLD EDITION · BUILD STATUS' : '✨ GOLD EDITION · STATO BUILD';
@@ -2120,8 +2122,8 @@ document.addEventListener('DOMContentLoaded', () => {
         : 'Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-13.';
       if (okBtn) okBtn.textContent = isEn ? 'Close & Keep Constellation' : 'Chiudi & Mantieni Costellazione';
 
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
+      modalEl.classList.add('is-open');
+      modalEl.setAttribute('aria-hidden', 'false');
     }
 
     window.showGoldInspectorModal = showGoldInspectorModal;
@@ -2132,7 +2134,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         e.stopPropagation();
         if (window.toggleGoldEasterEgg) {
-          window.toggleGoldEasterEgg();
+          window.toggleGoldEasterEgg(true);
+        } else if (window.showGoldInspectorModal) {
+          window.showGoldInspectorModal();
         }
       });
     });
