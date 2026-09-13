@@ -3461,4 +3461,344 @@ footer.site-footer {
   height: 14px;
 }
 
+/* =========================================================================
+   14. SECURITY HONEYPOT & GLITCH DEFENSE MODAL (ANTI-XSS)
+   ========================================================================= */
+.fake-alert-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 3, 5, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.fake-alert-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fake-alert-box {
+  background: #18181f;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 420px;
+  width: 100%;
+  padding: 1.5rem;
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.fake-alert-backdrop.is-open .fake-alert-box {
+  transform: scale(1);
+}
+
+.fake-alert-header {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  word-break: break-all;
+}
+
+.fake-alert-header-icon {
+  width: 14px;
+  height: 14px;
+  color: #a78bfa;
+}
+
+.fake-alert-body {
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  word-break: break-all;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fake-alert-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.fake-alert-btn {
+  background: var(--accent-violet);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-mono);
+}
+
+.fake-alert-btn:hover {
+  background: var(--accent-violet-light);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+}
+
+/* Glitch & Meltdown State */
+.fake-alert-box.is-glitching {
+  animation: glitchShake 0.12s infinite;
+  border-color: #ef4444;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.5), 0 0 80px rgba(139, 92, 246, 0.3);
+}
+
+.fake-alert-box.is-glitching .fake-alert-body {
+  color: #ef4444;
+  text-shadow: 2px 0 #3b82f6, -2px 0 #ef4444;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.fake-alert-box.is-glitching .fake-alert-btn {
+  background: #ef4444;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+.fake-alert-box.is-nice-try {
+  animation: none;
+  border-color: var(--emerald-glow);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(52, 211, 153, 0.3);
+}
+
+.fake-alert-box.is-nice-try .fake-alert-header {
+  color: var(--emerald-glow);
+}
+
+.fake-alert-box.is-nice-try .fake-alert-body {
+  color: #ffffff;
+  background: rgba(6, 78, 59, 0.25);
+  border-color: rgba(52, 211, 153, 0.3);
+  text-shadow: none;
+}
+
+.fake-alert-box.is-nice-try .fake-alert-btn {
+  background: var(--emerald-glow);
+  color: #030305;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+}
+
+@keyframes glitchShake {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-3px, 2px) rotate(-0.5deg); }
+  40% { transform: translate(3px, -2px) rotate(0.5deg); }
+  60% { transform: translate(-2px, -2px) rotate(0deg); }
+  80% { transform: translate(2px, 3px) rotate(0.5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* =========================================================================
+   15. GOLDEN CONSTELLATION & BUILD INSPECTOR (EASTER EGG)
+   ========================================================================= */
+.footer-version-tag {
+  cursor: pointer;
+}
+
+.footer-version-tag.is-gold-unlocked {
+  background: rgba(212, 175, 55, 0.15) !important;
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  color: #fbbf24 !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.footer-version-tag.is-gold-unlocked .footer-version-dot {
+  background: #fbbf24;
+  box-shadow: 0 0 8px #fbbf24;
+}
+
+.gold-inspector-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 3, 5, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.gold-inspector-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gold-inspector-card {
+  background: linear-gradient(135deg, #0e0e14 0%, #171520 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 40px rgba(212, 175, 55, 0.15);
+  max-width: 520px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 2rem;
+  color: var(--text-main);
+  position: relative;
+  transform: scale(0.92) translateY(10px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gold-inspector-backdrop.is-open .gold-inspector-card {
+  transform: scale(1) translateY(0);
+}
+
+.gold-inspector-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.gold-inspector-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #fbbf24;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+
+.gold-close-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.gold-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.gold-inspector-title {
+  font-family: var(--font-title);
+  font-size: 1.45rem;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.gold-inspector-subtitle {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.gold-telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 520px) {
+  .gold-telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gold-telemetry-box {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.85rem;
+}
+
+.gold-telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.gold-telemetry-val {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: #ffffff;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.gold-telemetry-val.accent-gold {
+  color: #fbbf24;
+}
+
+.gold-inspector-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  background: rgba(212, 175, 55, 0.06);
+  border-left: 3px solid #fbbf24;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1.25rem;
+}
+
+.gold-action-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(135deg, #d4af37 0%, #f59e0b 100%);
+  color: #030305;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.gold-action-btn:hover {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.5);
+  transform: translateY(-1px);
+}
+
 

@@ -2,7 +2,7 @@
 
 Questo documento definisce l'architettura dei versionamenti, gli standard architetturali, le regole di buona programmazione e la convenzione obbligatoria per i messaggi di commit del repository del portfolio di **Marco Pietri**. Il codice è manutenuto ed esteso in modalità collaborativa da **sviluppatori umani** e **agenti AI**.
 
-Versione di riferimento corrente della build sincronizzata: **`v8.1.1`** (Data: `2026-09-13`).
+Versione di riferimento corrente della build sincronizzata: **`v8.2.0`** (Data: `2026-09-13`).
 
 ---
 

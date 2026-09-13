@@ -380,6 +380,49 @@ document.addEventListener('DOMContentLoaded', () => {
       colorB: 250
     }));
 
+    // Golden Constellation Points & Vector Polygons (Easter Egg)
+    let goldPoints = [];
+    let isGoldUnlocked = false;
+
+    function initGoldConstellation() {
+      goldPoints = [];
+      const count = window.innerWidth <= 768 ? 8 : 14;
+      const shapes = ['gold-triangle', 'gold-diamond', 'gold-ring', 'gold-star'];
+      for (let i = 0; i < count; i++) {
+        goldPoints.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          radius: Math.random() * 2 + 1.8,
+          shape: shapes[i % shapes.length],
+          size: Math.random() * 6 + 7,
+          rot: Math.random() * Math.PI * 2,
+          rotSpeed: (Math.random() - 0.5) * 0.025,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    window.toggleGoldEasterEgg = function(forceState) {
+      if (typeof forceState === 'boolean') {
+        isGoldUnlocked = forceState;
+      } else {
+        isGoldUnlocked = !isGoldUnlocked;
+      }
+
+      if (isGoldUnlocked) {
+        initGoldConstellation();
+        document.querySelectorAll('.footer-version-tag').forEach(el => el.classList.add('is-gold-unlocked'));
+        if (typeof window.showGoldInspectorModal === 'function') {
+          window.showGoldInspectorModal();
+        }
+      } else {
+        goldPoints = [];
+        document.querySelectorAll('.footer-version-tag').forEach(el => el.classList.remove('is-gold-unlocked'));
+      }
+    };
+
     function resize() {
       width = window.innerWidth;
       height = window.innerHeight;
@@ -533,6 +576,102 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(167, 139, 250, 0.75)';
         ctx.fill();
+      }
+
+      // =========================================================================
+      // 1.5. Golden Constellation Geometric Mesh (Easter Egg)
+      // =========================================================================
+      if (isGoldUnlocked && goldPoints.length > 0) {
+        const goldMaxDist = isMobile ? 135 : 175;
+        
+        for (let i = 0; i < goldPoints.length; i++) {
+          const gp = goldPoints[i];
+          gp.x += gp.vx + Math.sin(time + gp.phase) * 0.18;
+          gp.y += gp.vy + Math.cos(time + gp.phase) * 0.18 - scrollVelocityY * 0.45;
+          gp.rot += gp.rotSpeed;
+
+          if (gp.x < -30) gp.x = width + 30;
+          if (gp.x > width + 30) gp.x = -30;
+          if (gp.y < -30) gp.y = height + 30;
+          if (gp.y > height + 30) gp.y = -30;
+        }
+
+        // Gold-to-gold connecting lines
+        for (let i = 0; i < goldPoints.length; i++) {
+          const gp1 = goldPoints[i];
+          for (let j = i + 1; j < goldPoints.length; j++) {
+            const gp2 = goldPoints[j];
+            const dist = Math.hypot(gp2.x - gp1.x, gp2.y - gp1.y);
+
+            if (dist < goldMaxDist) {
+              const alpha = (1 - dist / goldMaxDist) * 0.42;
+              ctx.beginPath();
+              ctx.moveTo(gp1.x, gp1.y);
+              ctx.lineTo(gp2.x, gp2.y);
+              ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
+              ctx.lineWidth = 0.85;
+              ctx.stroke();
+
+              // Gold micro-triangles
+              for (let k = j + 1; k < goldPoints.length; k++) {
+                const gp3 = goldPoints[k];
+                const d2 = Math.hypot(gp3.x - gp1.x, gp3.y - gp1.y);
+                const d3 = Math.hypot(gp3.x - gp2.x, gp3.y - gp2.y);
+                if (d2 < goldMaxDist * 0.85 && d3 < goldMaxDist * 0.85) {
+                  const polyAlpha = Math.min(alpha, (1 - d2 / goldMaxDist) * 0.07);
+                  ctx.beginPath();
+                  ctx.moveTo(gp1.x, gp1.y);
+                  ctx.lineTo(gp2.x, gp2.y);
+                  ctx.lineTo(gp3.x, gp3.y);
+                  ctx.closePath();
+                  ctx.fillStyle = `rgba(251, 191, 36, ${polyAlpha})`;
+                  ctx.fill();
+                }
+              }
+            }
+          }
+
+          // Draw vector gold shapes
+          ctx.save();
+          ctx.translate(gp1.x, gp1.y);
+          ctx.rotate(gp1.rot);
+          ctx.strokeStyle = 'rgba(251, 191, 36, 0.75)';
+          ctx.fillStyle = 'rgba(212, 175, 55, 0.2)';
+          ctx.lineWidth = 1.2;
+          const gs = gp1.size;
+
+          ctx.beginPath();
+          if (gp1.shape === 'gold-triangle') {
+            ctx.moveTo(0, -gs);
+            ctx.lineTo(gs * 0.86, gs * 0.5);
+            ctx.lineTo(-gs * 0.86, gs * 0.5);
+          } else if (gp1.shape === 'gold-diamond') {
+            ctx.moveTo(0, -gs);
+            ctx.lineTo(gs * 0.7, 0);
+            ctx.lineTo(0, gs);
+            ctx.lineTo(-gs * 0.7, 0);
+          } else if (gp1.shape === 'gold-ring') {
+            ctx.arc(0, 0, gs * 0.5, 0, Math.PI * 2);
+          } else {
+            // Gold star / cross
+            ctx.moveTo(-gs * 0.6, 0);
+            ctx.lineTo(gs * 0.6, 0);
+            ctx.moveTo(0, -gs * 0.6);
+            ctx.lineTo(0, gs * 0.6);
+          }
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          // Gold center glowing dot
+          ctx.beginPath();
+          ctx.arc(0, 0, gp1.radius, 0, Math.PI * 2);
+          ctx.fillStyle = '#fbbf24';
+          ctx.shadowColor = 'rgba(251, 191, 36, 0.8)';
+          ctx.shadowBlur = 6;
+          ctx.fill();
+          ctx.restore();
+        }
       }
 
       // =========================================================================
@@ -1089,7 +1228,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.1.1</span>
+              <span>v8.2.0</span>
             </div>
           </div>
         </div>
@@ -1598,6 +1737,15 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (e.key === 'Enter') {
         e.preventDefault();
         const raw = input.value.trim();
+
+        if (window.isInjectionAttempt && window.isInjectionAttempt(raw)) {
+          window.triggerSecurityHoneypot(raw, () => {
+            input.value = '';
+            closePalette();
+          });
+          return;
+        }
+
         const parts = raw.split(' ');
         const first = parts[0].toLowerCase().replace(/^[>:]/, '');
         
@@ -1711,9 +1859,214 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // =========================================================================
+  // 9. Security Honeypot & Simulated Exploit Neutralizer (Anti-XSS Trappola)
+  // =========================================================================
+  function initSecurityHoneypot() {
+    const injectionRegex = /(<script[\s\S]*?>|alert\s*\(|javascript:|onerror\s*=|onload\s*=|document\.cookie|<img[\s\S]*?onerror|<svg[\s\S]*?>|union\s+select|'\s*OR\s+1\s*=\s*1|DROP\s+TABLE)/i;
+
+    let alertBackdrop = document.getElementById('fake-alert-backdrop');
+    if (!alertBackdrop) {
+      alertBackdrop = document.createElement('div');
+      alertBackdrop.id = 'fake-alert-backdrop';
+      alertBackdrop.className = 'fake-alert-backdrop';
+      alertBackdrop.setAttribute('aria-hidden', 'true');
+      alertBackdrop.innerHTML = `
+        <div class="fake-alert-box" id="fake-alert-box" role="dialog" aria-modal="true">
+          <div class="fake-alert-header" id="fake-alert-header">
+            <svg class="fake-alert-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span id="fake-alert-domain">https://marcopietri.com</span>
+          </div>
+          <div class="fake-alert-body" id="fake-alert-body">1</div>
+          <div class="fake-alert-actions">
+            <button class="fake-alert-btn" id="fake-alert-btn">OK</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(alertBackdrop);
+    }
+
+    const box = document.getElementById('fake-alert-box');
+    const domainSpan = document.getElementById('fake-alert-domain');
+    const body = document.getElementById('fake-alert-body');
+    const btn = document.getElementById('fake-alert-btn');
+
+    let glitchTimer = null;
+    let scrambleInterval = null;
+
+    function triggerHoneypot(rawPayload, onDismiss) {
+      const isEn = currentLang === 'en';
+      
+      // Extract alert content if format alert(...) or script alert(...)
+      let extracted = '1';
+      const alertMatch = rawPayload.match(/alert\s*\(\s*['"`]?([^'"`)]*)['"`]?\s*\)/i);
+      if (alertMatch && alertMatch[1]) {
+        extracted = alertMatch[1];
+      } else {
+        extracted = rawPayload.length > 35 ? rawPayload.slice(0, 35) + '...' : rawPayload;
+      }
+
+      // 1. Initial State: Realistic Browser Alert
+      box.className = 'fake-alert-box';
+      domainSpan.textContent = isEn ? 'https://marcopietri.com says' : 'https://marcopietri.com dice';
+      body.textContent = extracted;
+      btn.textContent = 'OK';
+      alertBackdrop.classList.add('is-open');
+      alertBackdrop.setAttribute('aria-hidden', 'false');
+
+      // 2. After 2.0s -> Initiate Glitch & Meltdown
+      clearTimeout(glitchTimer);
+      clearInterval(scrambleInterval);
+
+      glitchTimer = setTimeout(() => {
+        box.classList.add('is-glitching');
+        const glitchChars = '!<>-_\\/[]{}—=+*^?#01010x8F§∆';
+        let frame = 0;
+        const totalFrames = 18;
+
+        scrambleInterval = setInterval(() => {
+          frame++;
+          let scrambled = '';
+          for (let i = 0; i < 16; i++) {
+            scrambled += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+          }
+          body.textContent = scrambled;
+
+          if (frame >= totalFrames) {
+            clearInterval(scrambleInterval);
+            // 3. Reveal "Nice try" state
+            box.classList.remove('is-glitching');
+            box.classList.add('is-nice-try');
+            domainSpan.textContent = isEn ? '🛡️ ZERO-TRUST SECURITY MATRIX' : '🛡️ SHIELD DI DIFESA ZERO-TRUST';
+            body.innerHTML = `
+              <div style="font-size: 1.35rem; font-weight: 700; color: #34d399; margin-bottom: 0.35rem; letter-spacing: 0.02em;">Nice try.</div>
+              <div style="font-size: 0.88rem; color: #d1d5db; font-family: var(--font-sans); font-weight: 400;">
+                ${isEn ? 'Be good and return to normal.' : 'Fai il bravo e torna alla normalità.'}
+              </div>
+            `;
+            btn.textContent = isEn ? 'Fai il bravo & Restart' : 'Fai il bravo & Restart';
+          }
+        }, 65);
+      }, 2000);
+
+      // Handle Dismiss / Restart
+      btn.onclick = () => {
+        clearTimeout(glitchTimer);
+        clearInterval(scrambleInterval);
+        alertBackdrop.classList.remove('is-open');
+        alertBackdrop.setAttribute('aria-hidden', 'true');
+        box.className = 'fake-alert-box';
+        if (typeof onDismiss === 'function') onDismiss();
+      };
+    }
+
+    window.triggerSecurityHoneypot = triggerHoneypot;
+    window.isInjectionAttempt = (str) => injectionRegex.test(str);
+  }
+
+  // =========================================================================
+  // 10. Golden Build & Integrity Inspector (Easter Egg Modal)
+  // =========================================================================
+  function initGoldInspectorModal() {
+    let modal = document.getElementById('gold-inspector-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'gold-inspector-modal';
+      modal.className = 'gold-inspector-backdrop';
+      modal.setAttribute('aria-hidden', 'true');
+      modal.innerHTML = `
+        <div class="gold-inspector-card" role="dialog" aria-modal="true">
+          <div class="gold-inspector-top">
+            <span class="gold-inspector-badge">✨ GOLD EDITION · BUILD STATUS</span>
+            <button class="gold-close-btn" id="gold-inspector-close" aria-label="Chiudi">&times;</button>
+          </div>
+          <h2 class="gold-inspector-title">Marco Pietri — Build &amp; Integrity</h2>
+          <p class="gold-inspector-subtitle">
+            Costellazione geometrica vettoriale sbloccata. Diagnostica di runtime verificata con policy zero-trust.
+          </p>
+          <div class="gold-telemetry-grid">
+            <div class="gold-telemetry-box">
+              <div class="gold-telemetry-label">Versione Build</div>
+              <div class="gold-telemetry-val accent-gold">v8.2.0</div>
+            </div>
+            <div class="gold-telemetry-box">
+              <div class="gold-telemetry-label">Edge Network</div>
+              <div class="gold-telemetry-val">Cloudflare Pages</div>
+            </div>
+            <div class="gold-telemetry-box">
+              <div class="gold-telemetry-label">Stack Runtime</div>
+              <div class="gold-telemetry-val">Pure Vanilla 60 FPS</div>
+            </div>
+            <div class="gold-telemetry-box">
+              <div class="gold-telemetry-label">Security Shield</div>
+              <div class="gold-telemetry-val accent-gold">Zero-Trust Armed</div>
+            </div>
+          </div>
+          <div class="gold-inspector-note">
+            Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-13.
+          </div>
+          <button class="gold-action-btn" id="gold-inspector-ok">Chiudi &amp; Mantieni Costellazione</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeBtn = document.getElementById('gold-inspector-close');
+      const okBtn = document.getElementById('gold-inspector-ok');
+
+      const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+      };
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (okBtn) okBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    function showGoldInspectorModal() {
+      const isEn = currentLang === 'en';
+      const badge = modal.querySelector('.gold-inspector-badge');
+      const sub = modal.querySelector('.gold-inspector-subtitle');
+      const note = modal.querySelector('.gold-inspector-note');
+      const okBtn = document.getElementById('gold-inspector-ok');
+
+      if (badge) badge.textContent = isEn ? '✨ GOLD EDITION · BUILD STATUS' : '✨ GOLD EDITION · STATO BUILD';
+      if (sub) sub.textContent = isEn 
+        ? 'Vector geometric constellation unlocked. Real-time runtime diagnostics verified with zero-trust policy.' 
+        : 'Costellazione geometrica vettoriale sbloccata. Diagnostica di runtime verificata con policy zero-trust.';
+      if (note) note.textContent = isEn
+        ? 'All modules (CASS, Eklisso, Spectra, Certifications) are synchronized with timestamp 2026-09-13.'
+        : 'Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-13.';
+      if (okBtn) okBtn.textContent = isEn ? 'Close & Keep Constellation' : 'Chiudi & Mantieni Costellazione';
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    window.showGoldInspectorModal = showGoldInspectorModal;
+
+    // Attach click to all footer version tags
+    document.querySelectorAll('.footer-version-tag').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (window.toggleGoldEasterEgg) {
+          window.toggleGoldEasterEgg();
+        }
+      });
+    });
+  }
+
   // Run new core subsystems
   initI18n();
   initCommandPalette();
   initViewTransitions();
+  initSecurityHoneypot();
+  initGoldInspectorModal();
 });
 
