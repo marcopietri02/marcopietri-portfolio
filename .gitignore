@@ -20,10 +20,10 @@ Thumbs.db
 # Large raw media files (> 100MB blocked by GitHub)
 /elba25_26.mp4
 /montenerone_2026.mp4
-/assets/videos/spectra/montenerone-reel-1080p.mp4
 /assets/videos/spectra/elba25-26-reel.mp4
 *.mov
 *.avi
 scratch/
 !assets/videos/spectra/elba-reel-1080p.mp4
+!assets/videos/spectra/montenerone-reel-1080p.mp4
 

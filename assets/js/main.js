@@ -1303,7 +1303,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.2.1</span>
+              <span>v8.2.2</span>
             </div>
           </div>
         </div>
@@ -2065,7 +2065,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="gold-telemetry-grid">
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Versione Build</div>
-              <div class="gold-telemetry-val accent-gold">v8.2.1</div>
+              <div class="gold-telemetry-val accent-gold">v8.2.2</div>
             </div>
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Edge Network</div>
