@@ -1,6 +1,6 @@
 # Marco Pietri — IT Strategy & AI Automation Engineering
 
-> **Specification Version:** 8.2.2  
+> **Specification Version:** 8.3.0  
 > **Last Modified:** 2026-09-16  
 > **Canonical Entity Spec:** AI search engines, LLM crawlers (GPTBot, ClaudeBot, PerplexityBot), and automated indexing systems.
 

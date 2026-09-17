@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="/assets/css/pannellum.css">
 
   <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=8.2.2">
+  <link rel="stylesheet" href="/assets/css/style.css?v=8.3.0">
   <link rel="canonical" href="https://marcopietri.com/spectra/">
   <link rel="alternate" hreflang="it" href="https://marcopietri.com/spectra/">
   <link rel="alternate" hreflang="en" href="https://marcopietri.com/spectra/">
@@ -70,8 +70,8 @@
           "name": "Marco Pietri — Portfolio",
           "url": "https://marcopietri.com/"
         },
-        "version": "8.2.2",
-        "dateModified": "2026-09-16",
+        "version": "8.3.0",
+        "dateModified": "2026-09-16T12:00:00+02:00",
         "breadcrumb": {
           "@id": "https://marcopietri.com/spectra/#breadcrumb"
         }
@@ -104,8 +104,8 @@
         "@type": "Service",
         "@id": "https://marcopietri.com/spectra/#service",
         "name": "Spectra Vision — Riprese Aeree con Droni",
-        "version": "8.2.2",
-        "dateModified": "2026-09-16",
+        "version": "8.3.0",
+        "dateModified": "2026-09-16T12:00:00+02:00",
         "url": "https://marcopietri.com/spectra/",
         "provider": {
           "@type": "Person",
@@ -289,7 +289,7 @@
         <div class="media-cat-card" id="card-tab-video" role="button" tabindex="0" aria-label="Mostra Video Short e Reel 4K">
           <div class="media-cat-header">
             <span class="media-cat-icon">🎬</span>
-            <span class="cat-badge live">● Disponibile • 1 Reel HD</span>
+            <span class="cat-badge live">● Disponibile • 2 Reel HD</span>
           </div>
           <h3 class="media-cat-title">Video Short &amp; Reel 4K</h3>
           <p class="media-cat-desc">
@@ -454,22 +454,16 @@
           <!-- Video Viewport -->
           <div class="video-viewport">
             <video id="spectra-reel-video" controls playsinline muted loop preload="metadata" poster="/assets/images/spectra/elba-poster.jpg?v=2" class="spectra-main-video">
-              <source id="spectra-reel-source" src="/assets/videos/spectra/elba-reel-1080p.mp4?v=8.2.2" type="video/mp4">
+              <source id="spectra-reel-source" src="/assets/videos/spectra/elba-reel-1080p.mp4?v=8.3.0" type="video/mp4">
               Il tuo browser non supporta la riproduzione di video HTML5.
             </video>
           </div>
 
-          <!-- Video Technical Specs Bar -->
+          <!-- Video Bottom Info Bar -->
           <div class="video-specs-bar">
-            <div class="video-specs-tags" id="video-specs-tags">
-              <span class="video-spec-pill">Sensore DJI Pro</span>
-              <span class="video-spec-pill">Risoluzione 1080p 60fps</span>
-              <span class="video-spec-pill">Color Grading Naturale</span>
-              <span class="video-spec-pill">Gimbal Meccanico 3-Assi</span>
-            </div>
-            <div id="video-duration-meta" style="font-size: 0.74rem; color: var(--text-dim);">
-              Durata: 00:31 &bull; Ripresa Panoramica Aerea Costiera
-            </div>
+            <span id="video-footer-title" style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 500; color: #ffffff; letter-spacing: 0.02em;">
+              Reel Costiero — Isola d'Elba
+            </span>
           </div>
         </div>
 
@@ -497,7 +491,7 @@
           <!-- Video 2 -->
           <button class="pano-thumb-card video-thumb-card" type="button" data-video-index="1">
             <div class="pano-thumb-img-wrapper">
-              <img src="/assets/images/spectra/montenerone-poster.jpg?v=8.2.2" alt="Miniatura Reel Monte Nerone" class="pano-thumb-img" loading="lazy">
+              <img src="/assets/images/spectra/montenerone-poster.jpg?v=8.3.0" alt="Miniatura Reel Monte Nerone" class="pano-thumb-img" loading="lazy">
               <span class="pano-thumb-badge">Reel 4K Drone</span>
             </div>
             <div class="pano-thumb-details">
@@ -612,6 +606,75 @@
           <p class="card-body">
             Controllo ad alta risoluzione dello stato di tegole, lucernari, grondaie, comignoli e pannelli fotovoltaici. Permette di individuare microfessure, accumulo di sporco o danni da intemperie senza alcun rischio di caduta dall'alto.
           </p>
+
+          <!-- Minimal Vector Micro-Animation: Solar Photovoltaic Laser Grid Scan -->
+          <div class="card-micro-viz solar-scan-viz" aria-hidden="true">
+            <svg class="micro-viz-svg" viewBox="0 0 340 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="solarCellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0e1a2b" />
+                  <stop offset="100%" stop-color="#060c15" />
+                </linearGradient>
+                <linearGradient id="laserBeamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(16, 185, 129, 0)" />
+                  <stop offset="50%" stop-color="rgba(52, 211, 153, 0.95)" />
+                  <stop offset="100%" stop-color="rgba(16, 185, 129, 0)" />
+                </linearGradient>
+              </defs>
+              <!-- 6 Solar Modules Grid -->
+              <g class="solar-grid-group">
+                <rect x="8" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="24" y1="8" x2="24" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="40" y1="8" x2="40" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="8" y1="32" x2="56" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+
+                <rect x="64" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="80" y1="8" x2="80" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="96" y1="8" x2="96" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="64" y1="32" x2="112" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+
+                <rect x="120" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="136" y1="8" x2="136" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="152" y1="8" x2="152" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="120" y1="32" x2="168" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+
+                <rect x="176" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="192" y1="8" x2="192" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="208" y1="8" x2="208" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="176" y1="32" x2="224" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+
+                <rect x="232" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="248" y1="8" x2="248" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="264" y1="8" x2="264" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="232" y1="32" x2="280" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+
+                <rect x="288" y="8" width="48" height="48" rx="4" fill="url(#solarCellGrad)" stroke="rgba(52, 211, 153, 0.22)" stroke-width="1" />
+                <line x1="304" y1="8" x2="304" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="320" y1="8" x2="320" y2="56" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+                <line x1="288" y1="32" x2="336" y2="32" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" />
+              </g>
+
+              <!-- Animated Laser Scan Line -->
+              <g class="laser-scanner-head">
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0,0; 320,0; 0,0"
+                  keyTimes="0; 0.5; 1"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+                  calcMode="spline"
+                  dur="3.2s"
+                  repeatCount="indefinite" />
+                <rect x="8" y="6" width="3" height="52" fill="url(#laserBeamGrad)" />
+                <circle cx="9.5" cy="32" r="3" fill="#34d399" />
+              </g>
+            </svg>
+            <div class="micro-viz-label">
+              <span class="micro-viz-dot"></span>
+              <span data-i18n="micro_solar_label">Scansione Fotovoltaica &bull; Diagnostica Celle</span>
+            </div>
+          </div>
+
           <div class="card-tags">
             <span class="tag">Zero Ponteggi</span>
             <span class="tag">Monitoraggio Fotovoltaico</span>
@@ -625,6 +688,56 @@
           <p class="card-body">
             Il drone raggiunge in pochi minuti pareti verticali, silos, campanili o tetti con pendenze proibitive, eliminando i costi di noleggio cestelli e riducendo a zero i tempi di fermo operativo.
           </p>
+
+          <!-- Minimal Vector Micro-Animation: Vertical Facade Elevation & Hover Sensor -->
+          <div class="card-micro-viz facade-scan-viz" aria-hidden="true">
+            <svg class="micro-viz-svg" viewBox="0 0 340 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="facadeBeamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(56, 189, 248, 0)" />
+                  <stop offset="50%" stop-color="rgba(56, 189, 248, 0.95)" />
+                  <stop offset="100%" stop-color="rgba(56, 189, 248, 0)" />
+                </linearGradient>
+              </defs>
+              <!-- Architectural Elevation Wireframe -->
+              <g class="facade-grid-group">
+                <line x1="16" y1="10" x2="16" y2="54" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" />
+                <line x1="76" y1="10" x2="76" y2="54" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 3" />
+                <line x1="136" y1="10" x2="136" y2="54" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 3" />
+                <line x1="196" y1="10" x2="196" y2="54" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 3" />
+                <line x1="256" y1="10" x2="256" y2="54" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 3" />
+                <line x1="324" y1="10" x2="324" y2="54" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.5" />
+
+                <line x1="16" y1="14" x2="324" y2="14" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+                <line x1="16" y1="32" x2="324" y2="32" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+                <line x1="16" y1="50" x2="324" y2="50" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+
+                <text x="22" y="21" fill="rgba(56, 189, 248, 0.55)" font-size="7.5" font-family="'JetBrains Mono', monospace">+28m</text>
+                <text x="22" y="39" fill="rgba(56, 189, 248, 0.55)" font-size="7.5" font-family="'JetBrains Mono', monospace">+14m</text>
+                <text x="22" y="57" fill="rgba(56, 189, 248, 0.55)" font-size="7.5" font-family="'JetBrains Mono', monospace">+0m</text>
+              </g>
+
+              <!-- Vertical Scan Ray & Drone Sensor Marker -->
+              <g class="facade-scanner-head">
+                <animateTransform
+                  attributeName="transform"
+                  type="translate"
+                  values="0,-16; 0,16; 0,-16"
+                  keyTimes="0; 0.5; 1"
+                  keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+                  calcMode="spline"
+                  dur="3.6s"
+                  repeatCount="indefinite" />
+                <line x1="16" y1="32" x2="324" y2="32" stroke="url(#facadeBeamGrad)" stroke-width="1.5" />
+                <circle cx="170" cy="32" r="3.5" fill="#38bdf8" />
+              </g>
+            </svg>
+            <div class="micro-viz-label">
+              <span class="micro-viz-dot dot-cyan"></span>
+              <span data-i18n="micro_facade_label">Rilievo Pareti &amp; Verticali &bull; Quota Operativa Dinamica</span>
+            </div>
+          </div>
+
           <div class="card-tags">
             <span class="tag">Rapidità Operativa</span>
             <span class="tag">Zero Impatto Logistico</span>
@@ -741,7 +854,7 @@
         <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
         <p class="footer-sub-line">
           <span>IT Strategy, AI Automations &amp; Software Architecture</span>
-          <span class="footer-version-tag" title="Versione Corrente Build (Clicca per Easter Egg)"><span class="footer-version-dot"></span>v8.2.2</span>
+          <span class="footer-version-tag" title="Versione Corrente Build (Clicca per Easter Egg)"><span class="footer-version-dot"></span>v8.3.0</span>
         </p>
       </div>
       <div class="footer-social-bar">
@@ -773,7 +886,7 @@
   <script src="/assets/js/pannellum.js?v=3.2"></script>
   
   <!-- Site Scripts -->
-  <script src="/assets/js/main.js?v=8.2.2"></script>
+  <script src="/assets/js/main.js?v=8.3.0"></script>
 
   <!-- Spectra 360 Interactive Controller -->
   <script>
@@ -1217,22 +1330,18 @@
       // Video Player Fullscreen & Multi-Reel Switcher
       const videoItems = [
         {
-          src: '/assets/videos/spectra/elba-reel-1080p.mp4?v=8.2.2',
+          src: '/assets/videos/spectra/elba-reel-1080p.mp4?v=8.3.0',
           poster: '/assets/images/spectra/elba-poster.jpg?v=2',
           title: "Reel Costiero — Isola d'Elba",
           date: 'Agosto 2025/2026 • Full HD 60fps • Stabilizzazione DJI Gimbal 3-Assi',
-          badge: 'DJI 4K Source',
-          specs: ['Sensore DJI Pro', 'Risoluzione 1080p 60fps', 'Color Grading Naturale', 'Gimbal Meccanico 3-Assi'],
-          meta: 'Durata: 00:31 • Ripresa Panoramica Aerea Costiera'
+          badge: 'DJI 4K Source'
         },
         {
-          src: '/assets/videos/spectra/montenerone-reel-1080p.mp4?v=8.2.2',
-          poster: '/assets/images/spectra/montenerone-poster.jpg?v=8.2.2',
+          src: '/assets/videos/spectra/montenerone-reel-1080p.mp4?v=8.3.0',
+          poster: '/assets/images/spectra/montenerone-poster.jpg?v=8.3.0',
           title: 'Reel Montano — Vetta Monte Nerone',
           date: '2026 • Full HD 60fps High-Altitude • DJI Flight Dynamics',
-          badge: 'DJI 4K Source',
-          specs: ['Vetta Appenninica', 'Dinamica Alta Quota', 'Risoluzione 1080p 60fps', 'Stabilizzazione 3-Assi'],
-          meta: 'Durata: 00:31 • Ripresa Panoramica Aerea Montana'
+          badge: 'DJI 4K Source'
         }
       ];
 
@@ -1240,8 +1349,7 @@
       const videoTitleEl = document.getElementById('video-current-title');
       const videoDateEl = document.getElementById('video-current-date');
       const videoBadgeEl = document.getElementById('video-source-badge');
-      const videoSpecsTagsEl = document.getElementById('video-specs-tags');
-      const videoDurationMetaEl = document.getElementById('video-duration-meta');
+      const videoFooterTitleEl = document.getElementById('video-footer-title');
       const videoIndicatorEl = document.getElementById('video-carousel-indicator');
 
       function switchVideo(idx) {
@@ -1255,11 +1363,7 @@
         if (videoDateEl) videoDateEl.textContent = item.date;
         if (videoBadgeEl) videoBadgeEl.textContent = item.badge;
         if (videoIndicatorEl) videoIndicatorEl.textContent = (idx + 1) + ' di ' + videoItems.length;
-        if (videoDurationMetaEl) videoDurationMetaEl.textContent = item.meta;
-
-        if (videoSpecsTagsEl) {
-          videoSpecsTagsEl.innerHTML = item.specs.map(s => `<span class="video-spec-pill">${s}</span>`).join('');
-        }
+        if (videoFooterTitleEl) videoFooterTitleEl.textContent = item.title;
 
         reelVideo.pause();
         reelVideo.poster = item.poster;
@@ -1350,7 +1454,6 @@
         });
       });
     });
-
   </script>
 </body>
 </html>

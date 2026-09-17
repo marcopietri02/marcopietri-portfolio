@@ -2,7 +2,7 @@
 
 Questo documento definisce l'architettura dei versionamenti, gli standard architetturali, le regole di buona programmazione e la convenzione obbligatoria per i messaggi di commit del repository del portfolio di **Marco Pietri**. Il codice è manutenuto ed esteso in modalità collaborativa da **sviluppatori umani** e **agenti AI**.
 
-Versione di riferimento corrente della build sincronizzata: **`v8.2.2`** (Data: `2026-09-16`).
+Versione di riferimento corrente della build sincronizzata: **`v8.3.0`** (Data: `2026-09-16`).
 
 ---
 
@@ -26,7 +26,7 @@ Questi componenti condividono all'unisono lo stesso numero di versione semantico
    L'intestazione per i crawler AI (GPTBot, ClaudeBot, PerplexityBot):  
    `> **Specification Version:** X.Y.Z | **Last Modified:** YYYY-MM-DD`
 5. **Dati Strutturati Schema.org (JSON-LD):**  
-   I blocchi semantici `@graph` nelle pagine HTML con le proprietà `"version": "X.Y.Z"` e `"dateModified": "YYYY-MM-DD"`.
+   I blocchi semantici `@graph` nelle pagine HTML con le proprietà `"version": "X.Y.Z"` e `"dateModified": "YYYY-MM-DDTHH:mm:ss+02:00"` (formato ISO 8601 DateTime richiesto da Google Search Console per ProfilePage).
 6. **Sitemap dei Motori di Ricerca (`sitemap.xml`):**  
    Il tag `<lastmod>YYYY-MM-DD</lastmod>` per ciascun URL indicizzato.
 

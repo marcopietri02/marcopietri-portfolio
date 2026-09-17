@@ -2536,6 +2536,74 @@ footer.site-footer {
   color: var(--text-main);
 }
 
+/* ==========================================================================
+   Card Micro-Visualizations (Section 02 Minimal Animations)
+   ========================================================================== */
+.card-micro-viz {
+  position: relative;
+  background: rgba(6, 10, 16, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem 0.5rem;
+  margin-bottom: 1.35rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: border-color var(--transition-smooth), background var(--transition-smooth);
+}
+
+.card:hover .card-micro-viz {
+  border-color: rgba(52, 211, 153, 0.35);
+  background: rgba(8, 14, 22, 0.85);
+}
+
+.card:hover .facade-scan-viz {
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.micro-viz-svg {
+  width: 100%;
+  height: 54px;
+  display: block;
+}
+
+.laser-scanner-head,
+.facade-scanner-head {
+  will-change: transform;
+}
+
+.micro-viz-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.micro-viz-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  animation: microDotPulse 1.8s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.micro-viz-dot.dot-cyan {
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+@keyframes microDotPulse {
+  0%, 100% { opacity: 0.95; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
 .media-cat-card[role="button"] {
   cursor: pointer;
 }

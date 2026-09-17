@@ -1057,7 +1057,11 @@ document.addEventListener('DOMContentLoaded', () => {
       btn_back_home: "Torna alla Home",
       btn_view_cert: "Visualizza Attestato Ufficiale",
       btn_download_cv: "Scarica CV Completo (PDF)",
-      cmd_placeholder: "Cerca progetti, sezioni o digita un comando (es: 'whoami', 'stack', 'cv')..."
+      cmd_placeholder: "Cerca progetti, sezioni o digita un comando (es: 'whoami', 'stack', 'cv')...",
+      
+      // Section 02 Micro-Visualizations
+      micro_solar_label: "Scansione Fotovoltaica • Diagnostica Celle",
+      micro_facade_label: "Rilievo Pareti & Verticali • Quota Operativa Dinamica"
     },
     en: {
       // Header & Nav
@@ -1196,7 +1200,11 @@ document.addEventListener('DOMContentLoaded', () => {
       btn_back_home: "Back to Home",
       btn_view_cert: "View Official Credential",
       btn_download_cv: "Download Full CV (PDF)",
-      cmd_placeholder: "Search projects, sections or type a command (e.g. 'whoami', 'stack', 'cv')..."
+      cmd_placeholder: "Search projects, sections or type a command (e.g. 'whoami', 'stack', 'cv')...",
+      
+      // Section 02 Micro-Visualizations
+      micro_solar_label: "Photovoltaic Scan • Cell Diagnostics",
+      micro_facade_label: "Facade & Vertical Survey • Dynamic Operational Altitude"
     }
   };
 
@@ -1303,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.2.2</span>
+              <span>v8.3.0</span>
             </div>
           </div>
         </div>
@@ -2065,7 +2073,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="gold-telemetry-grid">
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Versione Build</div>
-              <div class="gold-telemetry-val accent-gold">v8.2.2</div>
+              <div class="gold-telemetry-val accent-gold">v8.3.0</div>
             </div>
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Edge Network</div>

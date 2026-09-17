@@ -5,7 +5,7 @@
 - **Domain:** Configured via Cloudflare DNS with universal SSL/TLS.
 - **Languages:** HTML5 Semantico, Vanilla JavaScript (ES6+), CSS3 puro (Bespoke Editorial Design System).
 - **Version Control:** Git workflow with automatic CI/CD deployment on push to the `main` branch.
-- **Current Baseline Version:** `v8.2.2` (Data: `2026-09-16`)
+- **Current Baseline Version:** `v8.3.0` (Data: `2026-09-16`)
 
 ## Project Structure & Routing
 - Pure static folder-based routing:
@@ -28,7 +28,7 @@ Tutti gli sviluppatori umani e gli agenti AI devono aderire alla convenzione di 
   2. Query string di cache-busting per gli asset (`style.css?v=X.Y.Z`, `main.js?v=X.Y.Z`).
   3. Badge nella Command Palette in `main.js` (`vX.Y.Z`).
   4. Specifiche per Crawler AI in `llms.txt` (`Specification Version: X.Y.Z | Last Modified: YYYY-MM-DD`).
-  5. Schema.org JSON-LD nelle pagine HTML (`"version": "X.Y.Z"`, `"dateModified": "YYYY-MM-DD"`).
+  5. Schema.org JSON-LD nelle pagine HTML (`"version": "X.Y.Z"`, `"dateModified": "YYYY-MM-DDTHH:mm:ss+02:00"` conforme a Google Search Console).
   6. Timestamp di aggiornamento sitemap in `sitemap.xml` (`<lastmod>YYYY-MM-DD</lastmod>`).
 - **Disaccoppiati (Autonomi):**
   1. Librerie terze (es. `pannellum.js?v=3.2`).
