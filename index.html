@@ -42,7 +42,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Ysabeau+Office:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
   <!-- Shared Stylesheet (Bespoke Editorial Edition) -->
-  <link rel="stylesheet" href="/assets/css/style.css?v=8.3.1">
+  <link rel="stylesheet" href="/assets/css/style.css?v=8.3.2">
 
   <!-- Schema.org Knowledge Graph / Entity Spine (GEO & Semantic Disambiguation) -->
   <script type="application/ld+json">
@@ -54,7 +54,7 @@
         "@id": "https://marcopietri.com/#website",
         "url": "https://marcopietri.com/",
         "name": "Marco Pietri — Official Website",
-        "version": "8.3.1",
+        "version": "8.3.2",
         "dateModified": "2026-09-27T12:00:00+02:00",
         "publisher": {
           "@id": "https://marcopietri.com/#person"
@@ -66,7 +66,7 @@
         "@id": "https://marcopietri.com/#webpage",
         "url": "https://marcopietri.com/",
         "name": "Marco Pietri — IT Strategist & AI Automation Engineer",
-        "version": "8.3.1",
+        "version": "8.3.2",
         "dateModified": "2026-09-27T12:00:00+02:00",
         "isPartOf": {
           "@id": "https://marcopietri.com/#website"
@@ -86,7 +86,9 @@
         "name": "Marco Pietri",
         "givenName": "Marco",
         "familyName": "Pietri",
-        "image": "https://marcopietri.com/assets/images/marco-pietri.jpg",
+        "image": {
+          "@id": "https://marcopietri.com/#primaryimage"
+        },
         "url": "https://marcopietri.com/",
         "email": "mpietri82@gmail.com",
         "jobTitle": "IT Strategist & AI Automation Engineer",
@@ -181,6 +183,41 @@
             }
           ]
         }
+      },
+      {
+        "@type": "ImageObject",
+        "@id": "https://marcopietri.com/#primaryimage",
+        "inLanguage": "it",
+        "url": "https://marcopietri.com/assets/images/marco-pietri.jpg",
+        "contentUrl": "https://marcopietri.com/assets/images/marco-pietri.jpg",
+        "caption": "Marco Pietri — IT Strategist & AI Automation Engineer a Firenze",
+        "name": "Ritratto professionale di Marco Pietri",
+        "description": "Foto profilo ufficiale di Marco Pietri, Ingegnere specializzato in automazioni AI e IT Strategy.",
+        "creator": {
+          "@id": "https://marcopietri.com/#person"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://marcopietri.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Chi è Marco Pietri?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Marco Pietri è un IT Strategist e AI Automation Engineer basato a Firenze. Si occupa di progettare architetture software scalabili, sistemi decisionali basati su Machine Learning e infrastrutture Fintech (come l'architettura contactless per miPAGO)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Di cosa si occupa un IT Strategist / AI Engineer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Un IT Strategist analizza i processi aziendali per abbattere il debito tecnico e automatizzare flussi complessi. Nel campo dell'Intelligenza Artificiale, sviluppa pipeline RAG, agenti autonomi integrati con ERP/CRM aziendali e modelli predittivi."
+            }
+          }
+        ]
       }
     ]
   }
@@ -752,7 +789,7 @@
         <p>&copy; 2026 Marco Pietri &bull; Firenze, Italia</p>
         <p class="footer-sub-line">
           <span data-i18n="footer_sub">IT Strategy, AI Automations &amp; Software Architecture</span>
-          <span class="footer-version-tag" title="Versione Corrente Build (Clicca per Easter Egg)"><span class="footer-version-dot"></span>v8.3.1</span>
+          <span class="footer-version-tag" title="Versione Corrente Build (Clicca per Easter Egg)"><span class="footer-version-dot"></span>v8.3.2</span>
         </p>
       </div>
       <div class="footer-social-bar">
@@ -781,6 +818,6 @@
   </footer>
 
   <!-- Native JavaScript -->
-  <script src="/assets/js/main.js?v=8.3.1"></script>
+  <script src="/assets/js/main.js?v=8.3.2"></script>
 </body>
 </html>
