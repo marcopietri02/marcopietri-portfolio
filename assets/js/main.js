@@ -1311,7 +1311,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.3.0</span>
+              <span>v8.3.3</span>
             </div>
           </div>
         </div>
@@ -2073,7 +2073,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="gold-telemetry-grid">
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Versione Build</div>
-              <div class="gold-telemetry-val accent-gold">v8.3.0</div>
+              <div class="gold-telemetry-val accent-gold">v8.3.3</div>
             </div>
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Edge Network</div>
@@ -2089,7 +2089,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="gold-inspector-note">
-            Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-13.
+            Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-28.
           </div>
           <button class="gold-action-btn" id="gold-inspector-ok">Chiudi &amp; Mantieni Costellazione</button>
         </div>
@@ -2125,8 +2125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'Vector geometric constellation unlocked. Real-time runtime diagnostics verified with zero-trust policy.' 
         : 'Costellazione geometrica vettoriale sbloccata. Diagnostica di runtime verificata con policy zero-trust.';
       if (note) note.textContent = isEn
-        ? 'All modules (CASS, Eklisso, Spectra, Certifications) are synchronized with timestamp 2026-09-13.'
-        : 'Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-13.';
+        ? 'All modules (CASS, Eklisso, Spectra, Certifications) are synchronized with timestamp 2026-09-28.'
+        : 'Tutti i moduli (CASS, Eklisso, Spectra, Certificazioni) sono sincronizzati con timestamp 2026-09-28.';
       if (okBtn) okBtn.textContent = isEn ? 'Close & Keep Constellation' : 'Chiudi & Mantieni Costellazione';
 
       modalEl.classList.add('is-open');
