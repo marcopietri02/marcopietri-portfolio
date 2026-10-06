@@ -1042,9 +1042,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Contact & Footer
       contact_title: "Vuoi discutere un progetto o una consulenza?",
       contact_desc: "Disponibile per collaborazioni software, implementazioni di Machine Learning, ottimizzazione processi e missioni autorizzate con droni.",
+      contact_btn_calendar: "Fissa una Call 1:1",
       contact_btn_email: "Scrivi via Email",
       contact_btn_copy: "Copia Email",
       contact_copied: "Email Copiata!",
+      footer_calendar: "Prenota Call",
       footer_copy: "© 2026 Marco Pietri • Firenze, Italia",
       footer_sub: "IT Strategy, AI Automations & Software Architecture",
       
@@ -1185,9 +1187,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Contact & Footer
       contact_title: "Ready to discuss a project or advisory role?",
       contact_desc: "Available for custom software architectures, Machine Learning implementations, business process automation, and certified drone missions.",
+      contact_btn_calendar: "Book a 1:1 Meeting",
       contact_btn_email: "Send an Email",
       contact_btn_copy: "Copy Email",
       contact_copied: "Email Copied!",
+      footer_calendar: "Book a Call",
       footer_copy: "© 2026 Marco Pietri • Florence, Italy",
       footer_sub: "IT Strategy, AI Automations & Software Architecture",
       
@@ -1311,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.3.3</span>
+              <span>v8.4.0</span>
             </div>
           </div>
         </div>
@@ -1341,6 +1345,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { type: 'nav', title: 'Contact', subtitle: 'Email & Advisory Availability', href: '/#contact', icon: '✉️', tags: 'contact email message advisory' },
           
           // Direct Actions (EN)
+          { type: 'action', title: 'Schedule a 1:1 Meeting (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendar meet booking call meeting schedule appuntamento consulenza 1:1' },
           { type: 'action', title: 'Copy Email Address', subtitle: 'mpietri82@gmail.com', action: 'copy_email', icon: '📋', tags: 'copy email mail write' },
           { type: 'action', title: 'Download Curriculum Vitae (PDF)', subtitle: 'Official Google Drive PDF', action: 'open_cv', icon: '📄', tags: 'cv curriculum pdf download resume' },
           { type: 'action', title: 'Switch Language (IT / EN)', subtitle: 'Toggle Italian / English', action: 'toggle_lang', icon: '🌍', tags: 'language lingua english italiano it en' },
@@ -1363,6 +1368,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'nav', title: 'Contatti', subtitle: 'Email e disponibilità', href: '/#contact', icon: '✉️', tags: 'contatti email telefono messaggio' },
         
         // Direct Actions (IT)
+        { type: 'action', title: 'Prenota un Meeting 1:1 (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendario prenota meet booking call meeting fissa appuntamento consulenza schedule 1:1' },
         { type: 'action', title: 'Copia Indirizzo Email', subtitle: 'mpietri82@gmail.com', action: 'copy_email', icon: '📋', tags: 'copia email mail write' },
         { type: 'action', title: 'Scarica Curriculum Vitae (PDF)', subtitle: 'Google Drive PDF Ufficiale', action: 'open_cv', icon: '📄', tags: 'cv curriculum pdf download resume' },
         { type: 'action', title: 'Cambia Lingua / Switch Language (IT / EN)', subtitle: 'Toggle Italiano / English', action: 'toggle_lang', icon: '🌍', tags: 'lingua language english italiano it en' },
@@ -1385,6 +1391,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="term-line">  <span class="term-highlight">spectra</span>       - Details on Spectra UAS operations</div>
             <div class="term-line">  <span class="term-highlight">cert</span>         - Overview of official credentials</div>
             <div class="term-line">  <span class="term-highlight">contact</span>      - Contact channels</div>
+            <div class="term-line">  <span class="term-highlight">meet / cal</span>    - Schedule a 1:1 meeting with Google Calendar</div>
             <div class="term-line">  <span class="term-highlight">cv</span>           - Open Official CV PDF</div>
             <div class="term-line">  <span class="term-highlight">lang &lt;it|en&gt;</span>  - Switch site language</div>
             <div class="term-line">  <span class="term-highlight">date</span>         - Current local date and time in Florence</div>
@@ -1402,6 +1409,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="term-line">  <span class="term-highlight">spectra</span>       - Dettagli operazioni droni Spectra</div>
           <div class="term-line">  <span class="term-highlight">cert</span>         - Panoramica certificazioni e titoli</div>
           <div class="term-line">  <span class="term-highlight">contact</span>      - Informazioni di contatto</div>
+          <div class="term-line">  <span class="term-highlight">meet / cal</span>    - Prenota un incontro 1:1 con Google Calendar</div>
           <div class="term-line">  <span class="term-highlight">cv</span>           - Apri Curriculum Vitae PDF</div>
           <div class="term-line">  <span class="term-highlight">lang &lt;it|en&gt;</span>  - Cambia lingua del sito</div>
           <div class="term-line">  <span class="term-highlight">date</span>         - Data e ora locale a Firenze</div>
@@ -1552,6 +1560,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const loc = currentLang === 'en' ? 'en-US' : 'it-IT';
         return `<div class="term-line term-highlight">🕒 Florence (CET/CEST): ${now.toLocaleDateString(loc)} — ${now.toLocaleTimeString(loc)}</div>`;
       },
+      calendar: () => {
+        window.open('https://calendar.app.google/gKhe4f7WKE7wmt4r5', '_blank', 'noopener');
+        if (currentLang === 'en') {
+          return `
+            <div class="term-line"><span class="term-success">Opening Google Calendar booking page...</span></div>
+            <div class="term-line">URL: <a href="https://calendar.app.google/gKhe4f7WKE7wmt4r5" target="_blank" rel="noopener" style="color:#60a5fa;">calendar.app.google/gKhe4f7WKE7wmt4r5</a></div>
+          `;
+        }
+        return `
+          <div class="term-line"><span class="term-success">Apertura pagina di prenotazione Google Calendar in corso...</span></div>
+          <div class="term-line">URL: <a href="https://calendar.app.google/gKhe4f7WKE7wmt4r5" target="_blank" rel="noopener" style="color:#60a5fa;">calendar.app.google/gKhe4f7WKE7wmt4r5</a></div>
+        `;
+      },
+      meet: () => cliCommands.calendar(),
+      cal: () => cliCommands.calendar(),
+      book: () => cliCommands.calendar(),
       sudo: () => {
         if (currentLang === 'en') {
           return `<div class="term-line" style="color: #ef4444;">⚠️ Permission Denied: You already have full root access to Marco Pietri's portfolio! 😉</div>`;
@@ -1561,7 +1585,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function executeAction(actionKey) {
-      if (actionKey === 'copy_email') {
+      if (actionKey === 'open_calendar') {
+        window.open('https://calendar.app.google/gKhe4f7WKE7wmt4r5', '_blank', 'noopener');
+        closePalette();
+      } else if (actionKey === 'copy_email') {
         navigator.clipboard.writeText('mpietri82@gmail.com').then(() => {
           showToast(currentLang === 'en' ? 'Email mpietri82@gmail.com copied to clipboard!' : 'Email mpietri82@gmail.com copiata negli appunti!');
           closePalette();
@@ -2073,7 +2100,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="gold-telemetry-grid">
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Versione Build</div>
-              <div class="gold-telemetry-val accent-gold">v8.3.3</div>
+              <div class="gold-telemetry-val accent-gold">v8.4.0</div>
             </div>
             <div class="gold-telemetry-box">
               <div class="gold-telemetry-label">Edge Network</div>
@@ -2148,6 +2175,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // Global Click Delegator for data-copy-text buttons
+  document.addEventListener('click', (e) => {
+    const copyBtn = e.target.closest('[data-copy-text]');
+    if (!copyBtn) return;
+    const textToCopy = copyBtn.getAttribute('data-copy-text');
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const dict = I18N_DICTIONARY[currentLang] || I18N_DICTIONARY.it;
+        showToast(dict.contact_copied || `Copiato negli appunti: ${textToCopy}`);
+      }).catch(() => {
+        showToast(`Testo: ${textToCopy}`);
+      });
+    }
+  });
 
   // Run new core subsystems
   initI18n();
