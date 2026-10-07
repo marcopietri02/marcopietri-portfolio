@@ -3886,4 +3886,130 @@ footer.site-footer {
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   v8.5.0 Additions: CASS Dual-System Architectural Diagram
+   ========================================================================== */
+/* CASS Dual-System Architectural Diagram */
+.cass-arch-diagram {
+  margin: 2.5rem 0;
+  padding: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.cass-arch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cass-arch-header-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-violet-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cass-arch-badge {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 0.22rem 0.65rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  color: #34d399;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.03em;
+}
+
+.cass-arch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  position: relative;
+}
+
+.cass-arch-node {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.cass-arch-node:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.cass-arch-node-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.tag-system1 {
+  color: #38bdf8;
+}
+
+.tag-meta {
+  color: #f59e0b;
+}
+
+.tag-system2 {
+  color: #a78bfa;
+}
+
+.tag-dispatch {
+  color: #34d399;
+}
+
+.cass-arch-node-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+  font-family: var(--font-sans);
+}
+
+.cass-arch-node-desc {
+  font-size: 0.81rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+  flex-grow: 1;
+}
+
+.cass-arch-node-kpi {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  color: var(--text-dim);
+}
+
+.cass-arch-node-kpi span:last-child {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
 

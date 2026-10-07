@@ -353,7 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScrollY = window.scrollY || window.pageYOffset || 0;
     let scrollVelocityY = 0;
 
-    let interactiveElements = [];
     let closestRect = null;
     let targetProximity = 0; // 0.0 (violet) -> 1.0 (emerald green)
     let currentProximity = 0;
@@ -402,6 +401,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSatellitesList();
 
+    // STRICT CTA Selectors: Targets ONLY authentic, visible buttons and interactive triggers
+    const CTA_SELECTORS = '.btn, a.btn, button.btn, .btn-primary, .btn-secondary, .btn-calendar, .cmd-palette-trigger, .lang-toggle-btn';
+
+    function distToRect(px, py, r) {
+      const dx = Math.max(r.left - px, 0, px - r.right);
+      const dy = Math.max(r.top - py, 0, py - r.bottom);
+      return Math.hypot(dx, dy);
+    }
+
+    // Proximity Detection for Desktop (Focused ONLY on REAL, visible CTA buttons)
+    function checkDesktopProximity() {
+      if (!mouse.active || mouse.x < 0 || mouse.y < 0) {
+        targetProximity = 0;
+        closestRect = null;
+        return;
+      }
+
+      const elements = document.querySelectorAll(CTA_SELECTORS);
+      let minDist = Infinity;
+      let bestRect = null;
+      const attractionRadius = 90; // Snaps only when within 90px of an authentic CTA button
+
+      for (let i = 0; i < elements.length; i++) {
+        const el = elements[i];
+        if (!el.isConnected || el.offsetParent === null) continue;
+        const style = window.getComputedStyle(el);
+        if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity) < 0.1) continue;
+
+        const r = el.getBoundingClientRect();
+        // Strict boundary validation: Must be an actual rendered button in viewport
+        if (r.width < 15 || r.height < 15) continue;
+        if (r.bottom < 0 || r.top > height || r.right < 0 || r.left > width) continue;
+
+        const d = distToRect(mouse.x, mouse.y, r);
+        if (d < minDist) {
+          minDist = d;
+          bestRect = r;
+        }
+      }
+
+      if (minDist < attractionRadius) {
+        closestRect = bestRect;
+        const rawProx = 1 - (minDist / attractionRadius);
+        targetProximity = Math.pow(rawProx, 1.35);
+      } else {
+        targetProximity = 0;
+        closestRect = null;
+      }
+    }
+
     function initGoldConstellation() {
       goldPoints = [];
       const count = window.innerWidth <= 768 ? 8 : 14;
@@ -429,16 +478,16 @@ document.addEventListener('DOMContentLoaded', () => {
         isGoldUnlocked = true; // Always activate on click
       }
 
-      updateSatellitesList();
-
       if (isGoldUnlocked) {
         initGoldConstellation();
+        updateSatellitesList();
         document.querySelectorAll('.footer-version-tag').forEach(el => el.classList.add('is-gold-unlocked'));
         if (typeof window.showGoldInspectorModal === 'function') {
           window.showGoldInspectorModal();
         }
       } else {
         goldPoints = [];
+        updateSatellitesList();
         document.querySelectorAll('.footer-version-tag').forEach(el => el.classList.remove('is-gold-unlocked'));
       }
     };
@@ -466,55 +515,6 @@ document.addEventListener('DOMContentLoaded', () => {
           radius: Math.random() * 1.5 + 1.2,
           basePhase: Math.random() * Math.PI * 2,
         });
-      }
-    }
-
-    function updateInteractiveElements() {
-      interactiveElements = Array.from(
-        document.querySelectorAll(
-          'a, button, [role="button"], input, textarea, .card, .deck-card, .partner-card, .team-card, .social-link, .btn, .cross-nav-card, .media-cat-card, .pano-item-card, .filter-chip'
-        )
-      );
-    }
-
-    function distToRect(px, py, r) {
-      const dx = Math.max(r.left - px, 0, px - r.right);
-      const dy = Math.max(r.top - py, 0, py - r.bottom);
-      return Math.hypot(dx, dy);
-    }
-
-    // Proximity Detection for Desktop (Cursor Driven)
-    function checkDesktopProximity() {
-      if (!mouse.active || mouse.x < 0 || mouse.y < 0) {
-        targetProximity = 0;
-        closestRect = null;
-        return;
-      }
-
-      let minDist = Infinity;
-      let bestRect = null;
-      const attractionRadius = 240;
-
-      for (let i = 0; i < interactiveElements.length; i++) {
-        const el = interactiveElements[i];
-        const r = el.getBoundingClientRect();
-        if (r.bottom < -40 || r.top > height + 40 || r.right < -40 || r.left > width + 40) continue;
-        if (r.width === 0 || r.height === 0) continue;
-
-        const d = distToRect(mouse.x, mouse.y, r);
-        if (d < minDist) {
-          minDist = d;
-          bestRect = r;
-        }
-      }
-
-      if (minDist < attractionRadius && bestRect) {
-        closestRect = bestRect;
-        const rawProx = 1 - (minDist / attractionRadius);
-        targetProximity = Math.pow(rawProx, 1.35);
-      } else {
-        targetProximity = 0;
-        closestRect = null;
       }
     }
 
@@ -695,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // =========================================================================
-      // 2. Cursor Satellites (Desktop Only - Proximity Magnetic Snap)
+      // 2. Cursor Satellites (Desktop Only - Proximity Magnetic Snap to Real CTAs)
       // =========================================================================
       if (!isMobile && mouse.active) {
         checkDesktopProximity();
@@ -741,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Laser Reticle Frame around acquired target
+        // Laser Reticle Frame around acquired CTA target (strictly when near actual CTA)
         if (currentProximity > 0.25 && closestRect) {
           ctx.save();
           const r = closestRect;
@@ -803,7 +803,6 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.beginPath();
 
           if (sat.type === 'gold-octahedron') {
-            // Faceted Golden Octahedron / Diamond
             ctx.moveTo(0, -s);
             ctx.lineTo(s * 0.75, 0);
             ctx.lineTo(0, s);
@@ -811,7 +810,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.closePath();
             ctx.fill();
             ctx.stroke();
-            // Inner facet lines
             ctx.beginPath();
             ctx.moveTo(0, -s);
             ctx.lineTo(0, s);
@@ -821,7 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.lineWidth = 0.8;
             ctx.stroke();
           } else if (sat.type === 'gold-star') {
-            // 8-Point Vector Golden Star
             const inner = s * 0.42;
             const outer = s;
             for (let sp = 0; sp < 8; sp++) {
@@ -907,12 +904,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
       resize();
       initBackground();
-      updateInteractiveElements();
+      updateSatellitesList();
     });
 
     resize();
     initBackground();
-    updateInteractiveElements();
     animationFrameId = requestAnimationFrame(draw);
   }
 
@@ -930,9 +926,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cmd_k_hint: "Cerca o Comandi",
       
       // Hero Section
-      hero_eyebrow: "IT Strategy · AI Automations · Intelligent Systems",
-      hero_subtitle: "IT Strategist & AI Automation Engineer",
-      hero_lead: "Progetto architetture software, automazioni avanzate e sistemi intelligenti basati su intelligenza artificiale per efficientare processi complessi. Focalizzato su affidabilità computazionale, sicurezza strutturale e impatto strategico misurabile.",
+      hero_eyebrow: "Fractional IT Strategist · AI Automation Architect · Critical Systems",
+      hero_subtitle: "Fractional IT Strategist & AI Automation Architect",
+      hero_lead: "Progetto architetture resilienti e agenti AI industriali ad alta precisione. Riduciamo fino al 40% i costi operativi e abbattiamo il debito tecnico con zero concessioni all'hype.",
+      hero_btn_feasibility: "Prenota una Sessione di Fattibilità (30 min)",
       hero_btn_projects: "Vedi i Progetti",
       hero_btn_cert: "Certificazioni & CV",
       hero_btn_contact: "Contattami",
@@ -942,7 +939,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sec_01_title: "Metodo & Esperienza",
       sec_01_desc: "Unisco rigore ingegneristico e visione strategica. Coordino lo sviluppo di sistemi intelligenti e automazioni, con un approccio pragmatico: architetture manutenibili, processi scalabili e sicurezza strutturale.",
       sec_01_spec_title: "Aree di Specializzazione",
-      sec_01_spec_desc: "Traduco la complessità analitica in strumenti software immediati e resilienti. Quando non sono davanti a un terminale a ottimizzare un flusso, mi trovi a pilotare droni in operazioni tecniche autorizzate o a sperimentare su nuovi paradigmi algoritmici.",
+      sec_01_spec_desc: "Dall'hardware periferico passivo (chip NFC senza batteria) ai sensori aerei di precisione (UAS) fino agli engine decisionali intelligenti: una sola matrice ingegneristica fondata sull'affidabilità dei sistemi critici e la tolleranza zero all'errore.",
       
       comp_1_title: "Machine Learning & Explainable AI",
       comp_1_desc: "Sistemi ibridi di selezione contestuale algoritmi (CASS), data analysis e classificazione.",
@@ -1040,9 +1037,9 @@ document.addEventListener('DOMContentLoaded', () => {
       test_4_role: "Marketing & Operations · miPAGO",
 
       // Contact & Footer
-      contact_title: "Vuoi discutere un progetto o una consulenza?",
-      contact_desc: "Disponibile per collaborazioni software, implementazioni di Machine Learning, ottimizzazione processi e missioni autorizzate con droni.",
-      contact_btn_calendar: "Fissa una Call 1:1",
+      contact_title: "Pronto a scalare senza accumulare debito tecnico?",
+      contact_desc: "Prenota una sessione di fattibilità tecnica ed economica di 30 minuti. Valutiamo insieme architetture, automazioni AI scalabili e riduzione dei costi operativi.",
+      contact_btn_calendar: "Prenota Sessione di Fattibilità (30 min)",
       contact_btn_email: "Scrivi via Email",
       contact_btn_copy: "Copia Email",
       contact_copied: "Email Copiata!",
@@ -1075,9 +1072,10 @@ document.addEventListener('DOMContentLoaded', () => {
       cmd_k_hint: "Search or Commands",
       
       // Hero Section
-      hero_eyebrow: "IT Strategy · AI Automations · Intelligent Systems",
-      hero_subtitle: "IT Strategist & AI Automation Engineer",
-      hero_lead: "I design scalable software architectures, advanced automations, and intelligent AI-driven systems to optimize complex business processes. Focused on computational reliability, structural cybersecurity, and measurable strategic ROI.",
+      hero_eyebrow: "Fractional IT Strategist · AI Automation Architect · Critical Systems",
+      hero_subtitle: "Fractional IT Strategist & AI Automation Architect",
+      hero_lead: "I engineer resilient software architectures and high-precision industrial AI agents. We cut operational costs by up to 40% and eliminate technical debt with zero hype.",
+      hero_btn_feasibility: "Book a Feasibility Session (30 min)",
       hero_btn_projects: "View Projects",
       hero_btn_cert: "Certifications & CV",
       hero_btn_contact: "Get in Touch",
@@ -1087,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sec_01_title: "Method & Experience",
       sec_01_desc: "Combining engineering rigor with strategic advisory. I direct the development of intelligent systems and enterprise automations with a pragmatic mindset: maintainable architectures, scalable workflows, and defense-in-depth security.",
       sec_01_spec_title: "Core Specializations",
-      sec_01_spec_desc: "Translating complex analytical challenges into immediate, resilient software tools. When I'm not optimizing automation pipelines at the terminal, I operate authorized UAS drone missions or research hybrid algorithmic paradigms.",
+      sec_01_spec_desc: "From passive peripheral hardware (battery-less NFC chips) to precision aerial sensors (UAS) and intelligent decision engines: a single engineering framework built on critical systems reliability and zero error tolerance.",
       
       comp_1_title: "Machine Learning & Explainable AI",
       comp_1_desc: "Hybrid contextual algorithm selection systems (CASS), data analysis, and predictive classification.",
@@ -1185,9 +1183,9 @@ document.addEventListener('DOMContentLoaded', () => {
       test_4_role: "Marketing & Operations · miPAGO",
 
       // Contact & Footer
-      contact_title: "Ready to discuss a project or advisory role?",
-      contact_desc: "Available for custom software architectures, Machine Learning implementations, business process automation, and certified drone missions.",
-      contact_btn_calendar: "Book a 1:1 Meeting",
+      contact_title: "Ready to scale without accumulating technical debt?",
+      contact_desc: "Book a 30-minute technical and economic feasibility session. Let's evaluate architectures, scalable AI automations, and operational cost reduction together.",
+      contact_btn_calendar: "Book Feasibility Session (30 min)",
       contact_btn_email: "Send an Email",
       contact_btn_copy: "Copy Email",
       contact_copied: "Email Copied!",
@@ -1315,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
             </div>
             <div>
-              <span>v8.4.0</span>
+              <span>v8.5.0</span>
             </div>
           </div>
         </div>
@@ -1345,7 +1343,7 @@ document.addEventListener('DOMContentLoaded', () => {
           { type: 'nav', title: 'Contact', subtitle: 'Email & Advisory Availability', href: '/#contact', icon: '✉️', tags: 'contact email message advisory' },
           
           // Direct Actions (EN)
-          { type: 'action', title: 'Schedule a 1:1 Meeting (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendar meet booking call meeting schedule appuntamento consulenza 1:1' },
+          { type: 'action', title: 'Book Feasibility Session (30 min) (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendar meet booking call meeting schedule appuntamento consulenza feasibility audit 30 min' },
           { type: 'action', title: 'Copy Email Address', subtitle: 'mpietri82@gmail.com', action: 'copy_email', icon: '📋', tags: 'copy email mail write' },
           { type: 'action', title: 'Download Curriculum Vitae (PDF)', subtitle: 'Official Google Drive PDF', action: 'open_cv', icon: '📄', tags: 'cv curriculum pdf download resume' },
           { type: 'action', title: 'Switch Language (IT / EN)', subtitle: 'Toggle Italian / English', action: 'toggle_lang', icon: '🌍', tags: 'language lingua english italiano it en' },
@@ -1368,7 +1366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'nav', title: 'Contatti', subtitle: 'Email e disponibilità', href: '/#contact', icon: '✉️', tags: 'contatti email telefono messaggio' },
         
         // Direct Actions (IT)
-        { type: 'action', title: 'Prenota un Meeting 1:1 (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendario prenota meet booking call meeting fissa appuntamento consulenza schedule 1:1' },
+        { type: 'action', title: 'Prenota Sessione di Fattibilità (30 min) (Google Calendar)', subtitle: 'calendar.app.google/gKhe4f7WKE7wmt4r5', action: 'open_calendar', icon: '📅', tags: 'calendario prenota meet booking call meeting fissa appuntamento consulenza fattibilita audit 30 min' },
         { type: 'action', title: 'Copia Indirizzo Email', subtitle: 'mpietri82@gmail.com', action: 'copy_email', icon: '📋', tags: 'copia email mail write' },
         { type: 'action', title: 'Scarica Curriculum Vitae (PDF)', subtitle: 'Google Drive PDF Ufficiale', action: 'open_cv', icon: '📄', tags: 'cv curriculum pdf download resume' },
         { type: 'action', title: 'Cambia Lingua / Switch Language (IT / EN)', subtitle: 'Toggle Italiano / English', action: 'toggle_lang', icon: '🌍', tags: 'lingua language english italiano it en' },

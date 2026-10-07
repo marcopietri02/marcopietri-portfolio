@@ -5,7 +5,7 @@
 - **Domain:** Configured via Cloudflare DNS with universal SSL/TLS.
 - **Languages:** HTML5 Semantico, Vanilla JavaScript (ES6+), CSS3 puro (Bespoke Editorial Design System).
 - **Version Control:** Git workflow with automatic CI/CD deployment on push to the `main` branch.
-- **Current Baseline Version:** `v8.4.0` (Data: `2026-10-06`)
+- **Current Baseline Version:** `v8.5.0` (Data: `2026-10-07`)
 
 ## Project Structure & Routing
 - Pure static folder-based routing:
